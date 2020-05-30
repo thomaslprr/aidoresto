@@ -9,7 +9,7 @@ import {AuthProvider} from "./login/Auth";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./login/LoginRestaurateur";
 import Restaurant from "./Restaurant";
-import PageClient from "./components/client/PageClient";
+import PageClient from "./components/PageClient";
 
 function App() {
 
