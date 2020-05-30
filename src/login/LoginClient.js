@@ -86,7 +86,7 @@ const LoginClient = ({ history }) => {
     };
 
     const allerPageResto = () => {
-        history.push("/test/"+docId);
+        history.push("/restaurant/"+docId);
     }
 
     const getBoutonValid = () => {
@@ -149,12 +149,11 @@ const LoginClient = ({ history }) => {
         return <Redirect to="/" />;
     }*/
 
-    const CHARACTER_LIMIT = 6;
-    const [values, setValues] = React.useState({
-        name: ""
-    });
-    const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
+    const CHARACTER_LIMIT = 4;
+    const [codeResto, setCodeResto] = React.useState("");
+
+    const handleChange = (event) => {
+        setCodeResto(event.target.value.toUpperCase());
     };
 
     const classes = useStyles();
@@ -174,13 +173,14 @@ const LoginClient = ({ history }) => {
                         </Typography>
                         <form className={classes.form} onSubmit={handleLoginClient}>
                             <TextField
+                                value={codeResto}
                                 variant="outlined"
                                 margin="normal"
                                 inputProps={{
                                     maxLength: CHARACTER_LIMIT
                                 }}
-                                helperText={`${values.name.length}/${CHARACTER_LIMIT}`}
-                                onChange={handleChange("name")}
+                                helperText={`${codeResto.length}/${CHARACTER_LIMIT}`}
+                                onChange={handleChange}
                                 required
                                 fullWidth
                                 id="code_resto"

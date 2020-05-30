@@ -18,7 +18,7 @@ function App() {
               <Route exact path="/" component={Home}/>
                   <Route exact path="/login" component={LoginRestaurateur}/>
                   <Route exact path="/signup" component={SignUp}/>
-                  <Route exact path="/test/:id" render={props => <PageClient {...props} />} />
+                  <Route exact path="/restaurant/:id" render={props => <PageClient {...props} />} />
                   <Route exact path="/dashboard/:id" render={props => <Dashboard {...props} type={0}/>} />
                   <Route exact path="/dashboard/:id/commandes" render={props => <Dashboard {...props} type={1} />} />
                   <Route exact path="/dashboard/:id/boissons" render={props => <Dashboard {...props} type={2} />} />
