@@ -1,5 +1,5 @@
 
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,6 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import InfoIcon from '@material-ui/icons/Info';
 import * as firebase from "firebase";
+import CircularIntegration from "./BoutonAttente";
+import {useHistory} from "react-router";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,14 +40,31 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function RemplirInfo({id}){
+function RemplirInfo({id,donnee,affichage}){
+
+
+    const [nom,setNom] = useState("");
+    const [cp,setCp] = useState("");
+    const [ville,setVille] = useState("");
+    const [rue,setRue] = useState("");
+    const [numero,setNumero] = useState("");
+    useEffect(()=>{
+        setNom(donnee.nom);
+        setCp(donnee.adresse.code_postal);
+        setVille(donnee.adresse.ville);
+        setRue(donnee.adresse.rue);
+        setNumero(donnee.telephone);
+    },[])
     const classes = useStyles();
     const restaurantRef = firebase.firestore().collection("restaurant").doc(id);
 
+    const history = useHistory();
 
-    const [remplir,setRemplir] = useState(false);
+
+    const [chargementBouton,setChargementBouton] = useState(0);
     const handleModifResto = useCallback(
         async event => {
+            setChargementBouton(1);
             event.preventDefault();
             const { nom,numero,adresse,ville,code_postal } = event.target.elements;
             restaurantRef.update({
@@ -60,22 +79,65 @@ function RemplirInfo({id}){
             })
                 .then(function() {
                     console.log("Document successfully written!");
+                    setChargementBouton(2);
+                    window.location.reload();
+
                 })
                 .catch(function(error) {
                     console.error("Error writing document: ", error);
+                    setChargementBouton(3);
                 });
             },
         []
     );
 
+    function chargementBoutonComposant() {
+        if(chargementBouton==0){
+            return (<Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+            >
+                Compléter les informations
+            </Button>)
 
-    if(!remplir){
-        return(
-            <Button onClick={()=>setRemplir(true)} variant="contained" color="primary">
-                Compléter les informations de mon restaurant
-            </Button>
-        )
-    }else{
+        }else if(chargementBouton==1){
+            return (<Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                className={classes.submit}
+            >
+                Chargement...
+            </Button>)
+        }else if(chargementBouton==2){
+            return (<Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+            >
+                Modification réussie
+            </Button>)
+        }
+        else if(chargementBouton==3){
+            return (<Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+            >
+                Echec
+            </Button>)
+        }
+
+    }
+
+    if(affichage){
         return(
             <div>
                 <Container component="main" maxWidth="xs">
@@ -99,6 +161,8 @@ function RemplirInfo({id}){
                                         id="nom"
                                         label="Nom du restaurant"
                                         autoFocus
+                                        value={nom}
+                                        onChange={(e) => setNom(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -110,6 +174,9 @@ function RemplirInfo({id}){
                                         label="Ville"
                                         name="ville"
                                         autoComplete="ville"
+                                        value={ville}
+                                        onChange={(e) => setVille(e.target.value)}
+
                                     />
                                 </Grid>
                                 <Grid item xs={6}>
@@ -121,6 +188,9 @@ function RemplirInfo({id}){
                                         label="Code postal"
                                         id="code_postal"
                                         autoComplete="code_postal"
+                                        value={cp}
+                                        onChange={(e) => setCp(e.target.value)}
+
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -132,6 +202,9 @@ function RemplirInfo({id}){
                                         label="Rue du restaurant"
                                         id="adresse"
                                         autoComplete="current-password"
+                                        value={rue}
+                                        onChange={(e) => setRue(e.target.value)}
+
                                     />
                                 </Grid>
                                 <Grid item xs={12}>
@@ -141,21 +214,15 @@ function RemplirInfo({id}){
                                         fullWidth
                                         name="numero"
                                         label="Numéro de téléphone"
+                                        value={numero}
                                         id="numero"
                                         autoComplete="numero"
+                                        onChange={(e) => setNumero(e.target.value)}
+
                                     />
                                 </Grid>
                             </Grid>
-                            <Button
-                                type="submit"
-                                fullWidth
-                                variant="contained"
-                                color="primary"
-                                className={classes.submit}
-                            >
-                                Enregistrer les informations
-                            </Button>
-
+                            {chargementBoutonComposant()}
                         </form>
                     </div>
                     <Box mt={5}>
@@ -164,7 +231,11 @@ function RemplirInfo({id}){
 
             </div>
         )
+    }else{
+        return <div></div>
     }
+
+
 
 }
 

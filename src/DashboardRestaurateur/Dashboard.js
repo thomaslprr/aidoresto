@@ -1,12 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import SideBar from "./Sidebar";
-import Information from "./Information";
+import Information from "./info/Information";
 function Dashboard({ match: {params :{id}} , type}){
 
-    useEffect(()=>{
-        console.log("Voici ce que je recois : ");
-        console.log(type)
-    })
 
     return(
         <div>
