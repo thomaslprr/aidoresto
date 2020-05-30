@@ -10,7 +10,7 @@ function Home(){
             <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 
             <header>
-                Aidoresto
+                Helporesto
             </header>
         </div>
     );

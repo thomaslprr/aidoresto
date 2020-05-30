@@ -78,29 +78,6 @@ const SignUp = ({ history }) => {
                 </Typography>
                 <form className={classes.form} onSubmit={handleSignUp}>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                autoComplete="fname"
-                                name="firstName"
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="firstName"
-                                label="Nom du restaurant"
-                                autoFocus
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={6}>
-                            <TextField
-                                variant="outlined"
-                                required
-                                fullWidth
-                                id="lastName"
-                                label="Ville"
-                                name="lastName"
-                                autoComplete="lname"
-                            />
-                        </Grid>
                         <Grid item xs={12}>
                             <TextField
                                 variant="outlined"
@@ -136,7 +113,7 @@ const SignUp = ({ history }) => {
                     </Button>
                     <Grid container justify="flex-end">
                         <Grid item>
-                            <Link href="#" variant="body2">
+                            <Link href="/login" variant="body2">
                                 J'ai déjà un compte : se connecter
                             </Link>
                         </Grid>
