@@ -24,6 +24,7 @@ import LocalBarIcon from '@material-ui/icons/LocalBar';
 import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
 import { useHistory } from "react-router-dom";
+import Information from "./info/Information";
 
 const drawerWidth = 240;
 
@@ -95,7 +96,25 @@ function texteAAfficher(id){
 }
 
 
+
+
 function SideBar(props) {
+
+    function recupererModule(id){
+        switch(id){
+            case 0:
+                return <Typography paragraph>
+                    Bienvenue sur la page de gestion de votre restaurant.<br/><br/>
+                    Vous trouverez à gauche les différentes catégories à remplir afin que vos clients puissent voir les services que vous proposez.<br/><br/>
+                    La rubrique "informations" doit être remplie avant de pouvoir commencer à faire quoi que ce soit. <br/><br/>
+
+                    Bon courage et prenez soin de vous ! ❤️
+                </Typography>
+                break;
+            case 7:
+                return <Information id={props.id}/>
+        }
+    }
 
     const [restaurant, setRestaurant] = useState();
 
@@ -215,14 +234,8 @@ function SideBar(props) {
                 </nav>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Typography paragraph>
-                        Bienvenue sur la page de gestion de votre restaurant.<br/><br/>
-                        Vous trouverez à gauche les différentes catégories à remplir afin que vos clients puissent voir les services que vous proposez.<br/><br/>
-                        La rubrique "informations" doit être remplie avant de pouvoir commencer à faire quoi que ce soit. <br/><br/>
+                    {recupererModule(props.type)}
 
-                        Bon courage et prenez soin de vous ! ❤️
-                    </Typography>
-                    {props.module}
                 </main>
             </div>
         );
