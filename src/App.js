@@ -9,8 +9,10 @@ import {AuthProvider} from "./login/Auth";
 import PrivateRoute from "./PrivateRoute";
 import Login from "./login/LoginRestaurateur";
 import Restaurant from "./Restaurant";
+import PageClient from "./components/PageClient";
 
 function App() {
+
   return (
       <AuthProvider>
           <BrowserRouter>
@@ -18,6 +20,7 @@ function App() {
               <Route exact path="/" component={Home}/>
               <Route exact path="/login" component={Login}/>
               <Route exact path="/signup" component={SignUp}/>
+              <Route exact path="/test/:id" render={props => <PageClient {...props} />} />
               <Route exact path="/dashboard/:id" render={props => <Restaurant {...props} />} />
               </Switch>
           </BrowserRouter>
