@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
@@ -72,7 +72,7 @@ export default function Boisson({id}){
         };
 
     const classes = useStyles();
-    const [categorie, setCategorie] = React.useState('');
+    const [categorie, setCategorie] = useState('');
     const [annee,setAnnee] = useState("");
     const [prix,setPrix] = useState("");
     const [nom,setNom] = useState("");
@@ -83,12 +83,18 @@ export default function Boisson({id}){
     };
 
 
+    const [etatAjout, setEtatAjout] = useState(0);
 
     const boissonCollection = firebase.firestore().collection("restaurant").doc(id).collection("boisson");
 
 
+    useEffect(()=> {
+        console.log(categorie);
+    },[categorie]);
+
     const handleAjouterBoisson = () =>{
-        const boissonData = {
+        setEtatAjout(1);
+          const boissonData = {
             categorie: categorie,
             date: annee,
             nom: nom,
@@ -97,10 +103,73 @@ export default function Boisson({id}){
         };
         boissonCollection.add(boissonData).then(function() {
             console.log("Document successfully written!");
-        });
+            setEtatAjout(2);
+            window.location.reload();
+        })
+         .catch(function(error) {
+             console.error("Error writing document: ", error);
+             setEtatAjout(3);
+         });
+
+    };
+
+    function chargementBoutonComposant() {
+        if(etatAjout==0){
+            return (<Button onClick={handleAjouterBoisson} color="primary">
+                Ajouter
+            </Button>)
+
+        }else if(etatAjout==1){
+            return (<Button
+                type="submit"
+                variant="contained"
+                className={classes.submit}
+            >
+                Chargement...
+            </Button>)
+        }else if(etatAjout==2){
+            return (<Button
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+            >
+                Boisson ajoutée
+            </Button>)
+        }
+        else if(etatAjout==3){
+            return (<Button onClick={handleAjouterBoisson}
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={classes.submit}
+            >
+                Erreur
+            </Button>)
+        }
     }
 
-
+    function champDate (){
+        if(categorie=="Alcool"){
+            return <Grid item xs={4}>
+                <TextField
+                    autoComplete="fname"
+                    name="annee"
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="annee"
+                    label="Année"
+                    value={annee}
+                    onChange={(e) => setAnnee(e.target.value)}
+                    size="small"
+                />
+            </Grid>
+        }else{
+                return <></>
+            }
+    }
 
 
         return (
@@ -136,6 +205,7 @@ export default function Boisson({id}){
                         <Grid item xs={8}>
 
                         <TextField
+                            required
                             variant="outlined"
                             autoFocus
                             margin="dense"
@@ -151,6 +221,7 @@ export default function Boisson({id}){
 
                             <Grid item xs={4}>
                                 <TextField
+                                    required
                                     label="Volume"
                                     name="volume"
                                     id="volume"
@@ -166,6 +237,7 @@ export default function Boisson({id}){
                             </Grid>
                             <Grid item xs={4}>
                                 <TextField
+                                    required
                                     label="Prix"
                                     id="prix"
                                     name="prix"
@@ -180,30 +252,15 @@ export default function Boisson({id}){
                                 />
 
                             </Grid>
-                            <Grid item xs={4}>
-                                <TextField
-                                    autoComplete="fname"
-                                    name="annee"
-                                    variant="outlined"
-                                    required
-                                    fullWidth
-                                    id="annee"
-                                    label="Année"
-                                    value={annee}
-                                    onChange={(e) => setAnnee(e.target.value)}
-                                    size="small"
-                                />
 
-                            </Grid>
+                            {champDate()}
                         </Grid>
                     </DialogContent>
                     <DialogActions>
                         <Button onClick={handleClose} color="primary">
                             Annuler
                         </Button>
-                        <Button onClick={handleAjouterBoisson} color="primary">
-                            Ajouter
-                        </Button>
+                        {chargementBoutonComposant()}
                     </DialogActions>
                 </Dialog>
             </div>

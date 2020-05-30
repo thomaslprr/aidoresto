@@ -27,6 +27,7 @@ import { useHistory } from "react-router-dom";
 import Information from "./info/Information";
 import SpaIcon from '@material-ui/icons/Spa';
 import Boisson from "./boissons/Boisson";
+import Repas from "./Repas/Repas";
 
 const drawerWidth = 240;
 
@@ -77,7 +78,7 @@ function texteAAfficher(id){
             txt+="Boissons";
             break;
         case 3:
-            txt+="Entrées";
+            txt+="Repas";
             break;
         case 4:
             txt+="Repas";
@@ -115,6 +116,10 @@ function SideBar(props) {
                 break;
             case 2:
                 return <Boisson id={props.id}/>
+                break;
+            case 3:
+                return <Repas id={props.id} categoriee={"Entrée"}/>;
+                break;
             case 7:
                 return <Information id={props.id}/>
         }
