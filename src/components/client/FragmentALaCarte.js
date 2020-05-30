@@ -4,10 +4,9 @@ import { Typography, Avatar, Grid, Box } from "@material-ui/core";
 import firebase from "firebase";
 import PropTypes from 'prop-types';
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import Paper from "@material-ui/core/Paper";
+
 
 
 // CSS Style
@@ -119,13 +118,19 @@ const FragmentALaCarte = (props) => {
                 >
                     <LinkTab label="Entrée" href="/drafts" {...a11yProps(0)} />
                     <LinkTab label="Plat" href="/trash" {...a11yProps(1)} />
-                    <LinkTab label="Dessert" href="/trash" {...a11yProps(1)} />
-                    <LinkTab label="Boisson" href="/trash" {...a11yProps(1)} />
+                    <LinkTab label="Dessert" href="/trash" {...a11yProps(2)} />
+                    <LinkTab label="Boisson" href="/trash" {...a11yProps(3)} />
                 </Tabs>
             </AppBar>
+
             <TabPanel value={value} index={0}>
-                Page One
+
+
+
+
+
             </TabPanel>
+
             <TabPanel value={value} index={1}>
                 Page Two
             </TabPanel>

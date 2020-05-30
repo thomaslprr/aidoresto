@@ -1,14 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import { Typography, Avatar, Grid, Box } from "@material-ui/core";
-import firebase from "firebase";
 import PropTypes from 'prop-types';
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
-import Paper from "@material-ui/core/Paper";
 import FragmentALaCarte from "./FragmentALaCarte";
+import InfosResto from "../../stores/InfosResto";
 
 
 // CSS Style
@@ -73,35 +71,9 @@ function LinkTab(props) {
 
 const Carte = (props) => {
 
-    const [resto,setResto] = useState({
-        nom: "",
-        ville: "",
-        tel: ""
-    });
+    console.log("Carte : "+props.idResto);
 
     const classes = useStyle();
-
-    useEffect(()=>{
-
-        const restaurantRef = firebase.firestore().collection("restaurant").doc(props.idResto);
-
-        restaurantRef.get().then(function(doc) {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-                setResto({
-                    nom: doc.data().nom,
-                    ville: doc.data().adresse.ville,
-                    tel: doc.data().telephone
-                });
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
-    },[]);
-
 
     const [value, setValue] = useState(0);
 
@@ -123,7 +95,7 @@ const Carte = (props) => {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                Page One
+                Bientôt disponible
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <FragmentALaCarte idResto={props.idResto}/>
