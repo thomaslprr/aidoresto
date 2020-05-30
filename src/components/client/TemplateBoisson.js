@@ -12,6 +12,11 @@ const useStyle = makeStyles(theme =>({
         display: 'inline',
     },
 
+    item: {
+
+        margin: "1em"
+    }
+
 }));
 
 const TemplateBoisson = ({boisson}) => {
@@ -20,26 +25,28 @@ const TemplateBoisson = ({boisson}) => {
 
     return (
 
-        <ListItem alignItems="flex-start">
+        <>
+            <ListItem className={classes.item} alignItems="flex-start">
 
-            <ListItemText
-                primary={boisson.nom}
-                secondary={
-                    <React.Fragment>
-                        <Typography
-                            component="span"
-                            variant="body2"
-                            className={classes.inline}
-                            color="textPrimary"
-                        >
-                            {boisson.prix+"€ "}
-                        </Typography>
-                        {boisson.volume+" cl"}
-                    </React.Fragment>
-                }
-            />
-        </ListItem>
-
+                <ListItemText
+                    primary={boisson.nom}
+                    secondary={
+                        <React.Fragment>
+                            <Typography
+                                component="span"
+                                variant="body2"
+                                className={classes.inline}
+                                color="textPrimary"
+                            >
+                                {boisson.prix+"€ "}
+                            </Typography>
+                            {boisson.volume+" cl"}
+                        </React.Fragment>
+                    }
+                />
+            </ListItem>
+            <Divider variant="inset" component="li" />
+        </>
     )
 }
 

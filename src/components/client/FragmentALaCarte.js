@@ -150,7 +150,8 @@ const FragmentALaCarte = (props) => {
                         prix: doc.data().prix,
                         volume: doc.data().volume
                     }
-                    setDataBoisson([...tableau, x])
+                    console.log("BOISSON : "+x.nom);
+                    setDataBoisson(dataBoisson => dataBoisson.concat(x));
 
                 });
             })
@@ -172,7 +173,7 @@ const FragmentALaCarte = (props) => {
                         prix: doc.data().prix,
                         desc: doc.data().description
                     }
-                    setDataEntree([...tableau, x]);
+                    setDataEntree(dataEntree => dataEntree.concat(x));
 
                 });
             })
@@ -193,7 +194,7 @@ const FragmentALaCarte = (props) => {
                         prix: doc.data().prix,
                         desc: doc.data().description
                     }
-                    setDataPlat([...tableau, x]);
+                    setDataPlat(dataPlat => dataPlat.concat(x));
 
                 });
             })
@@ -214,7 +215,7 @@ const FragmentALaCarte = (props) => {
                         prix: doc.data().prix,
                         desc: doc.data().description
                     }
-                    setDataDessert([...tableau, x]);
+                    setDataDessert(dataDessert => dataDessert.concat(x));
 
                 });
             })
@@ -226,6 +227,12 @@ const FragmentALaCarte = (props) => {
     }
 
     const ListBoisson = () => {
+
+        console.log(dataBoisson);
+        console.log(dataEntree);
+        console.log(dataPlat);
+        console.log(dataDessert);
+
         return (
             <>
             {dataBoisson.map( item => (
@@ -281,34 +288,34 @@ const FragmentALaCarte = (props) => {
 
             <TabPanel value={value} index={0}>
                 <List className={classes.root2}>
-                    <ListItem alignItems="flex-start">
                         <Suspense fallback={<div>Chargement ...</div>}>
                             <ListEntree />
                         </Suspense>
-                    </ListItem>
                 </List>
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-                <ListItem alignItems="flex-start">
+                <List className={classes.root2}>
                     <Suspense fallback={<div>Chargement ...</div>}>
                         <ListPlat />
                     </Suspense>
-                </ListItem>
+                </List>
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-                <Suspense fallback={<div>Chargement ...</div>}>
-                    <ListDessert />
-                </Suspense>
+                <List className={classes.root2}>
+                    <Suspense fallback={<div>Chargement ...</div>}>
+                        <ListDessert />
+                    </Suspense>
+                </List>
             </TabPanel>
 
             <TabPanel value={value} index={3}>
-                <ListItem alignItems="flex-start">
+                <List className={classes.root2}>
                     <Suspense fallback={<div>Chargement ...</div>}>
                         <ListBoisson />
                     </Suspense>
-                </ListItem>
+                </List>
             </TabPanel>
         </div>
     );
