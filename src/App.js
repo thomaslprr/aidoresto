@@ -5,7 +5,7 @@ import {Route, Router, Switch} from "react-router";
 import Home from "./Home";
 import {BrowserRouter} from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
-import PageClient from "./components/PageClient";
+import PageClient from "./components/client/PageClient";
 import {AuthProvider} from "./login/Auth";
 import LoginRestaurateur from "./login/LoginRestaurateur";
 import Dashboard from "./DashboardRestaurateur/Dashboard";
