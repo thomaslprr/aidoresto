@@ -1,5 +1,5 @@
 import React from "react";
-import LoginClient from "./LoginClient";
+import LoginClient from "./login/LoginClient";
 import Typography from "@material-ui/core/Typography";
 
 function Home(){

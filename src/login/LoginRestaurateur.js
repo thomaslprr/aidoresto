@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from "react";
 import { withRouter, Redirect } from "react-router";
-import app from "./index.js";
+import app from "../index.js";
 import { AuthContext } from "./Auth.js";
 
 import Avatar from '@material-ui/core/Avatar';
@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-    }
+    },
 }));
 
 function Copyright() {
@@ -61,12 +61,18 @@ function Copyright() {
 }
 
 const LoginRestaurateur = ({ history }) => {
-    const handleLoginClient = useCallback(
+    const handleLogin = useCallback(
         async event => {
             event.preventDefault();
-            const { code_resto } = event.target.elements;
-            const adresse = "/dashboard/"+code_resto.value;
-            history.push(adresse);
+            const { email, password } = event.target.elements;
+            try {
+                await app
+                    .auth()
+                    .signInWithEmailAndPassword(email.value, password.value);
+                history.push("/");
+            } catch (error) {
+                alert(error);
+            }
         },
         [history]
     );
@@ -74,17 +80,9 @@ const LoginRestaurateur = ({ history }) => {
     const { currentUser } = useContext(AuthContext);
 
     /**
-     if (currentUser) {
+    if (currentUser) {
         return <Redirect to="/" />;
     }*/
-
-    const CHARACTER_LIMIT = 6;
-    const [values, setValues] = React.useState({
-        name: ""
-    });
-    const handleChange = name => event => {
-        setValues({ ...values, [name]: event.target.value });
-    };
 
     const classes = useStyles();
 
@@ -98,24 +96,34 @@ const LoginRestaurateur = ({ history }) => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Passer une commande
+                        Se connecter en tant que restaurateur
                     </Typography>
-                    <form className={classes.form} onSubmit={handleLoginClient}>
+                    <form className={classes.form} onSubmit={handleLogin}>
                         <TextField
                             variant="outlined"
                             margin="normal"
-                            inputProps={{
-                                maxLength: CHARACTER_LIMIT
-                            }}
-                            helperText={`${values.name.length}/${CHARACTER_LIMIT}`}
-                            onChange={handleChange("name")}
                             required
                             fullWidth
-                            id="code_resto"
-                            label="Code restaurant"
-                            name="code_resto"
+                            id="email"
+                            label="Adresse mail"
+                            name="email"
                             autoComplete="email"
                             autoFocus
+                        />
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Mot de passe"
+                            type="password"
+                            id="password"
+                            autoComplete="current-password"
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Se souvenir de moi"
                         />
                         <Button
                             type="submit"
@@ -124,19 +132,30 @@ const LoginRestaurateur = ({ history }) => {
                             color="primary"
                             className={classes.submit}
                         >
-                            Accéder au restaurant
+                            Se connecter
                         </Button>
-
+                        <Grid container>
+                            <Grid item xs>
+                                <Link href="#" variant="body2">
+                                    Mot de passe oublié ?
+                                </Link>
+                            </Grid>
+                            <Grid item>
+                                <Link href="/signup" variant="body2">
+                                    {"Vous n'avez pas de compte restaurateur ? S'inscrire"}
+                                </Link>
+                            </Grid>
+                        </Grid>
                         <Box mt={4}>
-                            <Link href="/signup">
-                                <Button
-                                    type="button"
-                                    fullWidth
-                                    variant="contained"
-                                    className={classes.submit}
-                                >
-                                    Je suis un restaurateur
-                                </Button>
+                            <Link href="/">
+                            <Button
+                                type="button"
+                                fullWidth
+                                variant="contained"
+                                className={classes.submit}
+                            >
+                                Je souhaite passer une commande
+                            </Button>
                             </Link>
                         </Box>
                         <Box mt={5}>

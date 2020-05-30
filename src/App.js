@@ -5,9 +5,9 @@ import SignUp from "./CreationCompteRestaurateur";
 import {Route, Router, Switch} from "react-router";
 import Home from "./Home";
 import {BrowserRouter} from "react-router-dom";
-import {AuthProvider} from "./Auth";
+import {AuthProvider} from "./login/Auth";
 import PrivateRoute from "./PrivateRoute";
-import Login from "./LoginRestaurateur";
+import Login from "./login/LoginRestaurateur";
 import Restaurant from "./Restaurant";
 
 function App() {

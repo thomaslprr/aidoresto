@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useState} from "react";
 import {useEffect} from "react";
-import app from "./index";
+import app from "../index";
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({children}) => {
