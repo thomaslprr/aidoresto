@@ -43,32 +43,49 @@ const Information = ({id}) => {
     function ouvrirPageModif(){
         setAffichage(true);
     }
-    function affichageBoutton(texte){
-        if(affichage){
-            return <div></div>
-        }else{
-            return <Button color="primary" onClick={ouvrirPageModif}>{texte} les informations de mon restaurant</Button>
+    function affichageBoutton(etape,texte){
 
-        }
+            if(etape==1){
+                if(affichage){
+                    return <div>
+                            <AlerteInfoPasRempli/>
+                            <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}/>
+                        </div>
+                }else{
+                    return <div>
+                        <AlerteInfoPasRempli/>
+                        <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}/>
+                        <Button color="primary" onClick={ouvrirPageModif}>Compléter les informations de mon restaurant</Button>
+                    </div>
+                }
+
+            }else{
+                if(affichage){
+                    return      <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}  />
+
+                }
+                return <div><Typography variant="h2" gutterBottom>{restaurantInfo.nom}</Typography>
+                    <Typography variant="h4" gutterBottom>{restaurantInfo.adresse.rue}, {restaurantInfo.adresse.ville} {restaurantInfo.adresse.code_postal}</Typography>
+                    <Typography variant="h5" gutterBottom>{restaurantInfo.telephone}</Typography>
+                    <Button color="primary" onClick={ouvrirPageModif}>Modifier les informations de mon restaurant</Button>
+                    <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}  /></div>
+            }
+
+
     }
 
     if(!loading){
         if(!rempli){
             return(
                 <div>
-                    <AlerteInfoPasRempli/>
-                    <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}/>
-                    {affichageBoutton("Compléter")}
+                    {affichageBoutton(1,"Compléter")}
                 </div>
             );
         }else{
             return(
                 <div>
-                    <Typography variant="h2" gutterBottom>{restaurantInfo.nom}</Typography>
-                    <Typography variant="h4" gutterBottom>{restaurantInfo.adresse.rue}, {restaurantInfo.adresse.ville} {restaurantInfo.adresse.code_postal}</Typography>
-                    <Typography variant="h5" gutterBottom>{restaurantInfo.telephone}</Typography>
-                    <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}  />
-                    {affichageBoutton("Modifier")}
+
+                    {affichageBoutton(2,"Modifier")}
                 </div>
             );
         }
