@@ -23,6 +23,7 @@ import FastfoodIcon from '@material-ui/icons/Fastfood';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
+import { useHistory } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -59,12 +60,46 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
+function texteAAfficher(id){
+    let txt = ": ";
+    console.log("voici l'id : "+id);
+    switch (id) {
+        case 0:
+            txt+="Général";
+            break;
+        case 1:
+            txt+="Vos commandes";
+            break;
+        case 2:
+            txt+="Boissons";
+            break;
+        case 3:
+            txt+="Entrées";
+            break;
+        case 4:
+            txt+="Repas";
+            break;
+        case 5:
+            txt+="Dessert";
+            break;
+        case 6:
+            txt+="Menus";
+            break;
+        case 7:
+            txt+="Informations";
+            break;
+        case undefined:
+            return "";
+    }
+    return txt;
+}
 
 
 function SideBar(props) {
 
     const [restaurant, setRestaurant] = useState();
     const [loading, setLoading] = useState(true);
+
 
     useEffect(()=>{
         console.log("data : "+props.id);
@@ -96,45 +131,51 @@ function SideBar(props) {
         setMobileOpen(!mobileOpen);
     };
 
+    const history = useHistory();
+
+    function changerOnglet(id,clickVal){
+        history.push('/dashboard/'+id+'/'+clickVal);
+    }
+
     const drawer = (
         <div>
             <div className={classes.toolbar} />
             <List>
-                <ListItem button>
+                <ListItem button onClick={()=> changerOnglet(props.id,"commandes") }>
                     <ListItemIcon><SendIcon color={"secondary"}/></ListItemIcon>
-                    <ListItemText primary="Vos commandes" />
+                    <ListItemText primary="Mes commandes" />
                 </ListItem>
             </List>
             <Divider />
             <List>
-                    <ListItem button>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"boissons") }>
                     <ListItemIcon><LocalBarIcon/></ListItemIcon>
                     <ListItemText primary="Boissons" />
                     </ListItem>
 
-                    <ListItem button>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"entrees") }>
                     <ListItemIcon></ListItemIcon>
                     <ListItemText primary="Entrées" />
                     </ListItem>
 
-                    <ListItem button>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"repas") }>
                     <ListItemIcon><FastfoodIcon/></ListItemIcon>
                     <ListItemText primary="Repas" />
                     </ListItem >
 
-                    <ListItem button>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"dessert") }>
                     <ListItemIcon><CakeIcon/></ListItemIcon>
                     <ListItemText primary="Dessert" />
                     </ListItem>
 
-                    <ListItem button>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"menus") }>
                     <ListItemIcon><MenuBookIcon/></ListItemIcon>
                     <ListItemText primary="Menus" />
                     </ListItem>
             </List>
             <Divider />
             <List>
-                <ListItem button>
+                <ListItem button onClick={()=> changerOnglet(props.id,"info") }>
                 <ListItemIcon><InfoIcon/></ListItemIcon>
                 <ListItemText primary="Informations" />
             </ListItem>
@@ -160,7 +201,7 @@ function SideBar(props) {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap>
-                            HELPORESTO - Gérer mon restaurant
+                            HELPORESTO - Gérer mon restaurant {texteAAfficher(props.type)}
                         </Typography>
                     </Toolbar>
                 </AppBar>

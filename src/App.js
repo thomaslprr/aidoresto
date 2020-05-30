@@ -19,7 +19,16 @@ function App() {
                   <Route exact path="/login" component={LoginRestaurateur}/>
                   <Route exact path="/signup" component={SignUp}/>
                   <Route exact path="/test/:id" render={props => <PageClient {...props} />} />
-                  <Route exact path="/dashboard/:id" render={props => <Dashboard {...props} />} />
+                  <Route exact path="/dashboard/:id" render={props => <Dashboard {...props} type={0}/>} />
+                  <Route exact path="/dashboard/:id/commandes" render={props => <Dashboard {...props} type={1} />} />
+                  <Route exact path="/dashboard/:id/boissons" render={props => <Dashboard {...props} type={2} />} />
+                  <Route exact path="/dashboard/:id/entrees" render={props => <Dashboard {...props} type={3} />} />
+                  <Route exact path="/dashboard/:id/repas" render={props => <Dashboard {...props} type={4} />} />
+                  <Route exact path="/dashboard/:id/dessert" render={props => <Dashboard {...props} type={5} />} />
+                  <Route exact path="/dashboard/:id/menus" render={props => <Dashboard {...props} type={6} />} />
+                  <Route exact path="/dashboard/:id/info" render={props => <Dashboard {...props} type={7} />} />
+
+
               </Switch>
           </BrowserRouter>
       </AuthProvider>
