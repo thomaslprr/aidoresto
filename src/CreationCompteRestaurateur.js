@@ -74,7 +74,7 @@ const SignUp = ({ history }) => {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign up
+                    Créer mon compte restaurateur
                 </Typography>
                 <form className={classes.form} onSubmit={handleSignUp}>
                     <Grid container spacing={2}>
@@ -114,7 +114,7 @@ const SignUp = ({ history }) => {
                     <Grid container justify="flex-end">
                         <Grid item>
                             <Link href="/login" variant="body2">
-                                J'ai déjà un compte : se connecter
+                                J'ai déjà un compte restaurateur : se connecter
                             </Link>
                         </Grid>
                     </Grid>

@@ -1,4 +1,6 @@
 import React from "react";
+import LoginClient from "./LoginClient";
+import Typography from "@material-ui/core/Typography";
 
 function Home(){
 
@@ -8,10 +10,7 @@ function Home(){
 
             <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
             <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-
-            <header>
-                Helporesto
-            </header>
+            <LoginClient/>
         </div>
     );
 

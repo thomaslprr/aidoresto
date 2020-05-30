@@ -60,7 +60,7 @@ function Copyright() {
     );
 }
 
-const Login = ({ history }) => {
+const LoginRestaurateur = ({ history }) => {
     const handleLogin = useCallback(
         async event => {
             event.preventDefault();
@@ -96,7 +96,7 @@ const Login = ({ history }) => {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Sign in
+                        Se connecter en tant que restaurateur
                     </Typography>
                     <form className={classes.form} onSubmit={handleLogin}>
                         <TextField
@@ -105,7 +105,7 @@ const Login = ({ history }) => {
                             required
                             fullWidth
                             id="email"
-                            label="Email Address"
+                            label="Adresse mail"
                             name="email"
                             autoComplete="email"
                             autoFocus
@@ -116,14 +116,14 @@ const Login = ({ history }) => {
                             required
                             fullWidth
                             name="password"
-                            label="Password"
+                            label="Mot de passe"
                             type="password"
                             id="password"
                             autoComplete="current-password"
                         />
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
+                            label="Se souvenir de moi"
                         />
                         <Button
                             type="submit"
@@ -132,7 +132,7 @@ const Login = ({ history }) => {
                             color="primary"
                             className={classes.submit}
                         >
-                            Sign In
+                            Se connecter
                         </Button>
                         <Grid container>
                             <Grid item xs>
@@ -141,11 +141,23 @@ const Login = ({ history }) => {
                                 </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link href="/signup" variant="body2">
                                     {"Vous n'avez pas de compte restaurateur ? S'inscrire"}
                                 </Link>
                             </Grid>
                         </Grid>
+                        <Box mt={4}>
+                            <Link href="/">
+                            <Button
+                                type="button"
+                                fullWidth
+                                variant="contained"
+                                className={classes.submit}
+                            >
+                                Je souhaite passer une commande
+                            </Button>
+                            </Link>
+                        </Box>
                         <Box mt={5}>
                             <Copyright />
                         </Box>
@@ -156,4 +168,4 @@ const Login = ({ history }) => {
     );
 };
 
-export default withRouter(Login);
+export default withRouter(LoginRestaurateur);
