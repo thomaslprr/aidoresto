@@ -14,6 +14,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {withRouter} from "react-router";
 import app from "./index";
+import firebase from "firebase";
+import UserStore from "./stores/UserStore";
 
 
 function Copyright() {
@@ -50,13 +52,75 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = ({ history }) => {
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max));
+    }
+
+    const generationId = () => {
+        const listeChar = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","0","1","2","3","4","5","6","7","8","9"];
+        var id = "";
+
+        for(var i = 0; i < 4; i++){
+            id += listeChar[getRandomInt(listeChar.length)];
+        }
+        console.log(id);
+        return id;
+    }
+
+    const verifIdLibre = async (id) =>{
+        var dispo = true;
+        await firebase.firestore().collection("restaurant").where("code_resto", "==", id)
+            .get()
+            .then(function(querySnapshot) {
+                querySnapshot.forEach(function(doc) {
+                    dispo = false;
+                });
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+        return dispo;
+    }
+
+    const creationCompteFirebase = async (idUser) => {
+
+        //Genreation ID
+        var idOk = false;
+        var id;
+
+        while(!idOk){
+            id = generationId();
+            idOk = await verifIdLibre(id);
+        }
+
+        console.log("Id final : "+id);
+        //Creation Profil vide avec ID
+
+        firebase.firestore().collection("restaurant").doc(idUser).set({
+            adresse: {
+                code_postal: "",
+                pays: "",
+                rue: "",
+                ville: ""
+            },
+            code_resto: id,
+            nom: "",
+            telephone: ""
+        });
+
+    }
+
     const handleSignUp = useCallback(async event => {
         event.preventDefault();
         const { email, password } = event.target.elements;
         try {
             await app
                 .auth()
-                .createUserWithEmailAndPassword(email.value, password.value);
+                .createUserWithEmailAndPassword(email.value, password.value).then((result) => {
+                        const user = result.user;
+                        creationCompteFirebase(user.uid);
+                    });
             history.push("/");
         } catch (error) {
             alert(error);
