@@ -2,15 +2,18 @@ import React, {useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import { Typography, Avatar, Grid, Box } from "@material-ui/core";
 import firebase from "firebase";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import Paper from "@material-ui/core/Paper";
 
 
 // CSS Style
 const useStyle = makeStyles(theme =>({
 
-    avatar:{
-        width: theme.spacing(15),
-        height: theme.spacing(15),
-        margin: theme.spacing(1)
+    resto:{
+        margin: "auto"
     }
 
 }));
@@ -22,6 +25,8 @@ const InfoResto = (props) => {
         ville: "",
         tel: ""
     });
+
+    const classes = useStyle();
 
     useEffect(()=>{
 
@@ -44,14 +49,23 @@ const InfoResto = (props) => {
         });
     },[]);
 
-    const classes = useStyle();
+
+    const [value, setValue] = useState("Menu");
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
     return (
-        <Box>
-            <Typography variant="h4">
-                {resto.nom}, {resto.ville}
-            </Typography>
-        </Box>
+
+        <AppBar position="static">
+            <Toolbar variant="dense">
+                <Typography className={classes.resto} variant="h6" color="inherit">
+                    {resto.nom}, {resto.ville}
+                </Typography>
+            </Toolbar>
+        </AppBar>
+
     )
 }
 

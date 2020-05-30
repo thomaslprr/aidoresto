@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import { Typography, Avatar, Grid, Box } from "@material-ui/core";
-import InfoResto from "./InfoResto";
+import InfoResto from "../InfoResto";
+import Carte from "./Carte";
 
 
 // CSS Style
@@ -20,6 +21,7 @@ const PageClient = ({ match: {params :{id}} }) => {
     return (
         <Box>
             <InfoResto idResto={id}/>
+            <Carte idResto={id}/>
         </Box>
     )
 }
