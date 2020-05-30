@@ -25,6 +25,8 @@ import InfoIcon from '@material-ui/icons/Info';
 import SendIcon from '@material-ui/icons/Send';
 import { useHistory } from "react-router-dom";
 import Information from "./info/Information";
+import SpaIcon from '@material-ui/icons/Spa';
+import Boisson from "./boissons/Boisson";
 
 const drawerWidth = 240;
 
@@ -111,6 +113,8 @@ function SideBar(props) {
                     Bon courage et prenez soin de vous ! ❤️
                 </Typography>
                 break;
+            case 2:
+                return <Boisson id={props.id}/>
             case 7:
                 return <Information id={props.id}/>
         }
@@ -151,7 +155,7 @@ function SideBar(props) {
                     </ListItem>
 
                     <ListItem button onClick={()=> changerOnglet(props.id,"entrees") }>
-                    <ListItemIcon></ListItemIcon>
+                    <ListItemIcon><SpaIcon/></ListItemIcon>
                     <ListItemText primary="Entrées" />
                     </ListItem>
 
