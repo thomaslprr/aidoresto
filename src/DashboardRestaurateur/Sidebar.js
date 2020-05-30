@@ -98,29 +98,7 @@ function texteAAfficher(id){
 function SideBar(props) {
 
     const [restaurant, setRestaurant] = useState();
-    const [loading, setLoading] = useState(true);
 
-
-    useEffect(()=>{
-        console.log("data : "+props.id);
-
-        const restaurantRef = firebase.firestore().collection("restaurant").doc(props.id);
-
-        restaurantRef.get().then(function(doc) {
-            if (doc.exists) {
-                console.log("Document data:", doc.data());
-                setRestaurant(doc.data());
-                setLoading(false);
-
-
-            } else {
-                // doc.data() will be undefined in this case
-                console.log("No such document!");
-            }
-        }).catch(function(error) {
-            console.log("Error getting document:", error);
-        });
-    },[]);
 
     const { window } = props;
     const classes = useStyles();
@@ -185,7 +163,6 @@ function SideBar(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
 
-    if(!loading){
         return (
             <div className={classes.root}>
                 <CssBaseline />
@@ -245,12 +222,10 @@ function SideBar(props) {
 
                         Bon courage et prenez soin de vous ! ❤️
                     </Typography>
+                    {props.module}
                 </main>
             </div>
         );
-    }else{
-            return <div>Chargement...</div>
-    }
 }
 
 SideBar.propTypes = {

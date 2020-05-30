@@ -1,5 +1,6 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import SideBar from "./Sidebar";
+import Information from "./Information";
 function Dashboard({ match: {params :{id}} , type}){
 
     useEffect(()=>{
@@ -9,7 +10,7 @@ function Dashboard({ match: {params :{id}} , type}){
 
     return(
         <div>
-        <SideBar id={id} type={type}/>
+        <SideBar id={id} type={type} module={<Information id={id}/>}/>
         </div>
     )
 
