@@ -52,7 +52,7 @@ const TemplateNourriture = ({repas}) => {
                     <Typography className={classes.desc} color="textSecondary" gutterBottom>
                         {repas.desc}
                     </Typography>
-                    <Typography variant="body2" component="p">
+                    <Typography variant="h6" component="p">
                         {repas.prix} €
                     </Typography>
                 </CardContent>
