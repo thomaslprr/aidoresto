@@ -38,7 +38,7 @@ const ListeBoissons = ({id}) => {
         }).catch(function (error) {
             console.log("Error getting document:", error);
         });
-    },[])
+    },[id])
 
     const msgAucuneBoisson = () => {
         if(aucuneBoison){

@@ -6,7 +6,29 @@ import RemplirInfo from "./RemplirInfo";
 import Button from "@material-ui/core/Button";
 import Chip from "@material-ui/core/Chip";
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
+import PopUpInfoResto from "./PopUpInfoResto";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import {makeStyles} from "@material-ui/styles";
 
+
+const useStyles = makeStyles({
+    root: {
+        minWidth: 275,
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 14,
+    },
+    pos: {
+        marginBottom: 12,
+    },
+});
 
 const Information = ({id}) => {
 
@@ -14,10 +36,11 @@ const Information = ({id}) => {
     const [loading, setLoading] = useState(true);
     const [rempli,setRempli] = useState(false);
 
-    const [affichage, setAffichage] = useState(false);
+    const classes = useStyles();
 
 
     useEffect(()=>{
+        console.log("wsh")
         console.log("data : "+id);
 
         const restaurantRef = firebase.firestore().collection("restaurant").doc(id);
@@ -42,10 +65,36 @@ const Information = ({id}) => {
         });
     },[]);
 
-    function ouvrirPageModif(){
-        setAffichage(true);
+    const [afficherCode,setAfficherCode] = useState(false);
+
+    const [affichage, setAffichage] = useState(false);
+
+
+
+    const openCodeResto = () => {
+
+        if(afficherCode){
+            return <PopUpInfoResto id={restaurantInfo.code_resto} setAffichage={setAfficherCode}/>
+        }else{
+            return <div></div>
+        }
+
+    };
+
+    const openModifInfo = () => {
+
+        if(affichage){
+            return  <RemplirInfo id={id} donnee={restaurantInfo} setAffichage={setAffichage} />
+        }else{
+            return <div></div>
+        }
+
     }
-    function affichageBoutton(etape,texte){
+
+
+    function affichageBoutton(etape){
+
+
 
             if(etape==1){
                 if(affichage){
@@ -57,25 +106,33 @@ const Information = ({id}) => {
                     return <div>
                         <AlerteInfoPasRempli/>
                         <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}/>
-                        <Button color="primary" onClick={ouvrirPageModif}>Compléter les informations de mon restaurant</Button>
+                        <Button color="primary" onClick={()=>setAffichage(true)}>Compléter les informations de mon restaurant</Button>
                     </div>
                 }
 
             }else{
-                if(affichage){
-                    return      <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}  />
+                return <div>
+                    <Card className={classes.root}>
+                        <CardContent>
+                            <Typography variant="h5" component="h2">
+                                {restaurantInfo.nom}
+                            </Typography>
+                            <Typography className={classes.pos} color="textSecondary">
+                                {restaurantInfo.adresse.rue}, {restaurantInfo.adresse.ville} {restaurantInfo.adresse.code_postal}
+                            </Typography>
+                            <Typography variant="button" display="block" gutterBottom>
+                                {restaurantInfo.telephone}
+                            </Typography>
+                        </CardContent>
+                        <CardActions>
+                            <Button color="secondary" onClick={()=>setAfficherCode(true)}>VOIR VOTRE CODE RESTAURANT</Button>
+                        </CardActions>
+                    </Card>
+                    {openCodeResto()}
+                    <Button color="primary" onClick={()=>setAffichage(true)}>Modifier les informations de mon restaurant</Button>
+                    {openModifInfo()}
 
-                }
-                return <div><Typography variant="h2" gutterBottom>{restaurantInfo.nom}</Typography>
-                    <Typography variant="h4" gutterBottom>{restaurantInfo.adresse.rue}, {restaurantInfo.adresse.ville} {restaurantInfo.adresse.code_postal}</Typography>
-                    <Typography variant="h5" gutterBottom>{restaurantInfo.telephone}</Typography>
-                    <Typography variant="h5" gutterBottom>Votre code restaurant
-
-                        <Chip label= {restaurantInfo.code_resto} color="primary" icon={<RestaurantMenuIcon />} clickable/>
-
-                    </Typography>
-                    <Button color="primary" onClick={ouvrirPageModif}>Modifier les informations de mon restaurant</Button>
-                    <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}  /></div>
+                </div>
             }
 
 
@@ -91,7 +148,6 @@ const Information = ({id}) => {
         }else{
             return(
                 <div>
-
                     {affichageBoutton(2,"Modifier")}
                 </div>
             );
