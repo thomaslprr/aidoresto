@@ -2,7 +2,7 @@ import React, {Suspense, useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import { Typography, Avatar, Grid, Box } from "@material-ui/core";
 import firebase from "firebase";
-import PropTypes from 'prop-types';
+import PropTypes, {element} from 'prop-types';
 import AppBar from "@material-ui/core/AppBar";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
@@ -12,6 +12,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import TemplateBoisson from "./TemplateBoisson";
 import TemplateNourriture from "./TemplateNourriture";
+import Commande from "../../stores/Commande";
 
 
 
@@ -146,6 +147,7 @@ const FragmentALaCarte = (props) => {
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     var x = {
+                        id: doc.id,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
                         volume: doc.data().volume
@@ -169,6 +171,7 @@ const FragmentALaCarte = (props) => {
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     var x = {
+                        id: doc.id,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
                         desc: doc.data().description
@@ -190,6 +193,7 @@ const FragmentALaCarte = (props) => {
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     var x = {
+                        id: doc.id,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
                         desc: doc.data().description
@@ -211,6 +215,7 @@ const FragmentALaCarte = (props) => {
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
                     var x = {
+                        id: doc.id,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
                         desc: doc.data().description
@@ -228,10 +233,12 @@ const FragmentALaCarte = (props) => {
 
     const ListBoisson = () => {
 
-        console.log(dataBoisson);
-        console.log(dataEntree);
-        console.log(dataPlat);
-        console.log(dataDessert);
+        dataBoisson.forEach(element => Commande.ajouterProduitListe(element));
+
+        console.log("Data store : ");
+        console.log("V 1 : ");
+        console.log(Commande.commandes);
+        console.log(Commande.articles);
 
         return (
             <>
@@ -243,6 +250,7 @@ const FragmentALaCarte = (props) => {
     }
 
     const ListEntree = () => {
+        dataEntree.forEach(element => Commande.ajouterProduitListe(element));
         return (
             <>
             {dataEntree.map( item => (
@@ -252,6 +260,7 @@ const FragmentALaCarte = (props) => {
         );
     }
     const ListPlat= () => {
+        dataPlat.forEach(element => Commande.ajouterProduitListe(element));
         return (
             <>
             {dataPlat.map( item => (
@@ -261,6 +270,7 @@ const FragmentALaCarte = (props) => {
         );
     }
     const ListDessert = () => {
+        dataDessert.forEach(element => Commande.ajouterProduitListe(element));
         return (
             <>
             {dataDessert.map( item => (

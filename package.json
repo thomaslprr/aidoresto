@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@babel/plugin-proposal-decorators": "^7.1.0",
     "@material-ui/core": "^4.10.0",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.54",
@@ -14,6 +15,7 @@
     "clsx": "^1.1.1",
     "firebase": "^7.14.6",
     "mobx": "^5.15.4",
+    "mobx-react": "^6.2.2",
     "prop-types": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -42,5 +44,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.2",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "install": "^0.13.0",
+    "npm": "^6.14.5"
   }
 }
