@@ -1,19 +1,25 @@
-import { extendObservable } from 'mobx';
-import {CompareArrows} from "@material-ui/icons";
+import {action, computed, decorate, extendObservable, observable} from 'mobx';
+
 
 class Commande {
+
+    estChoisi = observable.box(false);
+    listeProduit = observable.box([]);
+    commandes = observable.box({});
+
+
     constructor() {
-        extendObservable(this,{
-            estChoisi: false,
-            listeProduit: [],
-            commandes: {},
-        })
+
+        this.estChoisi= false;
+        this.listeProduit= [];
+        this.commandes= {};
+
     }
 
     ajouterProduitListe(produit){
 
-        Commande.listeProduit = Commande.listeProduit.concat(produit);
-        console.log(Commande.listeProduit);
+        this.listeProduit = this.listeProduit.concat(produit);
+        console.log(this.listeProduit);
 
     }
 
@@ -22,8 +28,8 @@ class Commande {
 
         //Verification présence dans le magasin
         var estPresent = false;
-        for(var i = 0; i<Commande.listeProduit.length; i++){
-            if (produit.id == Commande.listeProduit[i].id){
+        for(var i = 0; i<this.listeProduit.length; i++){
+            if (produit.id == this.listeProduit[i].id){
                 estPresent = true;
             }
         }
@@ -35,19 +41,28 @@ class Commande {
 
         //Ajout panier
         estPresent = false;
-        for (var key in Commande.commandes){
+        for (var key in this.commandes){
             if (produit.id == key){
                 estPresent = true;
             }
         }
 
         if (estPresent){
-            Commande.commandes[produit.id] ++;
+            this.commandes[produit.id] ++;
         }else {
-            Commande.commandes[produit.id] = 1;
+            this.commandes[produit.id] = 1;
         }
     }
 
+
+    get articles() {
+        return this.listeProduit;
+    }
+
+
 }
+decorate(Commande, {
+    articlescles: computed
+})
 
 export default new Commande();
