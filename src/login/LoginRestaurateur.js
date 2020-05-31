@@ -17,9 +17,9 @@ import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import UserStore from "../stores/UserStore";
 import AlertDialogInscription from "../creationCompte/Popup";
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
+import {User} from "firebase";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,6 +68,7 @@ const LoginRestaurateur = ({ history }) => {
 
     const [showModal,setShowModal] = useState(0);
 
+
     const handleLogin = useCallback(
         async event => {
             event.preventDefault();
@@ -77,12 +78,14 @@ const LoginRestaurateur = ({ history }) => {
                     .auth()
                     .signInWithEmailAndPassword(email.value, password.value).then((result) => {
                         const user = result.user;
-                        UserStore.isLoggedIn = true;
-                        UserStore.id = user.uid;
+                        sessionStorage.setItem('isConnected',true);
+                        window.sessionStorage.setItem('idResto',user.uid)
                         setShowModal(2);
                         history.push("/dashboard/"+user.uid);
+
                     });
             } catch (error) {
+                console.log(error);
                 setShowModal(1);
             }
         },

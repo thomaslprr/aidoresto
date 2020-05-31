@@ -15,7 +15,6 @@ import Container from '@material-ui/core/Container';
 import {withRouter} from "react-router";
 import app from "../index";
 import firebase from "firebase";
-import UserStore from "../stores/UserStore";
 import AlertDialogInscription from "./Popup";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 

@@ -38,9 +38,10 @@ const Information = ({id}) => {
 
     const classes = useStyles();
 
+    const [affichage, setAffichage] = useState(false);
+
 
     useEffect(()=>{
-        console.log("wsh")
         console.log("data : "+id);
 
         const restaurantRef = firebase.firestore().collection("restaurant").doc(id);
@@ -67,7 +68,6 @@ const Information = ({id}) => {
 
     const [afficherCode,setAfficherCode] = useState(false);
 
-    const [affichage, setAffichage] = useState(false);
 
 
 
@@ -82,7 +82,6 @@ const Information = ({id}) => {
     };
 
     const openModifInfo = () => {
-
         if(affichage){
             return  <RemplirInfo id={id} donnee={restaurantInfo} setAffichage={setAffichage} />
         }else{
@@ -97,18 +96,13 @@ const Information = ({id}) => {
 
 
             if(etape==1){
-                if(affichage){
-                    return <div>
-                            <AlerteInfoPasRempli/>
-                            <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}/>
-                        </div>
-                }else{
-                    return <div>
+
+                return (<div>
                         <AlerteInfoPasRempli/>
-                        <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}/>
                         <Button color="primary" onClick={()=>setAffichage(true)}>Compléter les informations de mon restaurant</Button>
-                    </div>
-                }
+                        {openModifInfo()}
+                    </div>);
+
 
             }else{
                 return <div>
