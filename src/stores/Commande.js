@@ -1,10 +1,12 @@
 import {action, computed, decorate, extendObservable, observable} from 'mobx';
+import {element} from "prop-types";
 
 
 class Commande {
 
     estChoisi = observable.box(false);
     listeProduit = observable.box([]);
+    nbProduit = 0;
     commandes = observable.box({});
 
 
@@ -16,10 +18,26 @@ class Commande {
 
     }
 
+    clearListeProduit(){
+        this.listeProduit = [];
+        this.nbProduit = 0;
+    }
+
     ajouterProduitListe(produit){
 
-        this.listeProduit = this.listeProduit.concat(produit);
-        console.log(this.listeProduit);
+        var aInserer = true;
+        for (var i = 0; i < this.nbProduit; i++){
+            if(this.listeProduit[i].id == produit.id){
+                aInserer = false;
+                return;
+            }
+        }
+
+
+        if (aInserer){
+            this.listeProduit = this.listeProduit.concat(produit);
+            this.nbProduit ++;
+        }
 
     }
 
