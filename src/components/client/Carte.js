@@ -95,10 +95,14 @@ const Carte = (props) => {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                Bientôt disponible
+                <Box>
+                    Bientôt disponible
+                </Box>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <FragmentALaCarte idResto={props.idResto}/>
+                <Box>
+                    <FragmentALaCarte idResto={props.idResto}/>
+                </Box>
             </TabPanel>
 
         </div>

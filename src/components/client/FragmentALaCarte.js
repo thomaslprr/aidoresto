@@ -241,7 +241,7 @@ const FragmentALaCarte = (props) => {
         return (
             <>
             {dataBoisson.map( item => (
-                <TemplateBoisson boisson={item} key={item}/>
+                <TemplateBoisson boisson={item}/>
                 ))}
             </>
         );
@@ -252,7 +252,7 @@ const FragmentALaCarte = (props) => {
         return (
             <>
             {dataEntree.map( item => (
-                <TemplateNourriture repas={item} key={item}/>
+                <TemplateNourriture repas={item}/>
                 ))}
             </>
         );
@@ -262,7 +262,7 @@ const FragmentALaCarte = (props) => {
         return (
             <>
             {dataPlat.map( item => (
-                <TemplateNourriture repas={item} key={item}/>
+                <TemplateNourriture repas={item}/>
                 ))}
             </>
         );
@@ -272,60 +272,62 @@ const FragmentALaCarte = (props) => {
         return (
             <>
             {dataDessert.map( item => (
-                <TemplateNourriture repas={item} key={item}/>
+                <TemplateNourriture repas={item} />
                 ))}
             </>
         );
     }
 
     return (
-        <div className={classes.root}>
-            <AppBar position="static">
-                <Tabs
-                    variant="fullWidth"
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="choix des plats">
+        <>
+            <div className={classes.root}>
+                <AppBar position="static">
+                    <Tabs
+                        variant="fullWidth"
+                        value={value}
+                        onChange={handleChange}
+                        aria-label="choix des plats">
 
-                    <LinkTab label="Entrée" href="/drafts" {...a11yProps(0)} />
-                    <LinkTab label="Plat" href="/trash" {...a11yProps(1)} />
-                    <LinkTab label="Dessert" href="/trash" {...a11yProps(2)} />
-                    <LinkTab label="Boisson" href="/trash" {...a11yProps(3)} />
-                </Tabs>
-            </AppBar>
+                        <LinkTab label="Entrée" href="/drafts" {...a11yProps(0)} />
+                        <LinkTab label="Plat" href="/trash" {...a11yProps(1)} />
+                        <LinkTab label="Dessert" href="/trash" {...a11yProps(2)} />
+                        <LinkTab label="Boisson" href="/trash" {...a11yProps(3)} />
+                    </Tabs>
+                </AppBar>
 
-            <TabPanel value={value} index={0}>
-                <Grid container spacing={3}>
+                <TabPanel value={value} index={0}>
+                    <Grid container spacing={3}>
+                            <Suspense fallback={<div>Chargement ...</div>}>
+                                <ListEntree />
+                            </Suspense>
+                    </Grid>
+                </TabPanel>
+
+                <TabPanel value={value} index={1}>
+                    <Grid container spacing={3}>
                         <Suspense fallback={<div>Chargement ...</div>}>
-                            <ListEntree />
+                            <ListPlat />
                         </Suspense>
-                </Grid>
-            </TabPanel>
+                    </Grid>
+                </TabPanel>
 
-            <TabPanel value={value} index={1}>
-                <Grid container spacing={3}>
-                    <Suspense fallback={<div>Chargement ...</div>}>
-                        <ListPlat />
-                    </Suspense>
-                </Grid>
-            </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <Grid container spacing={3}>
+                        <Suspense fallback={<div>Chargement ...</div>}>
+                            <ListDessert />
+                        </Suspense>
+                    </Grid>
+                </TabPanel>
 
-            <TabPanel value={value} index={2}>
-                <Grid container spacing={3}>
-                    <Suspense fallback={<div>Chargement ...</div>}>
-                        <ListDessert />
-                    </Suspense>
-                </Grid>
-            </TabPanel>
-
-            <TabPanel value={value} index={3}>
-                <Grid container spacing={3}>
-                    <Suspense fallback={<div>Chargement ...</div>}>
-                        <ListBoisson />
-                    </Suspense>
-                </Grid>
-            </TabPanel>
-        </div>
+                <TabPanel value={value} index={3}>
+                    <Grid container spacing={3}>
+                        <Suspense fallback={<div>Chargement ...</div>}>
+                            <ListBoisson />
+                        </Suspense>
+                    </Grid>
+                </TabPanel>
+            </div>
+        </>
     );
 
 }
