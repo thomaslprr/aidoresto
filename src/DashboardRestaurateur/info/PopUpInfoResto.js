@@ -33,7 +33,7 @@ export default function AlertDialogSlide({id,setAffichage}) {
                     <DialogContentText id="alert-dialog-slide-description">
                         Voici votre code restaurant ! <br/> Donner ce code à vos clients et ils pourront accéder à votre carte et commander dans votre restaurant depuis leur téléphone. <br/>
                         Pensez à enregistrer des plats et boissons.<br/>
-                        Il n'est composé que de 4 chiffres et lettres en majuscules.
+                        Le code est composé de 4 caractères : chiffres et lettres en majuscules.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
