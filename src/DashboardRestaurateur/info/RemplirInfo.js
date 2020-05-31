@@ -17,6 +17,12 @@ import InfoIcon from '@material-ui/icons/Info';
 import * as firebase from "firebase";
 import CircularIntegration from "./BoutonAttente";
 import {useHistory} from "react-router";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function RemplirInfo({id,donnee,affichage}){
+function RemplirInfo({id,donnee,setAffichage}){
 
 
     const [nom,setNom] = useState("");
@@ -62,34 +68,33 @@ function RemplirInfo({id,donnee,affichage}){
 
 
     const [chargementBouton,setChargementBouton] = useState(0);
-    const handleModifResto = useCallback(
-        async event => {
-            setChargementBouton(1);
-            event.preventDefault();
-            const { nom,numero,adresse,ville,code_postal } = event.target.elements;
-            restaurantRef.update({
-                nom: nom.value,
-                telephone:numero.value,
-                adresse:{
-                    code_postal:code_postal.value,
-                    pays:"France",
-                    rue:adresse.value,
-                    ville:ville.value
-                }
-            })
-                .then(function() {
-                    console.log("Document successfully written!");
-                    setChargementBouton(2);
-                    window.location.reload();
 
-                })
-                .catch(function(error) {
-                    console.error("Error writing document: ", error);
-                    setChargementBouton(3);
-                });
-            },
-        []
-    );
+    const handleModifResto = (event)=> {
+        console.log("clique sur valider");
+        setChargementBouton(1);
+        event.preventDefault();
+        const { nom,numero,adresse,ville,code_postal } = event.target.elements;
+        restaurantRef.update({
+            nom: nom.value,
+            telephone:numero.value,
+            adresse:{
+                code_postal:code_postal.value,
+                pays:"France",
+                rue:adresse.value,
+                ville:ville.value
+            }
+        })
+            .then(function() {
+                console.log("Document successfully written!");
+                setChargementBouton(2);
+                window.location.reload();
+
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+                setChargementBouton(3);
+            });
+    }
 
     function chargementBoutonComposant() {
         if(chargementBouton==0){
@@ -137,14 +142,17 @@ function RemplirInfo({id,donnee,affichage}){
 
     }
 
-    if(affichage){
         return(
             <div>
+                <div>
+                    <Dialog open={true} onClose={()=>setAffichage(false)} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Informations du restaurant</DialogTitle>
+                        <DialogContent>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <div className={classes.paper}>
                         <Avatar className={classes.avatar}>
-                            <InfoIcon />
+                            <RestaurantMenuIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
                             Votre restaurant
@@ -223,20 +231,20 @@ function RemplirInfo({id,donnee,affichage}){
                                 </Grid>
                             </Grid>
                             {chargementBoutonComposant()}
+
                         </form>
                     </div>
                     <Box mt={5}>
                     </Box>
                 </Container>
-
+                        </DialogContent>
+                        <DialogActions>
+                        </DialogActions>
+                    </Dialog>
+                </div>
             </div>
         )
-    }else{
-        return <div></div>
     }
 
-
-
-}
 
 export default RemplirInfo;

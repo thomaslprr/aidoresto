@@ -29,6 +29,7 @@ import SpaIcon from '@material-ui/icons/Spa';
 import Boisson from "./boissons/Boisson";
 import Repas from "./Repas/Repas";
 import ListeBoissons from "./boissons/ListeBoissons";
+import ListeRepas from "./Repas/ListeRepas";
 
 const drawerWidth = 240;
 
@@ -121,15 +122,37 @@ function SideBar(props) {
                 break;
             case 3:
                  orto = ["entrée", "la", "ajoutée","une"];
-                return <Repas id={props.id} categoriee={"Entrée"} orthographe={orto}/>;
+                return <><Repas id={props.id} categoriee={"Entrée"} orthographe={orto}/><br/>
+                        <ListeRepas
+                            id={props.id}
+                            categorie="Entrée"
+                            texteAucuneQuantite={"aucune entrée"}
+                            texteUnOuUne={"une"}
+                        />
+
+                        </>;
                 break;
             case 4:
-                 orto = ["déjeuné", "le", "ajouté","un"];
-                return <Repas id={props.id} categoriee={"Déjeuné"} orthographe={orto}/>;
+                 orto = ["repas", "le", "ajouté","un"];
+                return <><Repas id={props.id} categoriee={"Déjeuné"} orthographe={orto}/><br/>
+                        <ListeRepas
+                            id={props.id}
+                            categorie="Déjeuné"
+                            texteAucuneQuantite={"aucun repas"}
+                            texteUnOuUne={"un"}
+                        />
+                        </>;
                 break;
             case 5:
                 orto = ["dessert", "le", "ajouté","un"];
-                return <Repas id={props.id} categoriee={"Dessert"} orthographe={orto}/>;
+                return <><Repas id={props.id} categoriee={"Dessert"} orthographe={orto}/><br/>
+                        <ListeRepas
+                            id={props.id}
+                            categorie="Dessert"
+                            texteAucuneQuantite={"aucun dessert"}
+                            texteUnOuUne={"un"}
+                        />
+                        </>;
                 break;
 
             case 6:
