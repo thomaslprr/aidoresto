@@ -4,7 +4,6 @@ import {element} from "prop-types";
 
 class Commande {
 
-    estChoisi = observable.box(false);
     listeProduit = observable.box([]);
     nbProduit = 0;
     commandes = observable.box({});
@@ -12,10 +11,20 @@ class Commande {
 
     constructor() {
 
-        this.estChoisi= false;
-        this.listeProduit= [];
-        this.commandes= {};
+        if ('commande' in localStorage){
+            this.commandes = JSON.parse(localStorage.getItem('commande'));
+        }else{
+            this.commandes= {};
+        }
 
+        console.log("LA VAL EST ");
+        console.log(this.commandes);
+
+        this.listeProduit= [];
+    }
+
+    sauvegardePanier(){
+        localStorage.setItem('commande', JSON.stringify(this.commandes));
     }
 
     clearListeProduit(){
@@ -70,6 +79,8 @@ class Commande {
         }else {
             this.commandes[id] = 1;
         }
+
+        this.sauvegardePanier();
     }
 
     retraitProduit(id){
@@ -84,6 +95,7 @@ class Commande {
             }
         }
 
+        this.sauvegardePanier();
     }
 
 
