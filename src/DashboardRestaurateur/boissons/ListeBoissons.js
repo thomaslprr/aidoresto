@@ -21,6 +21,7 @@ const ListeBoissons = ({id}) => {
                 let donneesBoisson = doc.docs[i].data();
                 let data = {
                     id:doc.docs[i].id,
+                    id_resto: id,
                     nom: donneesBoisson.nom,
                     prix: donneesBoisson.prix,
                     categorie: donneesBoisson.categorie,
@@ -53,9 +54,10 @@ const ListeBoissons = ({id}) => {
                 {msgAucuneBoisson()}
                 <Grid container spacing={3}>
 
-                    {listeBoissons.map(({id, categorie, volume, date, nom, prix}) =>
-                        <Grid item xs>
+                    {listeBoissons.map(({id, categorie, volume, date, nom, prix,id_resto}) =>
+                        <Grid item xs key={id}>
                             <CarteBoisson
+                                idresto={id_resto}
                                 id={id}
                                 nom={nom}
                                 prix={prix}
