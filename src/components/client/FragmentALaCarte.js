@@ -148,6 +148,7 @@ const FragmentALaCarte = (props) => {
                 querySnapshot.forEach(function(doc) {
                     var x = {
                         id: doc.id,
+                        date: doc.data().date,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
                         volume: doc.data().volume
@@ -235,9 +236,6 @@ const FragmentALaCarte = (props) => {
 
         dataBoisson.forEach(element => Commande.ajouterProduitListe(element));
 
-        console.log("Data store : ");
-        console.log("V 1 : ");
-        console.log(Commande.commandes);
         console.log(Commande.articles);
 
         return (
@@ -297,35 +295,35 @@ const FragmentALaCarte = (props) => {
             </AppBar>
 
             <TabPanel value={value} index={0}>
-                <List className={classes.root2}>
+                <Grid container spacing={3}>
                         <Suspense fallback={<div>Chargement ...</div>}>
                             <ListEntree />
                         </Suspense>
-                </List>
+                </Grid>
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-                <List className={classes.root2}>
+                <Grid container spacing={3}>
                     <Suspense fallback={<div>Chargement ...</div>}>
                         <ListPlat />
                     </Suspense>
-                </List>
+                </Grid>
             </TabPanel>
 
             <TabPanel value={value} index={2}>
-                <List className={classes.root2}>
+                <Grid container spacing={3}>
                     <Suspense fallback={<div>Chargement ...</div>}>
                         <ListDessert />
                     </Suspense>
-                </List>
+                </Grid>
             </TabPanel>
 
             <TabPanel value={value} index={3}>
-                <List className={classes.root2}>
+                <Grid container spacing={3}>
                     <Suspense fallback={<div>Chargement ...</div>}>
                         <ListBoisson />
                     </Suspense>
-                </List>
+                </Grid>
             </TabPanel>
         </div>
     );
