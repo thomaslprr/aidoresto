@@ -9,6 +9,12 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
+import Badge from "@material-ui/core/Badge";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
+import AddIcon from '@material-ui/icons/Add';
+import RemoveIcon from '@material-ui/icons/Remove';
+import Box from "@material-ui/core/Box";
+import Commande from "../../stores/Commande";
 
 
 const useStyle = makeStyles(theme =>({
@@ -32,11 +38,24 @@ const useStyle = makeStyles(theme =>({
     item: {
 
         margin: "1em"
-    }
+    },
+    compteur: {
+        display: 'flex',
+        flexDirection: 'column',
+        '& > *': {
+            marginBottom: theme.spacing(2),
+        },
+        '& .MuiBadge-root': {
+            marginRight: theme.spacing(4),
+        },
+    },
 
 }));
 
 const TemplateNourriture = ({repas}) => {
+
+    const [count, setCount] = React.useState(Commande.quantiteItem(repas.id));
+    const [invisible, setInvisible] = React.useState(false);
 
     const classes = useStyle();
 
@@ -57,7 +76,37 @@ const TemplateNourriture = ({repas}) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button color="primary" size="small" onClick={console.log("click")}>Ajouter</Button>
+                    <Box m={2} />
+                    <div className={classes.compteur}>
+                        <div>
+                            <Badge
+                                color="primary"
+                                badgeContent={count}/>
+                            <ButtonGroup>
+                                <Button
+                                    aria-label="reduce"
+                                    onClick={() => {
+                                        if (count > 0){
+                                            setCount(Math.max(count - 1, 0));
+                                            Commande.retraitProduit(repas.id);
+                                        }
+
+                                    }}
+                                >
+                                    <RemoveIcon fontSize="small" />
+                                </Button>
+                                <Button
+                                    aria-label="increase"
+                                    onClick={() => {
+                                        setCount(count + 1);
+                                        Commande.ajouterUnElementAuPanier(repas.id);
+                                    }}
+                                >
+                                    <AddIcon fontSize="small" />
+                                </Button>
+                            </ButtonGroup>
+                        </div>
+                    </div>
                 </CardActions>
             </Card>
 
