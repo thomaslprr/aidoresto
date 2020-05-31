@@ -11,20 +11,38 @@ class Commande {
 
     constructor() {
 
-        if ('commande' in localStorage){
-            this.commandes = JSON.parse(localStorage.getItem('commande'));
+        if ('dateModif' in localStorage) {
+
+            if(Date.now() < parseInt(localStorage.getItem('dateModif'), 10)) {
+
+                if ('commande' in localStorage) {
+                    this.commandes = JSON.parse(localStorage.getItem('commande'));
+                } else {
+                    this.commandes = {};
+                }
+
+                if ('listeProduit' in localStorage) {
+                    this.listeProduit = JSON.parse(localStorage.getItem('listeProduit'));
+                } else {
+                    this.listeProduit = [];
+                }
+
+            }else {
+                localStorage.clear();
+                this.commandes = {};
+                this.listeProduit = [];
+            }
         }else{
-            this.commandes= {};
+            this.commandes = {};
+            this.listeProduit = [];
         }
 
-        console.log("LA VAL EST ");
-        console.log(this.commandes);
-
-        this.listeProduit= [];
+        this.nbProduit = 0;
     }
 
     sauvegardePanier(){
         localStorage.setItem('commande', JSON.stringify(this.commandes));
+        localStorage.setItem('dateModif', ''+Date.now()+3600*1000 );
     }
 
     clearListeProduit(){
@@ -35,21 +53,44 @@ class Commande {
     ajouterProduitListe(produit){
 
         var aInserer = true;
+        var present = false;
         for (var i = 0; i < this.nbProduit; i++){
             if(this.listeProduit[i].id == produit.id){
                 aInserer = false;
-                return;
             }
         }
-
 
         if (aInserer){
             this.listeProduit = this.listeProduit.concat(produit);
             this.nbProduit ++;
+        }else {
+
+            //Suppression de l'ancien
+            for (let i = 0; i < this.listeProduit.length; i++){
+                if (this.listeProduit[i].id === produit.id){
+                    this.listeProduit.splice(i, 1);
+                    break;
+                }
+            }
+
+            //Ajout du nouveau
+            this.listeProduit = this.listeProduit.concat(produit);
         }
+
+        localStorage.setItem('listeProduit', JSON.stringify(this.listeProduit));
+        localStorage.setItem('dateModif', ''+Date.now()+3600*1000 );
 
     }
 
+    prixTotal(){
+        var items = this.listeItems();
+
+        var total = 0;
+
+        items.forEach( element => total += (element.prix * element.quantite));
+
+        return total;
+    }
 
     ajouterUnElementAuPanier(id){
 
@@ -69,7 +110,7 @@ class Commande {
         //Ajout panier
         estPresent = false;
         for (let key in this.commandes){
-            if (id == key){
+            if (id === key){
                 estPresent = true;
             }
         }
@@ -112,6 +153,32 @@ class Commande {
         return 0;
     }
 
+    listeItems(){
+
+        // Retourne la commande (Objets + Quantite)
+        var items = [];
+
+        for (let idItem in this.commandes){
+
+            for(var i = 0; i<this.listeProduit.length; i++){
+
+                if (idItem == this.listeProduit[i].id){
+
+                    var obj = Object.assign({}, this.listeProduit[i]);
+                    var quantite = { quantite: this.quantiteItem(idItem)};
+
+                    var res = Object.assign(obj,quantite);
+
+                    items.push(res);
+                    break;
+                }
+            }
+        }
+
+        console.log(items);
+        return items;
+
+    }
 
 }
 decorate(Commande, {
