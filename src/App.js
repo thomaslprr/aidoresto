@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import SignUp from "./CreationCompteRestaurateur";
+import SignUp from "./creationCompte/CreationCompteRestaurateur";
 import {Route, Router, Switch} from "react-router";
 import Home from "./Home";
 import {BrowserRouter} from "react-router-dom";

@@ -22,6 +22,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import firebase from "firebase";
+import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -165,8 +166,8 @@ const LoginClient = ({ history }) => {
                 <Grid item xs={false} sm={4} md={7} className={classes.image} />
                 <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                     <div className={classes.paper}>
-                        <Avatar className={classes.avatar}>
-                            <LockOutlinedIcon />
+                        <Avatar className={classes.avatar} >
+                            <RestaurantMenuIcon />
                         </Avatar>
                         <Typography component="h1" variant="h5">
                             Passer une commande
@@ -200,7 +201,7 @@ const LoginClient = ({ history }) => {
                             </Button>
 
                             <Box mt={4}>
-                                <Link href="/signup">
+                                <Link href="/login">
                                     <Button
                                         type="button"
                                         fullWidth

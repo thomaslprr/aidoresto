@@ -78,7 +78,7 @@ function texteAAfficher(id){
             txt+="Boissons";
             break;
         case 3:
-            txt+="Repas";
+            txt+="Entrées";
             break;
         case 4:
             txt+="Repas";
@@ -104,6 +104,7 @@ function texteAAfficher(id){
 function SideBar(props) {
 
     function recupererModule(id){
+        let orto;
         switch(id){
             case 0:
                 return <Typography paragraph>
@@ -118,10 +119,25 @@ function SideBar(props) {
                 return <Boisson id={props.id}/>
                 break;
             case 3:
-                return <Repas id={props.id} categoriee={"Entrée"}/>;
+                 orto = ["entrée", "la", "ajoutée","une"];
+                return <Repas id={props.id} categoriee={"Entrée"} orthographe={orto}/>;
                 break;
+            case 4:
+                 orto = ["déjeuné", "le", "ajouté","un"];
+                return <Repas id={props.id} categoriee={"Déjeuné"} orthographe={orto}/>;
+                break;
+            case 5:
+                orto = ["dessert", "le", "ajouté","un"];
+                return <Repas id={props.id} categoriee={"Dessert"} orthographe={orto}/>;
+                break;
+
+            case 6:
+                return <div>La création de menus arrive bientôt !</div>;
+                break;
+
             case 7:
-                return <Information id={props.id}/>
+                return <Information id={props.id}/>;
+                break;
         }
     }
 

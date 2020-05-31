@@ -73,8 +73,8 @@ const LoginRestaurateur = ({ history }) => {
                         const user = result.user;
                         UserStore.isLoggedIn = true;
                         UserStore.id = user.uid;
+                        history.push("/dashboard/"+user.uid);
                     });
-                history.push("/");
             } catch (error) {
                 alert(error);
             }

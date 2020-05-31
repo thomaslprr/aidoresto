@@ -1,4 +1,4 @@
-import React, {useCallback} from 'react';
+import React, {useCallback, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,9 +13,10 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {withRouter} from "react-router";
-import app from "./index";
+import app from "../index";
 import firebase from "firebase";
-import UserStore from "./stores/UserStore";
+import UserStore from "../stores/UserStore";
+import AlertDialogInscription from "./Popup";
 
 
 function Copyright() {
@@ -111,6 +112,8 @@ const SignUp = ({ history }) => {
 
     }
 
+    const [showModal,setShowModal] = useState(0);
+
     const handleSignUp = useCallback(async event => {
         event.preventDefault();
         const { email, password } = event.target.elements;
@@ -121,17 +124,30 @@ const SignUp = ({ history }) => {
                         const user = result.user;
                         creationCompteFirebase(user.uid);
                     });
-            history.push("/");
+            setShowModal(2);
         } catch (error) {
-            alert(error);
+            setShowModal(1);
         }
     }, [history]);
 
 
     const classes = useStyles();
 
+    const afficherModale = ()=> {
+        if(showModal==1){
+            return  <AlertDialogInscription etat={1} changerEtat={setShowModal}/>
+
+
+        }
+        if(showModal==2){
+            return <AlertDialogInscription etat={2}/>
+        }
+    }
+
     return (
-        <Container component="main" maxWidth="xs">
+        <div>
+            {afficherModale()}
+            <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -188,6 +204,7 @@ const SignUp = ({ history }) => {
                 <Copyright />
             </Box>
         </Container>
+        </div>
     );
 }
 export default withRouter(SignUp);

@@ -4,6 +4,8 @@ import Typography from "@material-ui/core/Typography";
 import AlerteInfoPasRempli from "./AlerteInfoPasRempli";
 import RemplirInfo from "./RemplirInfo";
 import Button from "@material-ui/core/Button";
+import Chip from "@material-ui/core/Chip";
+import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 
 
 const Information = ({id}) => {
@@ -67,6 +69,11 @@ const Information = ({id}) => {
                 return <div><Typography variant="h2" gutterBottom>{restaurantInfo.nom}</Typography>
                     <Typography variant="h4" gutterBottom>{restaurantInfo.adresse.rue}, {restaurantInfo.adresse.ville} {restaurantInfo.adresse.code_postal}</Typography>
                     <Typography variant="h5" gutterBottom>{restaurantInfo.telephone}</Typography>
+                    <Typography variant="h5" gutterBottom>Votre code restaurant
+
+                        <Chip label= {restaurantInfo.code_resto} color="primary" icon={<RestaurantMenuIcon />} clickable/>
+
+                    </Typography>
                     <Button color="primary" onClick={ouvrirPageModif}>Modifier les informations de mon restaurant</Button>
                     <RemplirInfo id={id} donnee={restaurantInfo} affichage={affichage}  /></div>
             }

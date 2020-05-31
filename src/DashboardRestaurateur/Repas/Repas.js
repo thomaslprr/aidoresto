@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function Repas({id,categoriee}){
+export default function Repas({id,categoriee,orthographe}){
 
 
 
@@ -89,9 +89,6 @@ export default function Repas({id,categoriee}){
     const repasCollection = firebase.firestore().collection("restaurant").doc(id).collection("repas");
 
 
-    useEffect(()=> {
-        console.log(categorie);
-    },[categorie]);
 
     const handleAjouterBoisson = () =>{
         setEtatAjout(1);
@@ -135,7 +132,7 @@ export default function Repas({id,categoriee}){
                 color="primary"
                 className={classes.submit}
             >
-                Repas ajouté
+                {categoriee+" "+orthographe[2]}
             </Button>)
         }
         else if(etatAjout==3){
@@ -157,13 +154,13 @@ export default function Repas({id,categoriee}){
     return (
         <div>
             <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-                Ajouter une {categoriee}
+                Ajouter {orthographe[3]} {orthographe[0]}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">{categoriee}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Ajouter une {categoriee} à votre catalogue afin de la proposer à vos clients.
+                        Ajouter {orthographe[3]} {orthographe[0]} à votre catalogue afin de {orthographe[1]} proposer à vos clients.
                     </DialogContentText>
                     <Grid container spacing={2}>
 
