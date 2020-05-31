@@ -42,12 +42,12 @@ class Commande {
     }
 
 
-    ajouterUnElementAuPanier(produit){
+    ajouterUnElementAuPanier(id){
 
         //Verification présence dans le magasin
         var estPresent = false;
         for(var i = 0; i<this.listeProduit.length; i++){
-            if (produit.id == this.listeProduit[i].id){
+            if (id == this.listeProduit[i].id){
                 estPresent = true;
             }
         }
@@ -59,22 +59,45 @@ class Commande {
 
         //Ajout panier
         estPresent = false;
-        for (var key in this.commandes){
-            if (produit.id == key){
+        for (let key in this.commandes){
+            if (id == key){
                 estPresent = true;
             }
         }
 
         if (estPresent){
-            this.commandes[produit.id] ++;
+            this.commandes[id] ++;
         }else {
-            this.commandes[produit.id] = 1;
+            this.commandes[id] = 1;
         }
+    }
+
+    retraitProduit(id){
+
+        for (let key in this.commandes){
+            if (id == key){
+                if (this.commandes[id] > 1){
+                    this.commandes[id]--;
+                }else {
+                    delete this.commandes[id];
+                }
+            }
+        }
+
     }
 
 
     get articles() {
         return this.listeProduit;
+    }
+
+    quantiteItem(itemId){
+        for (var key in this.commandes){
+            if (itemId == key){
+                return this.commandes[itemId];
+            }
+        }
+        return 0;
     }
 
 
