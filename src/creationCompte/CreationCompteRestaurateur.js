@@ -133,14 +133,17 @@ const SignUp = ({ history }) => {
 
     const classes = useStyles();
 
+    const msgErreur = <>Impossible d'effectuer l'inscription. <br/> • Vérifiez votre connection internet <br/>
+                        • Vérifiez que l'adresse saisie soit conforme <br/> • Votre mot de passe doit contenir 6 caractères au minimum <br/><br/>
+                Si le problème persiste contactez-nous.</>;
     const afficherModale = ()=> {
         if(showModal==1){
-            return  <AlertDialogInscription etat={1} changerEtat={setShowModal}/>
+            return  <AlertDialogInscription etat={1} changerEtat={setShowModal} msgErreur={msgErreur}/>
 
 
         }
         if(showModal==2){
-            return <AlertDialogInscription etat={2}/>
+            return <AlertDialogInscription etat={2} url="/login"/>
         }
     }
 

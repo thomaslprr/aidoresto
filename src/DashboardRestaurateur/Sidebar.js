@@ -28,6 +28,7 @@ import Information from "./info/Information";
 import SpaIcon from '@material-ui/icons/Spa';
 import Boisson from "./boissons/Boisson";
 import Repas from "./Repas/Repas";
+import ListeBoissons from "./boissons/ListeBoissons";
 
 const drawerWidth = 240;
 
@@ -116,7 +117,7 @@ function SideBar(props) {
                 </Typography>
                 break;
             case 2:
-                return <Boisson id={props.id}/>
+                return <><Boisson id={props.id}/><br/><ListeBoissons id={props.id}/></>;
                 break;
             case 3:
                  orto = ["entrée", "la", "ajoutée","une"];

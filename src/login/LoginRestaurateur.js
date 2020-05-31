@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from "react";
+import React, {useCallback, useContext, useState} from "react";
 import { withRouter, Redirect } from "react-router";
 import app from "../index.js";
 import { AuthContext } from "./Auth.js";
@@ -17,6 +17,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import UserStore from "../stores/UserStore";
+import AlertDialogInscription from "../creationCompte/Popup";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -62,6 +63,9 @@ function Copyright() {
 }
 
 const LoginRestaurateur = ({ history }) => {
+
+    const [showModal,setShowModal] = useState(0);
+
     const handleLogin = useCallback(
         async event => {
             event.preventDefault();
@@ -73,10 +77,11 @@ const LoginRestaurateur = ({ history }) => {
                         const user = result.user;
                         UserStore.isLoggedIn = true;
                         UserStore.id = user.uid;
+                        setShowModal(2);
                         history.push("/dashboard/"+user.uid);
                     });
             } catch (error) {
-                alert(error);
+                setShowModal(1);
             }
         },
         [history]
@@ -90,8 +95,18 @@ const LoginRestaurateur = ({ history }) => {
     }*/
 
     const classes = useStyles();
+    const msgErreur = <>Impossible de se connecter !<br/>• Vérifiez votre connection internet <br/> • Assurez-vous que l'adresse mail saisie et le mot de passe soient corrects</>
+    const afficherModale = ()=> {
+        if(showModal==1){
+            return  <AlertDialogInscription etat={1} changerEtat={setShowModal} msgErreur={msgErreur}/>
+
+
+        }
+    }
 
     return (
+        <>
+            {afficherModale()}
         <Grid container component="main" className={classes.root}>
             <CssBaseline />
             <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -170,6 +185,7 @@ const LoginRestaurateur = ({ history }) => {
                 </div>
             </Grid>
         </Grid>
+            </>
     );
 };
 

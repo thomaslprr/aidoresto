@@ -12,7 +12,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function AlertDialogInscription({etat,changerEtat}) {
+export default function AlertDialogInscription({etat,changerEtat,url,msgErreur}) {
     const [open, setOpen] = React.useState(true);
     const handleClose = () => {
         changerEtat(0);
@@ -22,7 +22,7 @@ export default function AlertDialogInscription({etat,changerEtat}) {
 
 
     const connection = () => {
-        history.push("/login");
+        history.push(url);
     }
 
 
@@ -38,8 +38,7 @@ export default function AlertDialogInscription({etat,changerEtat}) {
                 <DialogTitle id="alert-dialog-slide-title">Erreur</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-slide-description">
-                        Impossible d'effectuer l'inscription, veuillez vérifier votre connection internet. <br/>
-                        Réessayez, si le problème persiste contactez nous.
+                        {msgErreur}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
