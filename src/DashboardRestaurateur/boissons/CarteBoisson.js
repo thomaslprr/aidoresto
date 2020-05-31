@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 import * as firebase from "firebase";
 import {useHistory} from "react-router";
 import {func} from "prop-types";
+import ModifierBoisson from "./PopupModifBoisson";
+import AlertDialogInscription from "../../creationCompte/Popup";
 
 const useStyles = makeStyles({
     root: {
@@ -44,10 +46,27 @@ export default function SimpleCardBoisson({nom,prix,volume,categorie,date,id,idr
         ).catch(function(error){
             console.log(error);
         });
-    }
+    };
+
+    const [showModal,setShowModal] = useState(0);
+
+    useEffect(()=>{
+
+    },[showModal]);
+
+    const modaleAAfficher = ()=> {
+        if(showModal==1){
+            return <ModifierBoisson idresto={idresto} idboisson={id} ann={date} cat={categorie} pri={prix} vol={volume} nm={nom} changerEtat={setShowModal}/>;
+        }else{
+            return <></>
+        }
+    };
+
 
     return (
+
         <Card className={classes.root}>
+            {modaleAAfficher()}
             <CardContent>
                 <Typography className={classes.title} color="textSecondary" gutterBottom>
                     {categorie}
@@ -65,10 +84,11 @@ export default function SimpleCardBoisson({nom,prix,volume,categorie,date,id,idr
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small">Modifier</Button>
+                <Button size="small" onClick={()=>setShowModal(1)}>Modifier</Button>
                 <Button size="small" onClick={handleSupression}>Suprimer</Button>
 
             </CardActions>
         </Card>
+
     );
 }
