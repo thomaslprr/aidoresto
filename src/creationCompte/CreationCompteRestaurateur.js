@@ -17,6 +17,7 @@ import app from "../index";
 import firebase from "firebase";
 import UserStore from "../stores/UserStore";
 import AlertDialogInscription from "./Popup";
+import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 
 
 function Copyright() {
@@ -154,7 +155,7 @@ const SignUp = ({ history }) => {
             <CssBaseline />
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
+                    <RestaurantMenuIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
                     Créer mon compte restaurateur

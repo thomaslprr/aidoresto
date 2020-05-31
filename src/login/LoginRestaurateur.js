@@ -2,6 +2,7 @@ import React, {useCallback, useContext, useState} from "react";
 import { withRouter, Redirect } from "react-router";
 import app from "../index.js";
 import { AuthContext } from "./Auth.js";
+import Background from '../image/resto1.jpg';
 
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -18,13 +19,14 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import UserStore from "../stores/UserStore";
 import AlertDialogInscription from "../creationCompte/Popup";
+import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 
 const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
     },
     image: {
-        backgroundImage: 'url(https://source.unsplash.com/random)',
+        backgroundImage: `url(${Background})`,
         backgroundRepeat: 'no-repeat',
         backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
         backgroundSize: 'cover',
@@ -113,7 +115,7 @@ const LoginRestaurateur = ({ history }) => {
             <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
+                        <RestaurantMenuIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Se connecter en tant que restaurateur
@@ -156,9 +158,6 @@ const LoginRestaurateur = ({ history }) => {
                         </Button>
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Mot de passe oublié ?
-                                </Link>
                             </Grid>
                             <Grid item>
                                 <Link href="/signup" variant="body2">
