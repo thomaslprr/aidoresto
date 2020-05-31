@@ -185,7 +185,7 @@ const FragmentALaCarte = (props) => {
         tableau = [];
         setDataPlat([]);
 
-        await firebase.firestore().collection("restaurant").doc(props.idResto).collection("repas").where("categorie", "==", "Plat")
+        await firebase.firestore().collection("restaurant").doc(props.idResto).collection("repas").where("categorie", "==", "Déjeuné")
             .get()
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
