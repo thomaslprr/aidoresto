@@ -4,7 +4,6 @@ import SignUp from "./creationCompte/CreationCompteRestaurateur";
 import {Route, Router, Switch} from "react-router";
 import Home from "./Home";
 import {BrowserRouter} from "react-router-dom";
-import PrivateRoute from "./PrivateRoute";
 import PageClient from "./components/client/PageClient";
 import {AuthProvider} from "./login/Auth";
 import LoginRestaurateur from "./login/LoginRestaurateur";
@@ -27,8 +26,7 @@ function App() {
                   <Route exact path="/dashboard/:id/dessert" render={props => <Dashboard {...props} type={5} />} />
                   <Route exact path="/dashboard/:id/menus" render={props => <Dashboard {...props} type={6} />} />
                   <Route exact path="/dashboard/:id/info" render={props => <Dashboard {...props} type={7} />} />
-
-
+                  
               </Switch>
           </BrowserRouter>
       </AuthProvider>

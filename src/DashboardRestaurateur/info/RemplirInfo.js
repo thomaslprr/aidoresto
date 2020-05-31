@@ -146,7 +146,6 @@ function RemplirInfo({id,donnee,setAffichage}){
             <div>
                 <div>
                     <Dialog open={true} onClose={()=>setAffichage(false)} aria-labelledby="form-dialog-title">
-                        <DialogTitle id="form-dialog-title">Informations du restaurant</DialogTitle>
                         <DialogContent>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
