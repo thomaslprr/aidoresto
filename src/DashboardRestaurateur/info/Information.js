@@ -12,6 +12,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import {makeStyles} from "@material-ui/styles";
 import QRCode from 'qrcode.react';
+import {BlobProvider, PDFDownloadLink} from "@react-pdf/renderer";
+import PDFResto from "./PDFResto";
 
 const useStyles = makeStyles({
     root: {
@@ -40,6 +42,12 @@ const Information = ({id}) => {
 
     const [affichage, setAffichage] = useState(false);
 
+    const [adresse,setAdresse] = useState("");
+
+    const [qrcode_adresse,setQrcode_adresse] = useState();
+
+
+
 
     useEffect(()=>{
         console.log("data : "+id);
@@ -53,9 +61,20 @@ const Information = ({id}) => {
                 setLoading(false);
                 if(doc.data().nom!=""){
                     setRempli(true);
+                    setAdresse(doc.data().adresse.rue+", "+doc.data().adresse.ville+" "+doc.data().adresse.code_postal);
+
+                    let qrCodeAdresse = <QRCode
+                        renderAs={'canvas'}
+                        id={id}
+                        value={"www.helporesto.fr/restaurant/"+id}
+                        size={200}
+                        level={"Q"}
+                        includeMargin={true}
+                    />;
+                    console.log("voici le qrcode code : "+qrCodeAdresse.toDataURL('image/jpeg', 1.0));
+                    setQrcode_adresse(qrCodeAdresse.toDataURL('image/jpeg', 1.0))
+
                 }
-
-
 
             } else {
                 // doc.data() will be undefined in this case
@@ -91,21 +110,11 @@ const Information = ({id}) => {
     }
 
 
-    const downloadQR = () => {
-        const canvas = document.getElementById(id);
-        const pngUrl = canvas
-            .toDataURL("image/png")
-            .replace("image/png", "image/octet-stream");
-        let downloadLink = document.createElement("a");
-        downloadLink.href = pngUrl;
-        downloadLink.download = "QR Code "+restaurantInfo.nom+".png";
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    };
+
+
+
 
         function affichageBoutton(etape){
-
 
 
             if(etape==1){
@@ -118,7 +127,8 @@ const Information = ({id}) => {
 
 
             }else{
-                return <div>
+
+                return (<div>
                     <Card className={classes.root}>
                         <CardContent>
                             <Typography variant="h5" component="h2">
@@ -130,26 +140,36 @@ const Information = ({id}) => {
                             <Typography variant="button" display="block" gutterBottom>
                                 {restaurantInfo.telephone}
                             </Typography>
+                            <QRCode
+                                renderAs={'canvas'}
+                                id={id}
+                                value={"www.helporesto.fr/restaurant/"+id}
+                                size={200}
+                                level={"Q"}
+                                includeMargin={true}
+                            />
                             <div>
-                                <QRCode
-                                    id={id}
-                                    value={"www.helporesto.fr/restaurant/"+id}
-                                    size={200}
-                                    level={"H"}
-                                    includeMargin={true}
-                                />
                             </div>
                         </CardContent>
                         <CardActions>
                             <Button color="secondary" onClick={()=>setAfficherCode(true)}>VOIR VOTRE CODE RESTAURANT</Button>
-                            <Button color="secondary" onClick={downloadQR}> Téléchargez le QR Code </Button>
+                            <PDFDownloadLink document={PDFResto(restaurantInfo.nom,adresse,qrcode_adresse,restaurantInfo.code_resto)} fileName="somename.pdf">
+                                {({ blob, url, loading, error }) => {
+                                    return (
+
+                                        <Button color="primary" >Télécharger la fiche du restaurant</Button>
+
+                                    )
+                                }}
+                            </PDFDownloadLink>
                         </CardActions>
                     </Card>
                     {openCodeResto()}
                     <Button color="primary" onClick={()=>setAffichage(true)}>Modifier les informations de mon restaurant</Button>
                     {openModifInfo()}
+                </div>);
 
-                </div>
+
             }
 
 
