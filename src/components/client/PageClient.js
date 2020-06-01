@@ -27,6 +27,7 @@ import NumberFormat from 'react-number-format';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import * as firebase from "firebase";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
+import blue from "@material-ui/core/colors/blue";
 
 
 
@@ -66,9 +67,9 @@ const useStyles = makeStyles((theme) => ({
     },
     fabGreen: {
         color: theme.palette.common.white,
-        backgroundColor: green[700],
+        backgroundColor: blue[900],
         '&:hover': {
-            backgroundColor: green[600],
+            backgroundColor: blue[600],
         },
     },
     appBar: {
@@ -287,7 +288,7 @@ const PageClient = ({ match: {params :{id}} }) => {
 
                         <Box className={classes.inputStyle}>
                             <Typography variant="subtitle2">
-                                Après avoir passé commande veuillez vous identifier auprès du personnel.
+                                Après avoir passé votre commande veuillez vous identifier auprès du personnel.
                             </Typography>
                         </Box>
 
