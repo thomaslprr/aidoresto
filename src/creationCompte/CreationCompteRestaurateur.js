@@ -17,6 +17,7 @@ import app from "../index";
 import firebase from "firebase";
 import AlertDialogInscription from "./Popup";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
+import Background from "../image/resto4.jpg";
 
 
 function Copyright() {
@@ -38,6 +39,21 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    img:{
+    /* Set rules to fill background */
+    minHeight: '100%',
+    minWidth: '1024px',
+
+    /* Set up proportionate scaling */
+    width: '100%',
+    height: 'auto',
+
+    /* Set up positioning */
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    zIndex:1
     },
     avatar: {
         margin: theme.spacing(1),
@@ -148,11 +164,11 @@ const SignUp = ({ history }) => {
     }
 
     return (
-        <div>
+        <div className={classes.img}>
             {afficherModale()}
             <Container component="main" maxWidth="xs">
             <CssBaseline />
-            <div className={classes.paper}>
+                <div className={classes.paper} style={{zIndex: 8,position: 'relative'}}   >
                 <Avatar className={classes.avatar}>
                     <RestaurantMenuIcon />
                 </Avatar>

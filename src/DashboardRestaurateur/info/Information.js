@@ -11,7 +11,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import {makeStyles} from "@material-ui/styles";
-
+import QRCode from 'qrcode.react';
 
 const useStyles = makeStyles({
     root: {
@@ -91,7 +91,20 @@ const Information = ({id}) => {
     }
 
 
-    function affichageBoutton(etape){
+    const downloadQR = () => {
+        const canvas = document.getElementById(id);
+        const pngUrl = canvas
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "QR Code "+restaurantInfo.nom+".png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    };
+
+        function affichageBoutton(etape){
 
 
 
@@ -117,9 +130,19 @@ const Information = ({id}) => {
                             <Typography variant="button" display="block" gutterBottom>
                                 {restaurantInfo.telephone}
                             </Typography>
+                            <div>
+                                <QRCode
+                                    id={id}
+                                    value={"www.helporesto.fr/restaurant/"+id}
+                                    size={200}
+                                    level={"H"}
+                                    includeMargin={true}
+                                />
+                            </div>
                         </CardContent>
                         <CardActions>
                             <Button color="secondary" onClick={()=>setAfficherCode(true)}>VOIR VOTRE CODE RESTAURANT</Button>
+                            <Button color="secondary" onClick={downloadQR}> Téléchargez le QR Code </Button>
                         </CardActions>
                     </Card>
                     {openCodeResto()}
