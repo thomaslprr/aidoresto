@@ -16,6 +16,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
+import firebase from "firebase";
 
 const useRowStyles = makeStyles({
     root: {
@@ -32,10 +33,33 @@ const useRowStyles = makeStyles({
 });
 
 
-function Row({laCom}) {
+function Row({laCom, id}) {
 
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+
+    const setEtatCommande = (etatDeLaCommande) => {
+
+        firebase.firestore().collection("restaurant").doc(id).collection("commandes").doc(laCom.id).update(
+            {
+                etat: etatDeLaCommande
+            }
+        ).then(function() {
+            console.log("Document successfully written!");
+        })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+    };
+
+
+    const validerCommande = () => {
+        setEtatCommande("en cours");
+    }
+
+    const refuserCommande = () => {
+        setEtatCommande("refusé");
+    }
 
     const getTime = (date) =>{
         var heure = "";
@@ -106,6 +130,7 @@ function Row({laCom}) {
                                             color="primary"
                                             className={classes.button}
                                             startIcon={<DoneIcon />}
+                                            onClick={validerCommande}
                                         >
                                             Valider
                                         </Button>
@@ -115,6 +140,7 @@ function Row({laCom}) {
                                             color="secondary"
                                             className={classes.button}
                                             startIcon={<DeleteIcon />}
+                                            onClick={refuserCommande}
                                         >
                                             Refuser
                                         </Button>
@@ -130,7 +156,7 @@ function Row({laCom}) {
 }
 
 
-export default function ListeCommandes({commandes}) {
+export default function ListeCommandes({commandes, idResto}) {
 
     const [commande,setCommande] = useState([]);
 
@@ -158,7 +184,7 @@ export default function ListeCommandes({commandes}) {
                 </TableHead>
                 <TableBody>
                     { commande.map((row) => (
-                        <Row laCom={row} />
+                        <Row laCom={row} id={idResto} />
                     ))}
                 </TableBody>
             </Table>
