@@ -53,8 +53,59 @@ function Row({laCom, id}) {
     };
 
 
+    const affichageBoutton = (etat) => {
+
+        if (etat === "attente"){
+            return (
+                <>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        startIcon={<DoneIcon />}
+                        onClick={validerCommande}
+                    >
+                        Valider
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        startIcon={<DeleteIcon />}
+                        onClick={refuserCommande}
+                    >
+                        Refuser
+                    </Button>
+                </>
+            );
+
+        }
+
+        if(etat === "en cours"){
+            return (
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<DoneIcon />}
+                    onClick={terminerCommande}
+                >
+                    Terminer
+                </Button>
+            );
+        }
+
+
+
+    }
+
     const validerCommande = () => {
         setEtatCommande("en cours");
+    }
+
+    const terminerCommande = () => {
+        setEtatCommande("fini");
     }
 
     const refuserCommande = () => {
@@ -125,25 +176,7 @@ function Row({laCom, id}) {
                                         </TableRow>
                                     ))}
                                     <TableRow>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            className={classes.button}
-                                            startIcon={<DoneIcon />}
-                                            onClick={validerCommande}
-                                        >
-                                            Valider
-                                        </Button>
-
-                                        <Button
-                                            variant="contained"
-                                            color="secondary"
-                                            className={classes.button}
-                                            startIcon={<DeleteIcon />}
-                                            onClick={refuserCommande}
-                                        >
-                                            Refuser
-                                        </Button>
+                                        {affichageBoutton(laCom.etat)}
                                     </TableRow>
                                 </TableBody>
                             </Table>
