@@ -24,6 +24,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import firebase from "firebase";
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import Background from "../image/resto4.jpg";
+import {Copyright} from "../PiedDePage/PiedPage";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,18 +56,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Copyright() {
-    return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            {'Copyright © '}
-            <Link color="inherit" href="https://helporesto.fr/">
-                Helporesto
-            </Link>{' '}
-            {new Date().getFullYear()}
-            {'.'}
-        </Typography>
-    );
-}
+
 
 const LoginClient = ({ history }) => {
 
