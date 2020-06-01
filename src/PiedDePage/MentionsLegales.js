@@ -346,7 +346,7 @@ export default  function MentionsLegales(){
         navigation de manière à ce que l’acceptation ou le refus des Cookies lui soient proposés
         ponctuellement, avant qu’un Cookie soit susceptible d’être enregistré dans son
         terminal. http://www.helporesto.fr informe l’Utilisateur que, dans ce cas, il se peut que les
-        fonctionnalités de son logiciel de navigation ne soient pas toutes disponibles.<br><br/>
+        fonctionnalités de son logiciel de navigation ne soient pas toutes disponibles.<br/><br/>
         Si l’Utilisateur refuse l’enregistrement de Cookies dans son terminal ou son navigateur, ou si
         l’Utilisateur supprime ceux qui y sont enregistrés, l’Utilisateur est informé que sa navigation et son
         expérience sur le Site peuvent être limitées. Cela pourrait également être le cas
@@ -385,8 +385,9 @@ export default  function MentionsLegales(){
         consultées), ainsi que l’utilisation de ce Site par l’Utilisateur.
         Le prestataire externe pourra éventuellement recueillir des informations sur les visiteurs du Site et
         d’autres sites Internet grâce à ces balises, constituer des rapports sur l’activité du Site à l’attention
-        de http://www.helporesto.fr, et fournir d’autres services relatifs à l’utilisation de celui-ci et d’Internet.</br>
-    </>)
+        de http://www.helporesto.fr, et fournir d’autres services relatifs à l’utilisation de celui-ci et d’Internet.
+    </>
+        );
 
 
 }
