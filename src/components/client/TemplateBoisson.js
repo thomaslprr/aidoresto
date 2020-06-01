@@ -52,6 +52,9 @@ const useStyle = makeStyles(theme =>({
         },
         margin: "0 auto",
     },
+    prix:{
+        textAlign: "right",
+    }
 
 }));
 
@@ -86,17 +89,25 @@ const TemplateBoisson = ({boisson}) => {
 
             <Card className={classes.root}>
                 <CardContent>
-                    <Typography variant="h5" component="h2">
-                        {boisson.nom}
-                    </Typography>
+                    <Grid container>
+                        <Grid item xs={10}>
+                            <Typography variant="h6" component="h2">
+                                {boisson.nom}
+                            </Typography>
+                        </Grid>
+
+                        <Grid item xs={2}>
+                            <Typography variant="h6" component="p" className={classes.prix} color="primary">
+                                {boisson.prix} €
+                            </Typography>
+                        </Grid>
+                    </Grid>
 
                     <Typography className={classes.pos} color="textSecondary">
                         {getLabel()}
                     </Typography>
 
-                    <Typography variant="h6" component="p">
-                        {boisson.prix} €
-                    </Typography>
+
                 </CardContent>
                 <CardActions>
 
