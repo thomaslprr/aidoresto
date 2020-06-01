@@ -13,10 +13,14 @@ const Commande = ({id}) => {
 
         firebase.firestore().collection("restaurant").doc(id).collection("commandes")
             .onSnapshot(function(querySnapshot) {
+
+                setListeCommande([]);
+                setLoading(false);
+
                 querySnapshot.forEach(function(doc) {
 
-                    setLoading(false);
                     let donnee = doc.data();
+
                     let commande = {
                         date: donnee.date,
                         nom: donnee.nom,
@@ -26,14 +30,14 @@ const Commande = ({id}) => {
                         numTable: donnee.numTable || ''
                     };
                     listeCommande.push(commande);
-                    //let lc = listeCommande;
-                    //lc.push(commande);
-                    //setListeCommande(lc);
+
+                    setListeCommande(listeCommande => listeCommande.concat(commande));
+
                 });
             });
 
 
-    },[])
+    },[]);
 
 
     if(loading){
