@@ -15,6 +15,7 @@ import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
+import DoneIcon from '@material-ui/icons/Done';
 
 const useRowStyles = makeStyles({
     root: {
@@ -22,6 +23,12 @@ const useRowStyles = makeStyles({
             borderBottom: 'unset',
         },
     },
+    button:{
+        margin: "2em 1em",
+    },
+    bold:{
+        fontWeight: "bold",
+    }
 });
 
 
@@ -59,9 +66,7 @@ function Row({laCom}) {
                         {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
                     </IconButton>
                 </TableCell>
-                <TableCell component="th" scope="row">
-                    <Typography variant="h6" color="primary">{laCom.nom}</Typography>
-                </TableCell>
+                <TableCell component="th" scope="row"><Typography variant="h6" color="primary" className={classes.bold}>{laCom.nom}</Typography></TableCell>
                 <TableCell align="right">{laCom.numTable}</TableCell>
                 <TableCell align="right"><Typography variant="h6" color="primary">{laCom.nombreCouverts}</Typography></TableCell>
                 <TableCell align="right"><Typography variant="h6">{getTime(laCom.date)}</Typography></TableCell>
@@ -95,24 +100,23 @@ function Row({laCom}) {
                                         </TableRow>
                                     ))}
                                     <TableRow>
-                                        <TableCell>
-                                            <Button
-                                                variant="contained"
-                                                color="secondary"
-                                                className={classes.button}
-                                                startIcon={<DeleteIcon />}
-                                            >
-                                                Refuser
-                                            </Button>
-                                            <Button
-                                                variant="contained"
-                                                color="primary"
-                                                className={classes.button}
-                                                startIcon={<DeleteIcon />}
-                                            >
-                                                Valider
-                                            </Button>
-                                        </TableCell>
+                                        <Button
+                                            variant="contained"
+                                            color="primary"
+                                            className={classes.button}
+                                            startIcon={<DoneIcon />}
+                                        >
+                                            Valider
+                                        </Button>
+
+                                        <Button
+                                            variant="contained"
+                                            color="secondary"
+                                            className={classes.button}
+                                            startIcon={<DeleteIcon />}
+                                        >
+                                            Refuser
+                                        </Button>
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -135,6 +139,7 @@ export default function ListeCommandes({commandes}) {
 
     },[commandes]);
 
+    const classes = useRowStyles();
 
     return (
         <TableContainer component={Paper}>
@@ -142,12 +147,12 @@ export default function ListeCommandes({commandes}) {
                 <TableHead>
                     <TableRow>
                         <TableCell />
-                        <TableCell><Typography variant="h6">Nom</Typography></TableCell>
-                        <TableCell align="right"><Typography variant="h6">Table</Typography></TableCell>
-                        <TableCell align="right"><Typography variant="h6">Couvert</Typography></TableCell>
-                        <TableCell align="right"><Typography variant="h6">Heure</Typography></TableCell>
-                        <TableCell align="right"><Typography variant="h6">Prix</Typography></TableCell>
-                        <TableCell align="right"><Typography variant="h6">Etat</Typography></TableCell>
+                        <TableCell><Typography variant="h6" className={classes.bold}>Nom</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6" className={classes.bold}>Table</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6" className={classes.bold}>Couvert</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6" className={classes.bold}>Heure</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6" className={classes.bold}>Prix</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6" className={classes.bold}>Etat</Typography></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
