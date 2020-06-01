@@ -24,6 +24,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import TextField from "@material-ui/core/TextField";
 import NumberFormat from 'react-number-format';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
 
@@ -89,6 +90,15 @@ const useStyles = makeStyles((theme) => ({
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
+    },
+    inputStyle:{
+        marginBottom: "3em",
+    },
+    paper: {
+        margin: theme.spacing(8, 4),
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
     },
 }));
 
@@ -194,11 +204,22 @@ const PageClient = ({ match: {params :{id}} }) => {
 
     const PageFinalisation = () => {
 
+        const [nom, setNom] = React.useState('');
+        const [couverts, setCouverts] = React.useState('');
+
+
         const envoieCommande = () => {
 
             setFinalisation(false);
             setOpen(false);
         }
+
+        const modifCouvert = (event) => {
+            setCouverts(event.target.value);
+        };
+        const modifNom = (event) => {
+            setNom(event.target.value);
+        };
 
         return(
             <>
@@ -213,23 +234,61 @@ const PageClient = ({ match: {params :{id}} }) => {
                         </Typography>
                     </Toolbar>
                 </AppBar>
-                <Box>
+
+                <div className={classes.paper}>
 
                     <form className={classes.form} onSubmit={envoieCommande}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Votre nom"
-                            name="nom"
-                            autoFocus
-                        />
+
+                        <Box className={classes.inputStyle}>
+                            <TextField
+                                variant="outlined"
+                                margin="normal"
+                                required
+                                fullWidth
+                                onChange={modifNom}
+                                value={nom}
+                                id="nom"
+                                label="Votre nom"
+                                name="nom"
+                                autoFocus
+                            />
+                        </Box>
+
+                        <Box className={classes.inputStyle}>
+                            <TextField
+                                variant="outlined"
+                                label="Nombre de couverts"
+                                value={couverts}
+                                onChange={modifCouvert}
+                                name="couverts"
+                                id="formatted-numberformat-input"
+                                InputProps={{
+                                    inputComponent: NumberFormatCustom,
+                                }}
+                                required
+                            />
+                        </Box>
+
+                        <Box className={classes.inputStyle}>
+                            <Typography variant="subtitle2">
+                                Après avoir passé commande veuillez vous identifier auprès du personnel.
+                            </Typography>
+                        </Box>
+
+                        <Box className={classes.inputStyle}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                type="submit"
+                                endIcon={<ShoppingBasketIcon/>}
+                                onClick={handleFinalisation}
+                            >
+                                Commander
+                            </Button>
+                        </Box>
                     </form>
 
-
-                </Box>
+                </div>
 
             </>
         );
