@@ -25,6 +25,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import TextField from "@material-ui/core/TextField";
 import NumberFormat from 'react-number-format';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import * as firebase from "firebase";
 
 
 
@@ -209,6 +210,27 @@ const PageClient = ({ match: {params :{id}} }) => {
 
 
         const envoieCommande = () => {
+
+            console.log("Envoie Commande : ");
+            console.log("nom :"+nom);
+            console.log("couverts : "+couverts);
+
+            const commandeData = {
+                nom: nom,
+                nombreCouverts: couverts,
+                listeItems: Commande.listeItems(),
+                prixTotal: Commande.prixTotal(),
+                date: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+
+            firebase.firestore().collection("restaurant").doc(id).collection("commandes").add(commandeData).then(function() {
+                console.log("Document successfully written!");
+            })
+                .catch(function(error) {
+                    console.error("Error writing document: ", error);
+                });
+
 
             setFinalisation(false);
             setOpen(false);
