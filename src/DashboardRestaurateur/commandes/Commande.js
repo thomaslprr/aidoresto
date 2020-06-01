@@ -22,12 +22,13 @@ const Commande = ({id}) => {
                     let donnee = doc.data();
 
                     let commande = {
-                        date: donnee.date,
+                        date: new Date(donnee.date.seconds * 1000),
                         nom: donnee.nom,
                         nombreCouverts: donnee.nombreCouverts,
                         prixTotal:donnee.prixTotal,
                         etat:donnee.etat || '',
-                        numTable: donnee.numTable || ''
+                        numTable: donnee.numTable || '',
+                        liste: donnee.listeItems
                     };
 
                     setListeCommande(listeCommande => listeCommande.concat(commande));
