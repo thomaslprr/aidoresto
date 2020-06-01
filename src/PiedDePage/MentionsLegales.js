@@ -50,34 +50,53 @@ export default  function MentionsLegales(){
             Les termes « données à caractère personnel », « personne concernée », « sous traitant » et « données
             sensibles » ont le sens défini par le Règlement Général sur la Protection des Données (RGPD : n° 2016-
             679)
-        <br/>
-        <Typography variant="h4" gutterBottom>
+        <br/>            <br/>
+            <br/>
+
+            <Typography variant="h4" gutterBottom>
             1. Présentation du site internet.
         </Typography>
         <Typography variant="body1" gutterBottom>
 
         En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie
         numérique, il est précisé aux utilisateurs du site internet http://www.helporesto.fr l'identité des
-        différents intervenants dans le cadre de sa réalisation et de son suivi:
+        différents intervenants dans le cadre de sa réalisation et de son suivi :
+            <br/>
+            <br/>
+
+
             <Typography variant="h6" display="block" gutterBottom>
                 Propriétaire :
-            </Typography>EI Quentin FONTAINE – Bréhal 50290 Bréhal
+            </Typography>
+            EI Quentin FONTAINE – Bréhal 50290 Bréhal
+            <br/>            <br/>
+
 
             <Typography variant="h6" display="block" gutterBottom>
                 Responsable publication :
             </Typography> Thomas LAPIERRE – contact@helporesto.fr
             <br/>
 
-        Le responsable publication est une personne physique ou une personne morale.
+
+            Le responsable publication est une personne physique ou une personne morale.
+            <br/>            <br/>
+
 
             <Typography variant="h6" display="block" gutterBottom>
                 Webmaster :
-            </Typography> Quentin FONTAINE – contact@helporesto.fr
+            </Typography>
+            Quentin FONTAINE – contact@helporesto.fr
+            <br/>            <br/>
+
+
             <Typography variant="h6" display="block" gutterBottom>
 
             Hébergeur :
             </Typography>
                 Firebase Hosting – Californie 94039 Mountain View 01 42 68 53 01
+            <br/>
+            <br/>
+
             <Typography variant="h6" display="block" gutterBottom>
 
                 Délégué à la protection des données </Typography>
@@ -192,9 +211,11 @@ export default  function MentionsLegales(){
         Le Client est informé des réglementations concernant la communication marketing, la loi du 21 Juin
         2014 pour la confiance dans l’Economie Numérique, la Loi Informatique et Liberté du 06 Août 2004
         ainsi que du Règlement Général sur la Protection des Données (RGPD : n° 2016-679).
-        <Typography variant="h5" gutterBottom>
+            <br/><br/>
+            <Typography variant="h5" gutterBottom>
         7.1 Responsables de la collecte des données personnelles
         </Typography>
+            <br/>
         Pour les Données Personnelles collectées dans le cadre de la création du compte personnel de
         l’Utilisateur et de sa navigation sur le Site, le responsable du traitement des Données Personnelles est :
         Quentin FONTAINE. http://www.helporesto.frest représenté par Quentin FONTAINE, son représentant
@@ -209,7 +230,9 @@ export default  function MentionsLegales(){
         les mesures raisonnables pour s’assurer de l’exactitude et de la pertinence des Données Personnelles
         au regard des finalités pour lesquelles http://www.helporesto.fr les traite.
 
+            <br/>
 
+            <br/>
         <Typography variant="h5" gutterBottom>
 
         7.2 Finalité des données collectées
@@ -226,6 +249,7 @@ export default  function MentionsLegales(){
         •pour mener des campagnes de communication (sms, mail) : numéro de téléphone, adresse email<br/>
         http://www.helporesto.fr ne commercialise pas vos données personnelles qui sont donc uniquement
         utilisées par nécessité ou à des fins statistiques et d’analyses.<br/>
+            <br/>
         <Typography variant="h5" gutterBottom>
         7.3 Droit d’accès, de rectification et d’opposition
         </Typography>
@@ -257,11 +281,14 @@ export default  function MentionsLegales(){
         imposées à http://www.helporesto.fr par la loi, notamment en matière de conservation ou d’archivage
         des documents. Enfin, les utilisateurs de http://www.helporesto.fr peuvent déposer une réclamation
         auprès des autorités de contrôle, et notamment de la CNIL (https://www.cnil.fr/fr/plaintes). <br/>
+            <br/>
 
         <Typography variant="h5" gutterBottom>
             7.4 Non-communication des données personnelles
         </Typography>
-        http://www.helporesto.fr s’interdit de traiter, héberger ou transférer les Informations collectées sur ses
+            <br/>
+
+            http://www.helporesto.fr s’interdit de traiter, héberger ou transférer les Informations collectées sur ses
         clients vers un pays situé en dehors de l’Union européenne ou reconnu comme « non adéquat » par la
         Commission européenne sans en informer préalablement le client.
         <br/>Pour autant, http://www.helporesto.fr reste libre du choix de ses sous-traitants techniques et commerciaux
@@ -302,6 +329,7 @@ export default  function MentionsLegales(){
         l'hypothèse du rachat de http://www.helporesto.fr et de ses droits permettrait la transmission des dites
         informations à l'éventuel acquéreur qui serait à son tour tenu de la même obligation de conservation et
         de modification des données vis à vis de l'utilisateur du site http://www.helporesto.fr. <br/>
+            <br/>
         <Typography variant="h5" gutterBottom>
 
         Sécurité
@@ -315,11 +343,12 @@ export default  function MentionsLegales(){
         divulgation, altération ou destruction.
 
         <br/>
-
+            <br/>
         <Typography variant="h4" gutterBottom>
 
         9. Liens hypertextes « cookies » et balises (“tags”) internet
         </Typography>
+            <br/>
         Le site http://www.helporesto.fr contient un certain nombre de liens hypertextes vers d’autres sites,
         mis en place avec l’autorisation de http://www.helporesto.fr. Cependant, http://www.helporesto.fr n’a
         pas la possibilité de vérifier le contenu des sites ainsi visités, et n’assumera en conséquence aucune
@@ -328,9 +357,11 @@ export default  function MentionsLegales(){
         moment désactiver ces cookies et ce gratuitement à partir des possibilités de désactivation qui vous sont
         offertes et rappelées ci-après, sachant que cela peut réduire ou empêcher l’accessibilité à tout ou partie des
         Services proposés par le site.<br/>
+            <br/>
         <Typography variant="h5" gutterBottom>
         9.1. « COOKIES »
         </Typography>
+            <br/>
         Un « cookie » est un petit fichier d’information envoyé sur le navigateur de l’Utilisateur et enregistré au
         sein du terminal de l’Utilisateur (ex : ordinateur, smartphone), (ci-après « Cookies »). Ce fichier
         comprend des informations telles que le nom de domaine de l’Utilisateur, le fournisseur d’accès
@@ -363,26 +394,30 @@ export default  function MentionsLegales(){
         matière de Cookies.<br/><br/>
         À tout moment, l’Utilisateur peut faire le choix d’exprimer et de modifier ses souhaits en matière de
         Cookies. http://www.helporesto.fr pourra en outre faire appel aux services de prestataires externes
-        pour l’aider à recueillir et traiter les informations décrites dans cette section.
+        pour l’aider à recueillir et traiter les informations décrites dans cette section.<br/><br/>
         Enfin, en cliquant sur les icônes dédiées aux réseaux sociaux Twitter, Facebook, Linkedin et Google Plus
         figurant sur le Site de http://www.helporesto.fr ou dans son application mobile et si l’Utilisateur a
         accepté le dépôt de cookies en poursuivant sa navigation sur le Site Internet ou l’application mobile
         de http://www.helporesto.fr, Twitter, Facebook, Linkedin et Google Plus peuvent également déposer
-        des cookies sur vos terminaux (ordinateur, tablette, téléphone portable).
+        des cookies sur vos terminaux (ordinateur, tablette, téléphone portable).<br/><br/>
         Ces types de cookies ne sont déposés sur vos terminaux qu’à condition que vous y consentiez, en
         continuant votre navigation sur le Site Internet ou l’application mobile de http://www.helporesto.fr. À
         tout moment, l’Utilisateur peut néanmoins revenir sur son consentement à ce
         que http://www.helporesto.fr dépose ce type de cookies.
+            <br/><br/>
+        <Typography variant="h5" gutterBottom>
+
         Article 9.2. BALISES (“TAGS”) INTERNET
+        </Typography><br/><br/>
         http://www.helporesto.fr peut employer occasionnellement des balises Internet (également appelées «
         tags », ou balises d’action, GIF à un pixel, GIF transparents, GIF invisibles et GIF un à un) et les déployer
         par l’intermédiaire d’un partenaire spécialiste d’analyses Web susceptible de se trouver (et donc de
-        stocker les informations correspondantes, y compris l’adresse IP de l’Utilisateur) dans un pays étranger.
+        stocker les informations correspondantes, y compris l’adresse IP de l’Utilisateur) dans un pays étranger.<br/><br/>
         Ces balises sont placées à la fois dans les publicités en ligne permettant aux internautes d’accéder au
-        Site, et sur les différentes pages de celui-ci.
+        Site, et sur les différentes pages de celui-ci.<br/><br/>
         Cette technologie permet à http://www.helporesto.fr d’évaluer les réponses des visiteurs face au Site et
         l’efficacité de ses actions (par exemple, le nombre de fois où une page est ouverte et les informations
-        consultées), ainsi que l’utilisation de ce Site par l’Utilisateur.
+        consultées), ainsi que l’utilisation de ce Site par l’Utilisateur.<br/><br/>
         Le prestataire externe pourra éventuellement recueillir des informations sur les visiteurs du Site et
         d’autres sites Internet grâce à ces balises, constituer des rapports sur l’activité du Site à l’attention
         de http://www.helporesto.fr, et fournir d’autres services relatifs à l’utilisation de celui-ci et d’Internet.

@@ -62,18 +62,6 @@ const Information = ({id}) => {
                 if(doc.data().nom!=""){
                     setRempli(true);
                     setAdresse(doc.data().adresse.rue+", "+doc.data().adresse.ville+" "+doc.data().adresse.code_postal);
-
-                    let qrCodeAdresse = <QRCode
-                        renderAs={'canvas'}
-                        id={id}
-                        value={"www.helporesto.fr/restaurant/"+id}
-                        size={200}
-                        level={"Q"}
-                        includeMargin={true}
-                    />;
-                    console.log("voici le qrcode code : "+qrCodeAdresse.toDataURL('image/jpeg', 1.0));
-                    setQrcode_adresse(qrCodeAdresse.toDataURL('image/jpeg', 1.0))
-
                 }
 
             } else {
@@ -109,6 +97,18 @@ const Information = ({id}) => {
 
     }
 
+    const downloadQR = () => {
+        const canvas = document.getElementById(id);
+        const pngUrl = canvas
+            .toDataURL("image/png")
+            .replace("image/png", "image/octet-stream");
+        let downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = "QR Code "+restaurantInfo.nom+".png";
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    };
 
 
 
@@ -145,23 +145,15 @@ const Information = ({id}) => {
                                 id={id}
                                 value={"www.helporesto.fr/restaurant/"+id}
                                 size={200}
-                                level={"Q"}
+                                level={"H"}
                                 includeMargin={true}
                             />
                             <div>
                             </div>
                         </CardContent>
                         <CardActions>
-                            <Button color="secondary" onClick={()=>setAfficherCode(true)}>VOIR VOTRE CODE RESTAURANT</Button>
-                            <PDFDownloadLink document={PDFResto(restaurantInfo.nom,adresse,qrcode_adresse,restaurantInfo.code_resto)} fileName="somename.pdf">
-                                {({ blob, url, loading, error }) => {
-                                    return (
-
-                                        <Button color="primary" >Télécharger la fiche du restaurant</Button>
-
-                                    )
-                                }}
-                            </PDFDownloadLink>
+                            <Button color="primary" onClick={()=>setAfficherCode(true)}>VOIR VOTRE CODE RESTAURANT</Button>
+                            <Button color="secondary"  onClick={downloadQR}>Télécharger le QR Code de votre restaurant</Button>
                         </CardActions>
                     </Card>
                     {openCodeResto()}

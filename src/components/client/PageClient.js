@@ -28,6 +28,7 @@ import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import * as firebase from "firebase";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import blue from "@material-ui/core/colors/blue";
+import {Copyright} from "../../PiedDePage/PiedPage";
 
 
 
@@ -397,6 +398,7 @@ const PageClient = ({ match: {params :{id}} }) => {
                {getContenuPopUp()}
 
             </Dialog>
+            <Copyright/>
 
         </>
     )
