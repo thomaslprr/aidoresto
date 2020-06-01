@@ -26,6 +26,7 @@ import TextField from "@material-ui/core/TextField";
 import NumberFormat from 'react-number-format';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import * as firebase from "firebase";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 
 
 
@@ -79,6 +80,8 @@ const useStyles = makeStyles((theme) => ({
     },
     legende: {
         fontWeight: "bold",
+    },
+    espace:{
         marginTop: "1em"
     },
     affichageQuantite: {
@@ -100,6 +103,9 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    divider: {
+      margin: "1em 0",
     },
 }));
 
@@ -146,7 +152,7 @@ const PageClient = ({ match: {params :{id}} }) => {
                     </Toolbar>
                 </AppBar>
                 <Box>
-                    <Grid container spacing={1}>
+                    <Grid container spacing={1} className={classes.espace}>
                         <Grid item xs={6}>
                             <Typography align="center" className={classes.legende}>
                                 Nom
@@ -163,7 +169,7 @@ const PageClient = ({ match: {params :{id}} }) => {
                             </Typography>
                         </Grid>
                     </Grid>
-                    <Divider />
+                    <Divider className={classes.divider} />
                 </Box>
 
                 <List>
@@ -172,22 +178,13 @@ const PageClient = ({ match: {params :{id}} }) => {
 
                 </List>
 
-                <Divider />
+                <Divider className={classes.divider} />
 
-                <Grid container spacing={1}>
-                    <Grid item xs={6}>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Typography align="center">
-                            Total
-                        </Typography>
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Typography align="center">
-                            {Commande.prixTotal()} €
-                        </Typography>
-                    </Grid>
-                </Grid>
+
+                <Typography align="center">
+                    Total : {Commande.prixTotal()} €
+                </Typography>
+
 
                 <Button
                     variant="contained"
@@ -210,10 +207,6 @@ const PageClient = ({ match: {params :{id}} }) => {
 
 
         const envoieCommande = () => {
-
-            console.log("Envoie Commande : ");
-            console.log("nom :"+nom);
-            console.log("couverts : "+couverts);
 
             const commandeData = {
                 nom: nom,
@@ -253,7 +246,7 @@ const PageClient = ({ match: {params :{id}} }) => {
                             <ArrowBackIcon />
                         </IconButton>
                         <Typography variant="h6" className={classes.title}>
-                            Ma Commande
+                            Finalisation de la commande
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -343,41 +336,37 @@ const PageClient = ({ match: {params :{id}} }) => {
                                     {item.nom}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={4}>
-                                <Grid container>
-                                    <Grid item xs={4}>
-                                        <Button
-                                            aria-label="reduce"
-                                            onClick={() => {
-                                            Commande.retraitProduit(item.id);
+                            <Grid item xs={4} alignItems="center">
+
+                                <ButtonGroup variant="text" color="default" aria-label="text primary button group">
+                                    <Button
+                                        aria-label="reduce"
+                                        onClick={() => {
+                                        Commande.retraitProduit(item.id);
+                                        setRefresh(!refresh);
+                                    }}
+                                        >
+                                        <RemoveIcon fontSize="small" />
+                                    </Button>
+
+                                    <Button>
+                                        {item.quantite}
+                                    </Button>
+
+                                    <Button
+                                        aria-label="increase"
+                                        onClick={() => {
+                                            Commande.ajouterUnElementAuPanier(item.id);
                                             setRefresh(!refresh);
                                         }}
-                                            >
-                                            <RemoveIcon fontSize="small" />
-                                        </Button>
-                                    </Grid>
-
-                                    <Grid item xs={4}>
-                                        <Typography align="center" className={classes.affichageQuantite}>
-                                            {item.quantite}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={4}>
-                                        <Button
-                                            aria-label="increase"
-                                            onClick={() => {
-                                                Commande.ajouterUnElementAuPanier(item.id);
-                                                setRefresh(!refresh);
-                                            }}
-                                        >
-                                            <AddIcon fontSize="small" />
-                                        </Button>
-                                    </Grid>
-                                </Grid>
+                                    >
+                                        <AddIcon fontSize="small" />
+                                    </Button>
+                                </ButtonGroup>
 
                             </Grid>
                             <Grid item xs={2}>
-                                <Typography align="right">
+                                <Typography align="center">
                                     {item.prix} €
                                 </Typography>
                             </Grid>
