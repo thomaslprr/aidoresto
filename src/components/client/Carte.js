@@ -90,17 +90,17 @@ const Carte = (props) => {
                     onChange={handleChange}
                     aria-label="nav tabs example"
                 >
-                    <LinkTab label="A la carte" href="/trash" {...a11yProps(1)} />
-
                     <LinkTab label="Menu" href="/drafts" {...a11yProps(0)} />
+
+                    <LinkTab label="A la carte" href="/trash" {...a11yProps(1)} />
                 </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
+            <TabPanel value={value} index={1}>
                 <Box>
                     <FragmentALaCarte idResto={props.idResto}/>
                 </Box>
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={value} index={0}>
                 <Box>
                     Bientôt disponible
                 </Box>
