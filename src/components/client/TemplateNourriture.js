@@ -15,6 +15,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Box from "@material-ui/core/Box";
 import Commande from "../../stores/Commande";
+import LocalMallIcon from '@material-ui/icons/LocalMall';
 
 
 const useStyle = makeStyles(theme =>({
@@ -48,6 +49,7 @@ const useStyle = makeStyles(theme =>({
         '& .MuiBadge-root': {
             marginRight: theme.spacing(4),
         },
+        margin:'0 auto',
     },
 
 }));
@@ -60,6 +62,7 @@ const TemplateNourriture = ({repas}) => {
     const classes = useStyle();
 
     return (
+
 
         <Grid item xs key={repas.id}>
 
@@ -76,13 +79,10 @@ const TemplateNourriture = ({repas}) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Box m={2} />
                     <div className={classes.compteur}>
                         <div>
-                            <Badge
-                                color="primary"
-                                badgeContent={count}/>
-                            <ButtonGroup>
+
+                            <ButtonGroup color="primary" aria-label="text primary button group">
                                 <Button
                                     aria-label="reduce"
                                     onClick={() => {
@@ -95,6 +95,11 @@ const TemplateNourriture = ({repas}) => {
                                 >
                                     <RemoveIcon fontSize="small" />
                                 </Button>
+
+                                <Button>
+                                    {count}
+                                </Button>
+
                                 <Button
                                     aria-label="increase"
                                     onClick={() => {
@@ -105,6 +110,7 @@ const TemplateNourriture = ({repas}) => {
                                     <AddIcon fontSize="small" />
                                 </Button>
                             </ButtonGroup>
+
                         </div>
                     </div>
                 </CardActions>

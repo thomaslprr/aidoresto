@@ -50,6 +50,7 @@ const useStyle = makeStyles(theme =>({
         '& .MuiBadge-root': {
             marginRight: theme.spacing(4),
         },
+        margin: "0 auto",
     },
 
 }));
@@ -98,13 +99,11 @@ const TemplateBoisson = ({boisson}) => {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Box m={2} />
+
                     <div className={classes.compteur}>
                         <div>
-                            <Badge
-                                color="primary"
-                                badgeContent={count}/>
-                            <ButtonGroup>
+
+                            <ButtonGroup color="primary" aria-label="text primary button group">
                                 <Button
                                     aria-label="reduce"
                                     onClick={() => {
@@ -117,6 +116,11 @@ const TemplateBoisson = ({boisson}) => {
                                 >
                                     <RemoveIcon fontSize="small" />
                                 </Button>
+
+                                <Button>
+                                    {count}
+                                </Button>
+
                                 <Button
                                     aria-label="increase"
                                     onClick={() => {
