@@ -3,9 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 
 const firebase = require('firebase');
 require('firebase/firestore');
+
+const theme = createMuiTheme({
+    palette: {
+        primary:{
+            main: '#1f62b9'
+        },
+        secondary: {
+            main: '#ff9555'
+        }
+    }
+});
 
 const app = firebase.initializeApp({
     apiKey: "AIzaSyAm9gNIaEiOl0wce4HYHE-WkYo62Kecs0I",
@@ -20,9 +33,12 @@ const app = firebase.initializeApp({
 export default app;
 
 ReactDOM.render(
-  <React.StrictMode>
+    <MuiThemeProvider theme={theme}>
+    <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  </React.StrictMode>
+    </MuiThemeProvider>
+        ,
   document.getElementById('root')
 );
 
