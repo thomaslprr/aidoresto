@@ -11,7 +11,7 @@ const Commande = ({id}) => {
 
     useEffect(()=>{
 
-        firebase.firestore().collection("restaurant").doc(id).collection("commandes")
+        firebase.firestore().collection("restaurant").doc(id).collection("commandes").where("etat", "in", ['attente', 'en cours'])
             .onSnapshot(function(querySnapshot) {
 
                 setListeCommande([]);
