@@ -71,6 +71,7 @@ function Row({laCom}) {
                 <TableCell align="right"><Typography variant="h6" color="primary">{laCom.nombreCouverts}</Typography></TableCell>
                 <TableCell align="right"><Typography variant="h6">{getTime(laCom.date)}</Typography></TableCell>
                 <TableCell align="right"><Typography variant="h6" color="primary">{laCom.prixTotal} €</Typography></TableCell>
+                <TableCell align="right"><Typography variant="h6">{laCom.etat}</Typography></TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
