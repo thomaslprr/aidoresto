@@ -5,7 +5,6 @@ import {element} from "prop-types";
 class Commande {
 
     listeProduit = observable.box([]);
-    nbProduit = 0;
     commandes = observable.box({});
 
 
@@ -37,7 +36,6 @@ class Commande {
             this.listeProduit = [];
         }
 
-        this.nbProduit = 0;
     }
 
     sauvegardePanier(){
@@ -47,14 +45,13 @@ class Commande {
 
     clearListeProduit(){
         this.listeProduit = [];
-        this.nbProduit = 0;
     }
 
     ajouterProduitListe(produit){
 
         var aInserer = true;
         var present = false;
-        for (var i = 0; i < this.nbProduit; i++){
+        for (var i = 0; i < this.listeProduit.length; i++){
             if(this.listeProduit[i].id == produit.id){
                 aInserer = false;
             }
@@ -62,7 +59,6 @@ class Commande {
 
         if (aInserer){
             this.listeProduit = this.listeProduit.concat(produit);
-            this.nbProduit ++;
         }else {
 
             //Suppression de l'ancien
