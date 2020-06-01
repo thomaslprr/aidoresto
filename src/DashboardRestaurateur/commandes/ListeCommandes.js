@@ -153,31 +153,34 @@ function Row({laCom, id}) {
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
                             <Typography gutterBottom component="div">
-                                Commande
+                                Détail
                             </Typography>
                             <Table size="small" aria-label="purchases">
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Plat</TableCell>
-                                        <TableCell align="right">Quantité</TableCell>
-                                        <TableCell align="right">Prix</TableCell>
+                                        <TableCell className={classes.bold} align="center">Nom</TableCell>
+                                        <TableCell className={classes.bold} align="center">Quantité</TableCell>
+                                        <TableCell className={classes.bold} align="center">Prix</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
+                                    <br/>
                                     {laCom.liste.map((item) => (
                                         <TableRow key={item.id}>
-                                            <TableCell component="th" scope="row">
+                                            <TableCell component="th" scope="row" align="center">
                                                 {item.nom}
                                             </TableCell>
-                                            <TableCell align="right">{item.quantite}</TableCell>
-                                            <TableCell align="right">
+                                            <TableCell align="center">{item.quantite}</TableCell>
+                                            <TableCell align="center">
                                                 {item.prix} €
                                             </TableCell>
                                         </TableRow>
                                     ))}
+                                    <br/>
                                     <TableRow>
                                         {affichageBoutton(laCom.etat)}
                                     </TableRow>
+                                    <br/>
                                 </TableBody>
                             </Table>
                         </Box>
