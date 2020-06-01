@@ -1,11 +1,8 @@
-import {action, computed, decorate, extendObservable, observable} from 'mobx';
-import {element} from "prop-types";
-
+import {computed, decorate, observable} from 'mobx';
 
 class Commande {
 
     listeProduit = observable.box([]);
-    nbProduit = 0;
     commandes = observable.box({});
 
 
@@ -37,24 +34,22 @@ class Commande {
             this.listeProduit = [];
         }
 
-        this.nbProduit = 0;
     }
 
     sauvegardePanier(){
         localStorage.setItem('commande', JSON.stringify(this.commandes));
-        localStorage.setItem('dateModif', ''+Date.now()+3600*1000 );
+        localStorage.setItem('dateModif', ''+(Date.now()+(3600*1000)) );
     }
 
     clearListeProduit(){
         this.listeProduit = [];
-        this.nbProduit = 0;
     }
 
     ajouterProduitListe(produit){
 
         var aInserer = true;
         var present = false;
-        for (var i = 0; i < this.nbProduit; i++){
+        for (var i = 0; i < this.listeProduit.length; i++){
             if(this.listeProduit[i].id == produit.id){
                 aInserer = false;
             }
@@ -62,23 +57,19 @@ class Commande {
 
         if (aInserer){
             this.listeProduit = this.listeProduit.concat(produit);
-            this.nbProduit ++;
         }else {
 
             //Suppression de l'ancien
-            for (let i = 0; i < this.listeProduit.length; i++){
-                if (this.listeProduit[i].id === produit.id){
-                    this.listeProduit.splice(i, 1);
-                    break;
-                }
-            }
+            let removeIndex = this.listeProduit.map(function(item) { return item.id; }).indexOf(produit.id);
+            this.listeProduit.splice(removeIndex, 1);
+
 
             //Ajout du nouveau
             this.listeProduit = this.listeProduit.concat(produit);
         }
 
         localStorage.setItem('listeProduit', JSON.stringify(this.listeProduit));
-        localStorage.setItem('dateModif', ''+Date.now()+3600*1000 );
+        localStorage.setItem('dateModif', ''+(Date.now()+(3600*1000)) );
 
     }
 
