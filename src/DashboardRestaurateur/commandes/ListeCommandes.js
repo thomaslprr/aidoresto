@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import Button from "@material-ui/core/Button";
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const useRowStyles = makeStyles({
     root: {
@@ -50,7 +52,7 @@ function Row({laCom}) {
     }
 
     return (
-        <div>
+        <>
             <TableRow className={classes.root}>
                 <TableCell>
                     <IconButton aria-label="expand row" size="small" onClick={() => setOpen(!open)}>
@@ -58,18 +60,18 @@ function Row({laCom}) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row">
-                    {laCom.nom}
+                    <Typography variant="h6" color="primary">{laCom.nom}</Typography>
                 </TableCell>
                 <TableCell align="right">{laCom.numTable}</TableCell>
-                <TableCell align="right">{laCom.nombreCouverts}</TableCell>
-                <TableCell align="right">{getTime(laCom.date)}</TableCell>
-                <TableCell align="right">{laCom.prixTotal}</TableCell>
+                <TableCell align="right"><Typography variant="h6" color="primary">{laCom.nombreCouverts}</Typography></TableCell>
+                <TableCell align="right"><Typography variant="h6">{getTime(laCom.date)}</Typography></TableCell>
+                <TableCell align="right"><Typography variant="h6" color="primary">{laCom.prixTotal} €</Typography></TableCell>
             </TableRow>
             <TableRow>
                 <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
                     <Collapse in={open} timeout="auto" unmountOnExit>
                         <Box margin={1}>
-                            <Typography variant="h6" gutterBottom component="div">
+                            <Typography gutterBottom component="div">
                                 Commande
                             </Typography>
                             <Table size="small" aria-label="purchases">
@@ -77,7 +79,7 @@ function Row({laCom}) {
                                     <TableRow>
                                         <TableCell>Plat</TableCell>
                                         <TableCell align="right">Quantité</TableCell>
-                                        <TableCell align="right">Total price ($)</TableCell>
+                                        <TableCell align="right">Prix</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -88,36 +90,40 @@ function Row({laCom}) {
                                             </TableCell>
                                             <TableCell align="right">{item.quantite}</TableCell>
                                             <TableCell align="right">
-                                                {item.prix}
+                                                {item.prix} €
                                             </TableCell>
                                         </TableRow>
                                     ))}
+                                    <TableRow>
+                                        <TableCell>
+                                            <Button
+                                                variant="contained"
+                                                color="secondary"
+                                                className={classes.button}
+                                                startIcon={<DeleteIcon />}
+                                            >
+                                                Refuser
+                                            </Button>
+                                            <Button
+                                                variant="contained"
+                                                color="primary"
+                                                className={classes.button}
+                                                startIcon={<DeleteIcon />}
+                                            >
+                                                Valider
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
                                 </TableBody>
                             </Table>
                         </Box>
                     </Collapse>
                 </TableCell>
             </TableRow>
-        </div>
+        </>
     );
 }
 
-
-
-function createData(nom, numTable, nombreCouvert, dateCommande, prixTotal, etat) {
-    return {
-        nom,
-        numTable,
-        nombreCouvert,
-        dateCommande,
-        prixTotal,
-        etat,
-        history: [
-            { date: '2020-01-05', customerId: '11091700', amount: 3 },
-            { date: '2020-01-02', customerId: 'Anonymous', amount: 1 },
-        ],
-    };
-}
 
 export default function ListeCommandes({commandes}) {
 
@@ -136,12 +142,12 @@ export default function ListeCommandes({commandes}) {
                 <TableHead>
                     <TableRow>
                         <TableCell />
-                        <TableCell>Nom</TableCell>
-                        <TableCell align="right">Table</TableCell>
-                        <TableCell align="right">Couvert</TableCell>
-                        <TableCell align="right">Heure</TableCell>
-                        <TableCell align="right">Prix</TableCell>
-                        <TableCell align="right">Etat</TableCell>
+                        <TableCell><Typography variant="h6">Nom</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6">Table</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6">Couvert</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6">Heure</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6">Prix</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6">Etat</Typography></TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
