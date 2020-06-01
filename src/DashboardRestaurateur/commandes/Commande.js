@@ -29,7 +29,6 @@ const Commande = ({id}) => {
                         etat:donnee.etat || '',
                         numTable: donnee.numTable || ''
                     };
-                    listeCommande.push(commande);
 
                     setListeCommande(listeCommande => listeCommande.concat(commande));
 
