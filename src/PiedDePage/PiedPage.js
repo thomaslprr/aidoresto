@@ -26,9 +26,12 @@ export function Copyright() {
             {'Copyright © '}
             <Link color="inherit">
                 Helporesto
-            </Link>{' '}
+            </Link>{' - '}
             {new Date().getFullYear()}
         </Typography>
+            <Typography variant="body2" color="textSecondary" align="center">
+               contact@helporesto.fr - 06 29 14 29 60
+            </Typography>
         <Typography variant="body2" color="textSecondary" align="center">
             {AfficherPopUpMentionLegale()}
      <Button color="inherit"  onClick={()=>setAfficherMentionLegale(true)}>

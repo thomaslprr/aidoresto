@@ -31,6 +31,7 @@ import Repas from "./Repas/Repas";
 import ListeBoissons from "./boissons/ListeBoissons";
 import ListeRepas from "./Repas/ListeRepas";
 import Commande from "./commandes/Commande";
+import {Copyright} from "../PiedDePage/PiedPage";
 
 const drawerWidth = 240;
 
@@ -110,13 +111,16 @@ function SideBar(props) {
         let orto;
         switch(id){
             case 0:
-                return <Typography paragraph>
+                return <><Typography paragraph>
                     Bienvenue sur la page de gestion de votre restaurant.<br/><br/>
                     Vous trouverez à gauche les différentes catégories à remplir afin que vos clients puissent voir les services que vous proposez.<br/><br/>
                     La rubrique "informations" doit être remplie avant de pouvoir commencer à faire quoi que ce soit. <br/><br/>
 
                     Bon courage et prenez soin de vous ! ❤️
                 </Typography>
+                    <br/><br/><br/>
+                <Copyright/>
+                    </>
                 break;
             case 1:
                 return <Commande id={props.id}/>
