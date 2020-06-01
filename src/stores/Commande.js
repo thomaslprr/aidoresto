@@ -42,7 +42,7 @@ class Commande {
 
     sauvegardePanier(){
         localStorage.setItem('commande', JSON.stringify(this.commandes));
-        localStorage.setItem('dateModif', ''+Date.now()+3600*1000 );
+        localStorage.setItem('dateModif', ''+(Date.now()+(3600*1000)) );
     }
 
     clearListeProduit(){
@@ -78,7 +78,7 @@ class Commande {
         }
 
         localStorage.setItem('listeProduit', JSON.stringify(this.listeProduit));
-        localStorage.setItem('dateModif', ''+Date.now()+3600*1000 );
+        localStorage.setItem('dateModif', ''+(Date.now()+(3600*1000)) );
 
     }
 
