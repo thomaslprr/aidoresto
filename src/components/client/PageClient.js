@@ -17,8 +17,36 @@ import Divider from "@material-ui/core/Divider";
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from "@material-ui/core/Slide";
 import Commande from "../../stores/Commande";
+import Button from "@material-ui/core/Button";
+import RemoveIcon from "@material-ui/icons/Remove";
+import AddIcon from "@material-ui/icons/Add";
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import TextField from "@material-ui/core/TextField";
+import NumberFormat from 'react-number-format';
 
 
+
+function NumberFormatCustom(props) {
+    const { inputRef, onChange, ...other } = props;
+
+    return (
+        <NumberFormat
+            {...other}
+            getInputRef={inputRef}
+            onValueChange={(values) => {
+                onChange({
+                    target: {
+                        name: props.name,
+                        value: values.value,
+                    },
+                });
+            }}
+            thousandSeparator
+            isNumericString
+        />
+    );
+}
 
 
 const useStyles = makeStyles((theme) => ({
@@ -51,6 +79,17 @@ const useStyles = makeStyles((theme) => ({
         fontWeight: "bold",
         marginTop: "1em"
     },
+    affichageQuantite: {
+        marginLeft: "20px",
+        marginRight: "20px",
+    },
+    button: {
+        margin: "auto"
+    },
+    form: {
+        width: '100%', // Fix IE 11 issue.
+        marginTop: theme.spacing(1),
+    },
 }));
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -62,63 +101,29 @@ const PageClient = ({ match: {params :{id}} }) => {
     const classes = useStyles();
 
     const [open, setOpen] = React.useState(false);
-    const [liste, setListe] = React.useState([]);
+    const [finalisation, setFinalisation] = React.useState(false);
+    const [refresh, setRefresh] = React.useState(false);
 
     const handleClickOpen = () => {
-        console.log(Commande.listeItems());
         setOpen(true);
+    };
+
+    const handleFinalisation = () => {
+        setFinalisation(true);
+    };
+
+    const retourFinalisation = () => {
+        setFinalisation(false);
     };
 
     const handleClose = () => {
         setOpen(false);
     };
 
-    const ListElements = () => {
-
-        return (
+    const ContenuCommande = () => {
+        return(
             <>
-                {Commande.listeItems().map( item => (
 
-                    <ListItem>
-
-                        <Grid container spacing={1}>
-                            <Grid item xs={6}>
-                                <Typography align="center">
-                                    {item.nom}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <Typography align="center">
-                                    {item.quantite}
-                                </Typography>
-                            </Grid>
-                            <Grid item xs={3}>
-                                <Typography align="center">
-                                    {item.prix} €
-                                </Typography>
-                            </Grid>
-                        </Grid>
-
-                    </ListItem>
-
-                ))}
-            </>
-        );
-    };
-
-    return (
-        <>
-            <Box>
-                <InfoResto idResto={id}/>
-                <Carte idResto={id}/>
-            </Box>
-
-            <Fab aria-label='Expand' className={clsx(classes.fab, classes.fabGreen)} onClick={handleClickOpen} color='inherit'>
-                <ShoppingCartIcon />
-            </Fab>
-
-
-            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
                 <AppBar className={classes.appBar}>
                     <Toolbar>
                         <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
@@ -136,12 +141,12 @@ const PageClient = ({ match: {params :{id}} }) => {
                                 Nom
                             </Typography>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={4}>
                             <Typography align="center" className={classes.legende}>
-                                Quantitée
+                                Quantité
                             </Typography>
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={2}>
                             <Typography align="center" className={classes.legende}>
                                 Prix
                             </Typography>
@@ -172,6 +177,152 @@ const PageClient = ({ match: {params :{id}} }) => {
                         </Typography>
                     </Grid>
                 </Grid>
+
+                <Button
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    endIcon={<NavigateNextIcon/>}
+                    onClick={handleFinalisation}
+                >
+                    Finaliser ma commande
+                </Button>
+
+            </>
+        );
+    };
+
+    const PageFinalisation = () => {
+
+        const envoieCommande = () => {
+
+            setFinalisation(false);
+            setOpen(false);
+        }
+
+        return(
+            <>
+
+                <AppBar className={classes.appBar}>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" onClick={retourFinalisation} aria-label="close">
+                            <ArrowBackIcon />
+                        </IconButton>
+                        <Typography variant="h6" className={classes.title}>
+                            Ma Commande
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                <Box>
+
+                    <form className={classes.form} onSubmit={envoieCommande}>
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Votre nom"
+                            name="nom"
+                            autoFocus
+                        />
+                    </form>
+
+
+                </Box>
+
+            </>
+        );
+    };
+
+    const getContenuPopUp = () => {
+        if (finalisation){
+            return(
+                <PageFinalisation/>
+            );
+        }else {
+            return (
+                <ContenuCommande />
+            );
+        }
+    }
+
+    const ListElements = () => {
+
+        return (
+            <>
+                {Commande.listeItems().map( item => (
+
+                    <ListItem>
+
+                        <Grid container spacing={1}>
+                            <Grid item xs={6}>
+                                <Typography align="center">
+                                    {item.nom}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Grid container>
+                                    <Grid item xs={4}>
+                                        <Button
+                                            aria-label="reduce"
+                                            onClick={() => {
+                                            Commande.retraitProduit(item.id);
+                                            setRefresh(!refresh);
+                                        }}
+                                            >
+                                            <RemoveIcon fontSize="small" />
+                                        </Button>
+                                    </Grid>
+
+                                    <Grid item xs={4}>
+                                        <Typography align="center" className={classes.affichageQuantite}>
+                                            {item.quantite}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={4}>
+                                        <Button
+                                            aria-label="increase"
+                                            onClick={() => {
+                                                Commande.ajouterUnElementAuPanier(item.id);
+                                                setRefresh(!refresh);
+                                            }}
+                                        >
+                                            <AddIcon fontSize="small" />
+                                        </Button>
+                                    </Grid>
+                                </Grid>
+
+                            </Grid>
+                            <Grid item xs={2}>
+                                <Typography align="right">
+                                    {item.prix} €
+                                </Typography>
+                            </Grid>
+                        </Grid>
+
+                    </ListItem>
+
+                ))}
+            </>
+        );
+    };
+
+    return (
+        <>
+            <Box>
+                <InfoResto idResto={id}/>
+                <Carte idResto={id}/>
+            </Box>
+
+            <Fab aria-label='Expand' className={clsx(classes.fab, classes.fabGreen)} onClick={handleClickOpen} color='inherit'>
+                <ShoppingCartIcon />
+            </Fab>
+
+
+            <Dialog fullScreen open={open} onClose={handleClose} TransitionComponent={Transition}>
+
+               {getContenuPopUp()}
 
             </Dialog>
 
