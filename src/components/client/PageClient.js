@@ -220,7 +220,8 @@ const PageClient = ({ match: {params :{id}} }) => {
                 nombreCouverts: couverts,
                 listeItems: Commande.listeItems(),
                 prixTotal: Commande.prixTotal(),
-                date: firebase.firestore.FieldValue.serverTimestamp()
+                date: firebase.firestore.FieldValue.serverTimestamp(),
+                etat: "attente"
             };
 
 

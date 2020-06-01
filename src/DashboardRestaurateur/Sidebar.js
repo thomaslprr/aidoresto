@@ -30,6 +30,7 @@ import Boisson from "./boissons/Boisson";
 import Repas from "./Repas/Repas";
 import ListeBoissons from "./boissons/ListeBoissons";
 import ListeRepas from "./Repas/ListeRepas";
+import Commande from "./commandes/Commande";
 
 const drawerWidth = 240;
 
@@ -117,6 +118,8 @@ function SideBar(props) {
                     Bon courage et prenez soin de vous ! ❤️
                 </Typography>
                 break;
+            case 1:
+                return <Commande id={props.id}/>
             case 2:
                 return <><Boisson id={props.id}/><br/><ListeBoissons id={props.id}/></>;
                 break;
