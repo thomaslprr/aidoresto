@@ -16,6 +16,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
+import firebase from "firebase";
 
 const useRowStyles = makeStyles({
     root: {
@@ -32,10 +33,84 @@ const useRowStyles = makeStyles({
 });
 
 
-function Row({laCom}) {
+function Row({laCom, id}) {
 
     const [open, setOpen] = React.useState(false);
     const classes = useRowStyles();
+
+    const setEtatCommande = (etatDeLaCommande) => {
+
+        firebase.firestore().collection("restaurant").doc(id).collection("commandes").doc(laCom.id).update(
+            {
+                etat: etatDeLaCommande
+            }
+        ).then(function() {
+            console.log("Document successfully written!");
+        })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+    };
+
+
+    const affichageBoutton = (etat) => {
+
+        if (etat === "attente"){
+            return (
+                <>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        startIcon={<DoneIcon />}
+                        onClick={validerCommande}
+                    >
+                        Valider
+                    </Button>
+
+                    <Button
+                        variant="contained"
+                        color="secondary"
+                        className={classes.button}
+                        startIcon={<DeleteIcon />}
+                        onClick={refuserCommande}
+                    >
+                        Refuser
+                    </Button>
+                </>
+            );
+
+        }
+
+        if(etat === "en cours"){
+            return (
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<DoneIcon />}
+                    onClick={terminerCommande}
+                >
+                    Terminer
+                </Button>
+            );
+        }
+
+
+
+    }
+
+    const validerCommande = () => {
+        setEtatCommande("en cours");
+    }
+
+    const terminerCommande = () => {
+        setEtatCommande("fini");
+    }
+
+    const refuserCommande = () => {
+        setEtatCommande("refusé");
+    }
 
     const getTime = (date) =>{
         var heure = "";
@@ -101,23 +176,7 @@ function Row({laCom}) {
                                         </TableRow>
                                     ))}
                                     <TableRow>
-                                        <Button
-                                            variant="contained"
-                                            color="primary"
-                                            className={classes.button}
-                                            startIcon={<DoneIcon />}
-                                        >
-                                            Valider
-                                        </Button>
-
-                                        <Button
-                                            variant="contained"
-                                            color="secondary"
-                                            className={classes.button}
-                                            startIcon={<DeleteIcon />}
-                                        >
-                                            Refuser
-                                        </Button>
+                                        {affichageBoutton(laCom.etat)}
                                     </TableRow>
                                 </TableBody>
                             </Table>
@@ -130,7 +189,7 @@ function Row({laCom}) {
 }
 
 
-export default function ListeCommandes({commandes}) {
+export default function ListeCommandes({commandes, idResto}) {
 
     const [commande,setCommande] = useState([]);
 
@@ -158,7 +217,7 @@ export default function ListeCommandes({commandes}) {
                 </TableHead>
                 <TableBody>
                     { commande.map((row) => (
-                        <Row laCom={row} />
+                        <Row laCom={row} id={idResto} />
                     ))}
                 </TableBody>
             </Table>

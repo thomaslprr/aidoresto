@@ -22,6 +22,7 @@ const Commande = ({id}) => {
                     let donnee = doc.data();
 
                     let commande = {
+                        id: doc.id,
                         date: new Date(donnee.date.seconds * 1000),
                         nom: donnee.nom,
                         nombreCouverts: donnee.nombreCouverts,
@@ -45,7 +46,7 @@ const Commande = ({id}) => {
         <div>Chargement...</div>
         );
     }else{
-       return  <ListeCommandes key={listeCommande} commandes={listeCommande}/>;
+       return  <ListeCommandes key={listeCommande} commandes={listeCommande} idResto={id}/>;
     }
 
 };
