@@ -1,6 +1,4 @@
-import {action, computed, decorate, extendObservable, observable} from 'mobx';
-import {element} from "prop-types";
-
+import {computed, decorate, observable} from 'mobx';
 
 class Commande {
 
@@ -62,12 +60,9 @@ class Commande {
         }else {
 
             //Suppression de l'ancien
-            for (let i = 0; i < this.listeProduit.length; i++){
-                if (this.listeProduit[i].id === produit.id){
-                    this.listeProduit.splice(i, 1);
-                    break;
-                }
-            }
+            let removeIndex = this.listeProduit.map(function(item) { return item.id; }).indexOf(produit.id);
+            this.listeProduit.splice(removeIndex, 1);
+
 
             //Ajout du nouveau
             this.listeProduit = this.listeProduit.concat(produit);
