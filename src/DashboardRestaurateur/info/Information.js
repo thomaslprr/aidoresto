@@ -4,8 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import AlerteInfoPasRempli from "./AlerteInfoPasRempli";
 import RemplirInfo from "./RemplirInfo";
 import Button from "@material-ui/core/Button";
-import Chip from "@material-ui/core/Chip";
-import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import PopUpInfoResto from "./PopUpInfoResto";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
@@ -49,10 +47,14 @@ const Information = ({id}) => {
 
 
 
-
     useEffect(()=>{
-        console.log("data : "+id);
 
+        setTimeout(() => {getData(); }, 300);
+
+    },[]);
+
+
+    const getData = () => {
         const restaurantRef = firebase.firestore().collection("restaurant").doc(id);
 
         restaurantRef.get().then(function(doc) {
@@ -71,13 +73,11 @@ const Information = ({id}) => {
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
+            setTimeout(() => {getData(); }, 300);
         });
-    },[]);
+    };
 
     const [afficherCode,setAfficherCode] = useState(false);
-
-
-
 
     const openCodeResto = () => {
 
