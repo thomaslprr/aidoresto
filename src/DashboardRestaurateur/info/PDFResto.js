@@ -65,6 +65,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontFamily: 'Oswald'
     },
+    section: {
+        color: 'white',
+        textAlign: 'center',
+        marginLeft:135
+    },
+
     pageNumber: {
         position: 'absolute',
         fontSize: 12,
@@ -95,7 +101,10 @@ const PDFResto = (nom,adresse,qrcode,coderesto) => {
                 <Text style={styles.text}>
 
                 </Text>
-                <Image source={ {uri: qrcode} } />
+
+                <View style={styles.section}>
+                <Image source={ {uri: qrcode} } style={{width:250+'px'}} />
+                </View>
 
                 <Text style={styles.ou}>
                     OU
