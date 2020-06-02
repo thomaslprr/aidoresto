@@ -47,8 +47,14 @@ const Information = ({id}) => {
 
 
     useEffect(()=>{
-        console.log("data : "+id);
 
+        getData();
+
+    },[]);
+
+    const [afficherCode,setAfficherCode] = useState(false);
+
+    const getData = () => {
         const restaurantRef = firebase.firestore().collection("restaurant").doc(id);
 
         restaurantRef.get().then(function(doc) {
@@ -67,10 +73,9 @@ const Information = ({id}) => {
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
+            setTimeout(() => {getData(); }, 300);
         });
-    },[]);
-
-    const [afficherCode,setAfficherCode] = useState(false);
+    }
 
 
 
