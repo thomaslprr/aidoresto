@@ -234,7 +234,7 @@ const FragmentALaCarte = (props) => {
 
     const ListBoisson = () => {
 
-        dataBoisson.forEach(element => Commande.ajouterProduitListe(element));
+        dataBoisson.forEach(element => Commande.ajouterProduitListe(element, props.idResto));
 
         console.log(Commande.articles);
 
@@ -248,7 +248,7 @@ const FragmentALaCarte = (props) => {
     }
 
     const ListEntree = () => {
-        dataEntree.forEach(element => Commande.ajouterProduitListe(element));
+        dataEntree.forEach(element => Commande.ajouterProduitListe(element, props.idResto));
         return (
             <>
             {dataEntree.map( item => (
@@ -258,7 +258,7 @@ const FragmentALaCarte = (props) => {
         );
     }
     const ListPlat= () => {
-        dataPlat.forEach(element => Commande.ajouterProduitListe(element));
+        dataPlat.forEach(element => Commande.ajouterProduitListe(element, props.idResto));
         return (
             <>
             {dataPlat.map( item => (
@@ -268,7 +268,7 @@ const FragmentALaCarte = (props) => {
         );
     }
     const ListDessert = () => {
-        dataDessert.forEach(element => Commande.ajouterProduitListe(element));
+        dataDessert.forEach(element => Commande.ajouterProduitListe(element, props.idResto));
         return (
             <>
             {dataDessert.map( item => (

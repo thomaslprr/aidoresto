@@ -4,6 +4,7 @@ class Commande {
 
     listeProduit = observable.box([]);
     commandes = observable.box({});
+    idResto = "";
 
 
     constructor() {
@@ -16,6 +17,10 @@ class Commande {
                     this.commandes = JSON.parse(localStorage.getItem('commande'));
                 } else {
                     this.commandes = {};
+                }
+
+                if ('idResto' in localStorage){
+                    this.idResto = localStorage.getItem('idResto');
                 }
 
                 if ('listeProduit' in localStorage) {
@@ -45,7 +50,24 @@ class Commande {
         this.listeProduit = [];
     }
 
-    ajouterProduitListe(produit){
+    suppressionLocalData(){
+
+        this.idResto = "";
+        this.listeProduit = [];
+        this.commandes = {};
+        localStorage.clear();
+
+    }
+
+    ajouterProduitListe(produit, idDuResto){
+
+        // Clear du local storage au changement de resto
+        if (this.idResto === "" || idDuResto === this.idResto){
+            this.idResto = idDuResto;
+            localStorage.setItem('idResto', this.idResto );
+        }else {
+            this.suppressionLocalData();
+        }
 
         var aInserer = true;
         var present = false;
