@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useState} from 'react';
+import React from 'react';
 import { Typography, Avatar, Grid, Box } from "@material-ui/core";
 import InfoResto from "./InfoResto";
 import Carte from "./Carte";
@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import {makeStyles} from "@material-ui/core/styles";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Fab from '@material-ui/core/Fab';
-import { green } from '@material-ui/core/colors';
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -21,47 +20,15 @@ import Button from "@material-ui/core/Button";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import TextField from "@material-ui/core/TextField";
-import NumberFormat from 'react-number-format';
-import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import * as firebase from "firebase";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import blue from "@material-ui/core/colors/blue";
 import {Copyright} from "../../PiedDePage/PiedPage";
 import Badge from "@material-ui/core/Badge";
+import PageFinalisation from "./Commande/PageFinalisation";
 
-
-
-function NumberFormatCustom(props) {
-    const { inputRef, onChange, ...other } = props;
-
-    return (
-        <NumberFormat
-            {...other}
-            getInputRef={inputRef}
-            onValueChange={(values) => {
-                onChange({
-                    target: {
-                        name: props.name,
-                        value: values.value,
-                    },
-                });
-            }}
-            thousandSeparator
-            isNumericString
-        />
-    );
-}
 
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        backgroundColor: theme.palette.background.paper,
-        width: 500,
-        position: 'relative',
-        minHeight: 200,
-    },
     fab: {
         position: 'fixed',
         bottom: theme.spacing(2),
@@ -146,6 +113,15 @@ const PageClient = ({ match: {params :{id}} }) => {
         setOpen(false);
     };
 
+    const finDeCommande = (statut) => {
+
+        setFinalisation(false);
+        setOpen(false);
+
+        //Ouvrir notif
+
+    }
+
     const ContenuCommande = () => {
         return(
             <>
@@ -209,120 +185,15 @@ const PageClient = ({ match: {params :{id}} }) => {
         );
     };
 
-    const PageFinalisation = () => {
-
-        const [nom, setNom] = React.useState('');
-        const [couverts, setCouverts] = React.useState('');
-
-
-        const envoieCommande = () => {
-
-            const commandeData = {
-                nom: nom,
-                nombreCouverts: couverts,
-                listeItems: Commande.listeItems(),
-                prixTotal: Commande.prixTotal(),
-                date: firebase.firestore.FieldValue.serverTimestamp(),
-                etat: "attente"
-            };
-
-
-            firebase.firestore().collection("restaurant").doc(id).collection("commandes").add(commandeData).then(function() {
-                console.log("Document successfully written!");
-            })
-                .catch(function(error) {
-                    console.error("Error writing document: ", error);
-                });
-
-
-            setFinalisation(false);
-            setOpen(false);
-        }
-
-        const modifCouvert = (event) => {
-            setCouverts(event.target.value);
-        };
-        const modifNom = (event) => {
-            setNom(event.target.value);
-        };
-
-        return(
-            <>
-
-                <AppBar className={classes.appBar}>
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" onClick={retourFinalisation} aria-label="close">
-                            <ArrowBackIcon />
-                        </IconButton>
-                        <Typography variant="h6" className={classes.title}>
-                            Finalisation de la commande
-                        </Typography>
-                    </Toolbar>
-                </AppBar>
-
-                <div className={classes.paper}>
-
-                    <form className={classes.form} onSubmit={envoieCommande}>
-
-                        <Box className={classes.inputStyle}>
-                            <TextField
-                                variant="outlined"
-                                margin="normal"
-                                required
-                                fullWidth
-                                onChange={modifNom}
-                                value={nom}
-                                id="nom"
-                                label="Votre nom"
-                                name="nom"
-                                autoFocus
-                            />
-                        </Box>
-
-                        <Box className={classes.inputStyle}>
-                            <TextField
-                                variant="outlined"
-                                label="Nombre de couverts"
-                                value={couverts}
-                                onChange={modifCouvert}
-                                name="couverts"
-                                id="formatted-numberformat-input"
-                                InputProps={{
-                                    inputComponent: NumberFormatCustom,
-                                }}
-                                required
-                            />
-                        </Box>
-
-                        <Box className={classes.inputStyle}>
-                            <Typography variant="subtitle2">
-                                Après avoir passé votre commande veuillez vous identifier auprès du personnel.
-                            </Typography>
-                        </Box>
-
-                        <Box className={classes.inputStyle}>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                type="submit"
-                                endIcon={<ShoppingBasketIcon/>}
-                                onClick={handleFinalisation}
-                            >
-                                Commander
-                            </Button>
-                        </Box>
-                    </form>
-
-                </div>
-
-            </>
-        );
-    };
 
     const getContenuPopUp = () => {
         if (finalisation){
             return(
-                <PageFinalisation/>
+                <PageFinalisation
+                    handleFinalisation={handleFinalisation}
+                    idResto={id}
+                    retourFinalisation={retourFinalisation}
+                    finDeCommande={finDeCommande} />
             );
         }else {
             return (
