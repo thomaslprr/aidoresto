@@ -29,6 +29,7 @@ import * as firebase from "firebase";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import blue from "@material-ui/core/colors/blue";
 import {Copyright} from "../../PiedDePage/PiedPage";
+import Badge from "@material-ui/core/Badge";
 
 
 
@@ -122,6 +123,12 @@ const PageClient = ({ match: {params :{id}} }) => {
     const [open, setOpen] = React.useState(false);
     const [finalisation, setFinalisation] = React.useState(false);
     const [refresh, setRefresh] = React.useState(false);
+
+    const [elementsPanier, setElementsPanier] = React.useState(Commande.elementsTotals());
+
+    const setCountPanier = () => {
+        setElementsPanier(Commande.elementsTotals());
+    }
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -385,11 +392,13 @@ const PageClient = ({ match: {params :{id}} }) => {
         <>
             <Box>
                 <InfoResto idResto={id}/>
-                <Carte idResto={id}/>
+                <Carte idResto={id} setCountPanier={setCountPanier}/>
             </Box>
 
             <Fab aria-label='Expand' className={clsx(classes.fab, classes.fabGreen)} onClick={handleClickOpen} color='inherit'>
-                <ShoppingCartIcon />
+                <Badge badgeContent={elementsPanier} color="error">
+                    <ShoppingCartIcon />
+                </Badge>
             </Fab>
 
 

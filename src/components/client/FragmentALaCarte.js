@@ -241,7 +241,7 @@ const FragmentALaCarte = (props) => {
         return (
             <>
             {dataBoisson.map( item => (
-                <TemplateBoisson boisson={item}/>
+                <TemplateBoisson boisson={item} setCountPanier={props.setCountPanier}/>
                 ))}
             </>
         );
@@ -252,7 +252,7 @@ const FragmentALaCarte = (props) => {
         return (
             <>
             {dataEntree.map( item => (
-                <TemplateNourriture repas={item}/>
+                <TemplateNourriture repas={item} setCountPanier={props.setCountPanier}/>
                 ))}
             </>
         );
@@ -262,7 +262,7 @@ const FragmentALaCarte = (props) => {
         return (
             <>
             {dataPlat.map( item => (
-                <TemplateNourriture repas={item}/>
+                <TemplateNourriture repas={item} setCountPanier={props.setCountPanier}/>
                 ))}
             </>
         );
@@ -272,7 +272,7 @@ const FragmentALaCarte = (props) => {
         return (
             <>
             {dataDessert.map( item => (
-                <TemplateNourriture repas={item} />
+                <TemplateNourriture repas={item} setCountPanier={props.setCountPanier} />
                 ))}
             </>
         );

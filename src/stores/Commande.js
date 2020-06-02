@@ -83,6 +83,14 @@ class Commande {
         return total;
     }
 
+    elementsTotals(){
+        var count = 0;
+
+        this.listeItems().forEach( element => count += element.quantite);
+
+        return count;
+    }
+
     ajouterUnElementAuPanier(id){
 
         //Verification présence dans le magasin

@@ -99,7 +99,7 @@ const Carte = (props) => {
             </AppBar>
             <TabPanel value={value} index={0}>
                 <Box>
-                    <FragmentALaCarte idResto={props.idResto}/>
+                    <FragmentALaCarte idResto={props.idResto} setCountPanier={props.setCountPanier}/>
                 </Box>
             </TabPanel>
             <TabPanel value={value} index={1}>

@@ -57,7 +57,7 @@ const useStyle = makeStyles(theme =>({
 
 }));
 
-const TemplateNourriture = ({repas}) => {
+const TemplateNourriture = ({repas, setCountPanier}) => {
 
     const [count, setCount] = React.useState(Commande.quantiteItem(repas.id));
     const [invisible, setInvisible] = React.useState(false);
@@ -101,6 +101,7 @@ const TemplateNourriture = ({repas}) => {
                                         if (count > 0){
                                             setCount(Math.max(count - 1, 0));
                                             Commande.retraitProduit(repas.id);
+                                            setCountPanier();
                                         }
 
                                     }}
@@ -117,6 +118,7 @@ const TemplateNourriture = ({repas}) => {
                                     onClick={() => {
                                         setCount(count + 1);
                                         Commande.ajouterUnElementAuPanier(repas.id);
+                                        setCountPanier();
                                     }}
                                 >
                                     <AddIcon fontSize="small" />

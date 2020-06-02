@@ -58,7 +58,7 @@ const useStyle = makeStyles(theme =>({
 
 }));
 
-const TemplateBoisson = ({boisson}) => {
+const TemplateBoisson = ({boisson, setCountPanier}) => {
 
     const classes = useStyle();
 
@@ -121,6 +121,7 @@ const TemplateBoisson = ({boisson}) => {
                                         if (count > 0){
                                             setCount(Math.max(count - 1, 0));
                                             Commande.retraitProduit(boisson.id);
+                                            setCountPanier();
                                         }
 
                                     }}
@@ -137,6 +138,7 @@ const TemplateBoisson = ({boisson}) => {
                                     onClick={() => {
                                         setCount(count + 1);
                                         Commande.ajouterUnElementAuPanier(boisson.id);
+                                        setCountPanier();
                                     }}
                                 >
                                     <AddIcon fontSize="small" />
