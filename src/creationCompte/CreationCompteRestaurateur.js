@@ -99,7 +99,6 @@ const SignUp = ({ history }) => {
             idOk = await verifIdLibre(id);
         }
 
-        console.log("Id final : "+id);
         //Creation Profil vide avec ID
 
         firebase.firestore().collection("restaurant").doc(idUser).set({
@@ -152,11 +151,12 @@ const SignUp = ({ history }) => {
     }
 
     return (
-        <div className={classes.img}>
+
+        <div>
             {afficherModale()}
             <Container component="main" maxWidth="xs">
             <CssBaseline />
-                <div className={classes.paper} style={{zIndex: 8,position: 'relative'}}   >
+                <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <RestaurantMenuIcon />
                 </Avatar>
