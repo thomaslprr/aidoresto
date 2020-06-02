@@ -199,7 +199,7 @@ const LoginClient = ({ history }) => {
                                         variant="contained"
                                         className={classes.submit}
                                     >
-                                        Je suis un restaurateur
+                                        Je suis restaurateur
                                     </Button>
                                 </Link>
                             </Box>
