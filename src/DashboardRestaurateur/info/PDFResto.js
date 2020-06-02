@@ -93,7 +93,7 @@ const PDFResto = (nom,adresse,qrcode,coderesto) => {
                 <Text style={styles.title}>{nom}</Text>
                 <Text style={styles.author}>{adresse}</Text>
                 <Text style={styles.subtitle}>
-                    Accèder à la carte de notre restaurant en scannant le QRCode ci-dessous.
+                    Accéder à la carte de notre restaurant en scannant le QRCode ci-dessous.
                 </Text>
                 <Text style={styles.subtitle2}>
                     Vous pouvez le scanner à l'aide de votre caméra de téléphone, snapchat, etc.
@@ -110,7 +110,7 @@ const PDFResto = (nom,adresse,qrcode,coderesto) => {
                     OU
                 </Text>
                 <Text style={styles.subtitle}>
-                    Accèder à la carte de notre restaurant en rentrant le code suivant sur le site
+                    Accéder à la carte de notre restaurant en rentrant le code suivant sur le site
                 </Text>
                 <Text style={styles.adressesite}>helporesto.fr</Text>
                 <Text style={styles.textcode}>
