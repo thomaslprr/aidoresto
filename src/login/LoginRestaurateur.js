@@ -153,7 +153,7 @@ const LoginRestaurateur = ({ history }) => {
                             </Grid>
                             <Grid item>
                                 <Link href="/signup" variant="body2">
-                                    {"Vous n'avez pas de compte restaurateur ? S'inscrire"}
+                                    <Typography variant="subtitle1">Vous n'avez pas de compte restaurateur ? S'inscrire</Typography>
                                 </Link>
                             </Grid>
                         </Grid>
