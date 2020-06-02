@@ -77,7 +77,7 @@ export default function SimpleCardRepas({nom,prix,ingredients,categorie,descript
             </CardContent>
             <CardActions>
                 <Button size="small" onClick={()=>setShowModal(1)}>Modifier</Button>
-                <Button size="small" onClick={handleSupression}>Suprimer</Button>
+                <Button size="small" onClick={handleSupression}>Supprimer</Button>
 
             </CardActions>
         </Card>

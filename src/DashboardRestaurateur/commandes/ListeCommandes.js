@@ -212,7 +212,7 @@ export default function ListeCommandes({commandes, idResto}) {
                         <TableCell />
                         <TableCell><Typography variant="h6" className={classes.bold}>Nom</Typography></TableCell>
                         <TableCell align="right"><Typography variant="h6" className={classes.bold}>Table</Typography></TableCell>
-                        <TableCell align="right"><Typography variant="h6" className={classes.bold}>Couvert</Typography></TableCell>
+                        <TableCell align="right"><Typography variant="h6" className={classes.bold}>Couverts</Typography></TableCell>
                         <TableCell align="right"><Typography variant="h6" className={classes.bold}>Heure</Typography></TableCell>
                         <TableCell align="right"><Typography variant="h6" className={classes.bold}>Prix</Typography></TableCell>
                         <TableCell align="right"><Typography variant="h6" className={classes.bold}>Etat</Typography></TableCell>
