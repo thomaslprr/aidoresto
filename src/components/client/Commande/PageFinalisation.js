@@ -83,13 +83,13 @@ const PageFinalisation = (props) => {
 
         firebase.firestore().collection("restaurant").doc(props.idResto).collection("commandes").add(commandeData).then(function() {
             console.log("Document successfully written!");
+            props.finDeCommande("valid");
         })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
+                props.finDeCommande("error");
             });
 
-
-        props.finDeCommande();
 
     }
 

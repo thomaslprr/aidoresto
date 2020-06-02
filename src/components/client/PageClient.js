@@ -25,6 +25,8 @@ import blue from "@material-ui/core/colors/blue";
 import {Copyright} from "../../PiedDePage/PiedPage";
 import Badge from "@material-ui/core/Badge";
 import PageFinalisation from "./Commande/PageFinalisation";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from '@material-ui/lab/Alert';
 
 
 
@@ -83,6 +85,10 @@ const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 const PageClient = ({ match: {params :{id}} }) => {
 
     const classes = useStyles();
@@ -90,6 +96,11 @@ const PageClient = ({ match: {params :{id}} }) => {
     const [open, setOpen] = React.useState(false);
     const [finalisation, setFinalisation] = React.useState(false);
     const [refresh, setRefresh] = React.useState(false);
+    const [notif, setNotif] = React.useState({
+        open: false,
+        text: "",
+        color: "",
+    });
 
     const [elementsPanier, setElementsPanier] = React.useState(Commande.elementsTotals());
 
@@ -113,12 +124,34 @@ const PageClient = ({ match: {params :{id}} }) => {
         setOpen(false);
     };
 
+    const handleCloseNotif = () => {
+        setNotif({
+            open: false,
+            text: "",
+            color: "",
+        });
+    };
+
     const finDeCommande = (statut) => {
 
         setFinalisation(false);
         setOpen(false);
 
         //Ouvrir notif
+        if (statut === "valid"){
+            setNotif({
+                open: true,
+                text: "Votre commande a bien été prise en compte",
+                color: "success",
+            });
+        }
+        if (statut === "error"){
+            setNotif({
+                open: true,
+                text: "Erreur lors de l'envoi de la commande, veuillez réessayer",
+                color: "error",
+            });
+        }
 
     }
 
@@ -261,6 +294,12 @@ const PageClient = ({ match: {params :{id}} }) => {
 
     return (
         <>
+            <Snackbar open={notif.open} autoHideDuration={5000} onClose={handleCloseNotif}>
+                <Alert onClose={handleCloseNotif} severity={notif.color}>
+                    {notif.text}
+                </Alert>
+            </Snackbar>
+
             <Box>
                 <InfoResto idResto={id}/>
                 <Carte idResto={id} setCountPanier={setCountPanier}/>
