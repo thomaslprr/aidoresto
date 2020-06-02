@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 function texteAAfficher(id){
     let txt = ": ";
-    console.log("voici l'id : "+id);
+
     switch (id) {
         case 0:
             txt+="Général";
@@ -85,10 +85,10 @@ function texteAAfficher(id){
             txt+="Entrées";
             break;
         case 4:
-            txt+="Repas";
+            txt+="Plats";
             break;
         case 5:
-            txt+="Dessert";
+            txt+="Desserts";
             break;
         case 6:
             txt+="Menus";
@@ -213,12 +213,12 @@ function SideBar(props) {
 
                     <ListItem button onClick={()=> changerOnglet(props.id,"repas") }>
                     <ListItemIcon><FastfoodIcon/></ListItemIcon>
-                    <ListItemText primary="Repas" />
+                    <ListItemText primary="Plats" />
                     </ListItem >
 
                     <ListItem button onClick={()=> changerOnglet(props.id,"dessert") }>
                     <ListItemIcon><CakeIcon/></ListItemIcon>
-                    <ListItemText primary="Dessert" />
+                    <ListItemText primary="Desserts" />
                     </ListItem>
 
                     <ListItem button onClick={()=> changerOnglet(props.id,"menus") }>
