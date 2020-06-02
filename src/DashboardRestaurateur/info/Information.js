@@ -48,7 +48,7 @@ const Information = ({id}) => {
 
     useEffect(()=>{
 
-        getData();
+        setTimeout(() => {getData(); }, 300);
 
     },[]);
 
