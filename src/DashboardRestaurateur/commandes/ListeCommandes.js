@@ -17,8 +17,11 @@ import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
 import firebase from "firebase";
+import red from "@material-ui/core/colors/red";
+import RedButton from "../../utils/ColoredButtons/RedButton";
+import GreenButton from "../../utils/ColoredButtons/GreenButton";
 
-const useRowStyles = makeStyles({
+const useRowStyles = makeStyles((theme) => ({
     root: {
         '& > *': {
             borderBottom: 'unset',
@@ -29,8 +32,8 @@ const useRowStyles = makeStyles({
     },
     bold:{
         fontWeight: "bold",
-    }
-});
+    },
+}));
 
 
 function Row({laCom, id}) {
@@ -68,15 +71,15 @@ function Row({laCom, id}) {
                         Valider
                     </Button>
 
-                    <Button
+                    <RedButton
                         variant="contained"
-                        color="secondary"
+                        color="primary"
                         className={classes.button}
                         startIcon={<DeleteIcon />}
                         onClick={refuserCommande}
                     >
                         Refuser
-                    </Button>
+                    </RedButton>
                 </>
             );
 
@@ -84,15 +87,15 @@ function Row({laCom, id}) {
 
         if(etat === "en cours"){
             return (
-                <Button
+                <GreenButton
                     variant="contained"
-                    color="secondary"
+                    color="primary"
                     className={classes.button}
                     startIcon={<DoneIcon />}
                     onClick={terminerCommande}
                 >
                     Terminer
-                </Button>
+                </GreenButton>
             );
         }
 
@@ -142,7 +145,7 @@ function Row({laCom, id}) {
                     </IconButton>
                 </TableCell>
                 <TableCell component="th" scope="row"><Typography variant="h6" color="primary" className={classes.bold}>{laCom.nom}</Typography></TableCell>
-                <TableCell align="right">{laCom.numTable}</TableCell>
+                <TableCell align="right"><Typography variant="h6">{laCom.numTable}</Typography></TableCell>
                 <TableCell align="right"><Typography variant="h6" color="primary">{laCom.nombreCouverts}</Typography></TableCell>
                 <TableCell align="right"><Typography variant="h6">{getTime(laCom.date)}</Typography></TableCell>
                 <TableCell align="right"><Typography variant="h6" color="primary">{laCom.prixTotal} €</Typography></TableCell>
