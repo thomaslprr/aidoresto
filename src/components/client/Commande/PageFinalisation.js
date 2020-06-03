@@ -11,6 +11,7 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import {makeStyles} from "@material-ui/core/styles";
 import NumberFormat from "react-number-format";
 import firebase from "firebase";
+import Grid from "@material-ui/core/Grid";
 
 
 
@@ -28,13 +29,22 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(1),
     },
     inputStyle:{
-        marginBottom: "3em",
+        margin: "2em 3em",
     },
     paper: {
         margin: theme.spacing(8, 4),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+    },
+    typedContainer:{
+        position: "absolute",
+        top:"50%",
+        left:"50%",
+        transform: "translate(-50%, -50%)",
+        width: "100vw",
+        textAlign: "center",
+        zIndex: 1
     }
 }));
 
@@ -67,6 +77,7 @@ const PageFinalisation = (props) => {
 
     const [nom, setNom] = React.useState('');
     const [couverts, setCouverts] = React.useState('');
+    const [numTable, setNumTable] = React.useState('');
 
 
     const envoieCommande = () => {
@@ -77,7 +88,8 @@ const PageFinalisation = (props) => {
             listeItems: Commande.listeItems(),
             prixTotal: Commande.prixTotal(),
             date: firebase.firestore.FieldValue.serverTimestamp(),
-            etat: "attente"
+            etat: "attente",
+            numTable: numTable
         };
 
 
@@ -99,6 +111,9 @@ const PageFinalisation = (props) => {
     const modifNom = (event) => {
         setNom(event.target.value);
     };
+    const modifNumTable = (event) => {
+        setNumTable(event.target.value);
+    };
 
     return(
         <>
@@ -114,7 +129,7 @@ const PageFinalisation = (props) => {
                 </Toolbar>
             </AppBar>
 
-            <div className={classes.paper}>
+            <Box className={classes.typedContainer}>
 
                 <form className={classes.form} onSubmit={envoieCommande}>
 
@@ -123,7 +138,6 @@ const PageFinalisation = (props) => {
                             variant="outlined"
                             margin="normal"
                             required
-                            fullWidth
                             onChange={modifNom}
                             value={nom}
                             id="nom"
@@ -140,11 +154,22 @@ const PageFinalisation = (props) => {
                             value={couverts}
                             onChange={modifCouvert}
                             name="couverts"
-                            id="formatted-numberformat-input"
+                            id="couverts"
                             InputProps={{
                                 inputComponent: NumberFormatCustom,
                             }}
                             required
+                        />
+                    </Box>
+
+                    <Box className={classes.inputStyle}>
+                        <TextField
+                            variant="outlined"
+                            label="Numéro de la table"
+                            value={numTable}
+                            onChange={modifNumTable}
+                            name="numTable"
+                            id="numTable"
                         />
                     </Box>
 
@@ -167,7 +192,7 @@ const PageFinalisation = (props) => {
                     </Box>
                 </form>
 
-            </div>
+            </Box>
 
         </>
     );
