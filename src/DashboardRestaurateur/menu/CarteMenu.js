@@ -25,7 +25,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SimpleCardMenu(menu) {
+export default function SimpleCardMenu({menu}) {
 
     const classes = useStyles();
 
@@ -37,7 +37,7 @@ export default function SimpleCardMenu(menu) {
                     {menu.nom}
                 </Typography>
                 <Typography className={classes.pos} color="textSecondary">
-                    {menu.prix}
+                    {menu.prix} €
                 </Typography>
             </CardContent>
             <CardActions>
