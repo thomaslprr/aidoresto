@@ -21,16 +21,22 @@ const ListeMenu = ({idResto}) => {
 
     useEffect(()=> {
 
+
         const refCollection = firebase.firestore().collection("restaurant").doc(idResto).collection("menus");
 
-        refCollection.get().then(function (doc) {
+
+        refCollection.onSnapshot(function(querySnapshot) {
+
+            setListeMenus([]);
             setLoading(false);
+
             let lb = [];
-            for(let i =0; i< doc.docs.length ; i++){
-                setAucunMenu(false);
-                let donneesMenu = doc.docs[i].data();
+
+            querySnapshot.forEach(function(doc) {
+
+                let donneesMenu = doc.data();
                 let data = {
-                    id: doc.docs[i].id,
+                    id: doc.id,
                     id_resto: idResto,
                     nom: donneesMenu.nom,
                     prix: donneesMenu.prix,
@@ -40,15 +46,12 @@ const ListeMenu = ({idResto}) => {
                     boissons: donneesMenu.boissons
                 }
                 lb.push(data);
-            };
+            });
+
             setListeMenus(lb);
-            console.log("liste des menus ! ");
-            console.log(lb);
-
-
-        }).catch(function (error) {
-            console.log("Error getting document:", error);
         });
+
+
     },[idResto])
 
     const msgAucunMenu = () => {
