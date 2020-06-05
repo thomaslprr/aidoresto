@@ -47,6 +47,13 @@ const useStyles = makeStyles((theme) => ({
             padding: theme.spacing(3),
         },
     },
+    save:{
+        justifyContent: 'center',
+        margin: "1rem 0"
+    },
+    header:{
+        marginBottom: "0.5rem",
+    }
 }));
 
 
@@ -155,7 +162,7 @@ export default function PageAjoutMenu({handleClose, idResto}) {
 
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
-                    <Grid container spacing={3}>
+                    <Grid container spacing={3} className={classes.header}>
                         <Grid item xs={9}>
                             <TextField
                                 required
@@ -252,12 +259,16 @@ export default function PageAjoutMenu({handleClose, idResto}) {
                         </List>
                     </ListItem>
                 </List>
-                <GreenButton
-                    startIcon={<SaveIcon/>}
-                    onClick={ajouterMenu}
-                >
-                    Enregistrer le menu
-                </GreenButton>
+
+                    <Grid container className={classes.save}>
+                        <GreenButton
+                            startIcon={<SaveIcon/>}
+                            onClick={ajouterMenu}
+                        >
+                            Enregistrer le menu
+                        </GreenButton>
+                    </Grid>
+
                 </Paper>
             </main>
 
