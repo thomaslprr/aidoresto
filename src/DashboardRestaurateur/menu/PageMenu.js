@@ -35,7 +35,7 @@ const PageMenu = ({idResto}) => {
 
             <Dialog fullScreen open={openAjoutMenu} onClose={handleCloseAjoutMenu} TransitionComponent={Transition}>
 
-                <PageAjoutMenu handleClose={handleCloseAjoutMenu}/>
+                <PageAjoutMenu handleClose={handleCloseAjoutMenu} idResto={idResto}/>
 
             </Dialog>
         </>

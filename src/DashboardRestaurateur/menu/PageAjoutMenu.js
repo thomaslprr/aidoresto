@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItem from '@material-ui/core/ListItem';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
@@ -11,11 +8,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
-import Slide from '@material-ui/core/Slide';
 import Switch from "@material-ui/core/Switch";
 import TextField from "@material-ui/core/TextField";
 import ListeComposentMenu from "./ListeComposentsMenu";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import GreenButton from "../../utils/ColoredButtons/GreenButton";
+import SaveIcon from '@material-ui/icons/Save';
+import firebase from "firebase";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -28,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PageAjoutMenu({handleClose}) {
+export default function PageAjoutMenu({handleClose, idResto}) {
 
     const [listeEntrees, setListeEntrees] = React.useState([]);
     const [listePlats, setListePlats] = React.useState([]);
@@ -77,6 +76,41 @@ export default function PageAjoutMenu({handleClose}) {
 
     const [nomMenu, setNomMenu] = React.useState("");
     const [prixMenu, setPrixMenu] = React.useState(0);
+
+
+    const ajouterMenu = () =>{
+
+        // Conditions envoie du menu
+        if (nomMenu === ''){
+            //TODO notif en cas de champs vides
+
+        }else {
+            //envoie des données sur firestore:
+            const refCollection = firebase.firestore().collection("restaurant").doc(idResto).collection("menus");
+
+            let dataMenu = {
+                boissons: state.boissons ? listeBoissons : [],
+                entrees: state.entrees ? listeEntrees : [],
+                desserts: state.desserts ? listeDesserts : [],
+                plats: state.plats ? listePlats : [],
+                prix: prixMenu,
+                nom: nomMenu,
+            }
+
+            refCollection.add(dataMenu).then(function() {
+                console.log("Document successfully written!");
+                //TODO Notif succes, bouton envoie bloquer, attendre 3s et fermer la pop up
+
+                //Provisoire
+                handleClose();
+            })
+                .catch(function(error) {
+                    console.error("Error writing document: ", error);
+                    //TODO notif erreur reessayer de 3s rester sur la pop up
+                });
+
+        }
+    };
 
 
     const handleChange = (event) => {
@@ -181,6 +215,13 @@ export default function PageAjoutMenu({handleClose}) {
                 value={prixMenu}
                 onChange={(e) => setPrixMenu(e.target.value)}
             />
+            <GreenButton
+                startIcon={<SaveIcon/>}
+                onClick={ajouterMenu}
+            >
+                Enregistrer le menu
+            </GreenButton>
+
         </>
     );
 }
