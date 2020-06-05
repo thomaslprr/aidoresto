@@ -5,7 +5,8 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
-import Button from "../../utils/ColoredButtons/GreenButton";
+import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import Button from "@material-ui/core/Button";
 
 const ListeComposentMenu = ({listeCompo, txtBtn}) => {
 
@@ -13,26 +14,39 @@ const ListeComposentMenu = ({listeCompo, txtBtn}) => {
 
 
     return (
-        <div>
-            <Button>
+
+        <List>
+            <Button
+                variant="outlined"
+                color="primary"
+                onClick={()=>{ }}
+                startIcon={<AddCircleOutlineIcon/>}
+            >
                 Ajouter {txtBtn}
             </Button>
-            <List>
-                {listeCompo.map((element) =>
-                    <ListItem>
-                        <ListItemText
-                            primary={element.nom+"  -  "+element.quantite}
-                            secondary='la description'
-                        />
-                        <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="delete">
-                                <DeleteIcon />
-                            </IconButton>
-                        </ListItemSecondaryAction>
-                    </ListItem>
-                )}
-            </List>
-        </div>
+
+            <ListItem>
+                test
+            </ListItem><ListItem>
+                test
+            </ListItem><ListItem>
+                test
+            </ListItem>
+            {listeCompo.map((element) =>
+                <ListItem>
+                    <ListItemText
+                        primary={element.nom+"  -  "+element.quantite}
+                        secondary='la description'
+                    />
+                    <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete">
+                            <DeleteIcon />
+                        </IconButton>
+                    </ListItemSecondaryAction>
+                </ListItem>
+            )}
+        </List>
+
 
     );
 
