@@ -7,46 +7,60 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Button from "@material-ui/core/Button";
+import {element} from "prop-types";
+import PopUpAjoutItem from "./PopUpAjoutItem";
 
-const ListeComposentMenu = ({listeCompo, txtBtn}) => {
+const ListeComposentMenu = ({listeCompo, type, txtBtn, setListElements}) => {
 
     const [listeComposent,setListeComposent] = useState(listeCompo);
+    const [popUpAjout,setPopUpAjout] = useState(false);
 
+
+    const ajoutElement = (element) =>{
+
+        setPopUpAjout(false);
+        setListElements(type, listeCompo.concat(element));
+
+    };
 
     return (
 
-        <List>
-            <Button
-                variant="outlined"
-                color="primary"
-                onClick={()=>{ }}
-                startIcon={<AddCircleOutlineIcon/>}
-            >
-                Ajouter {txtBtn}
-            </Button>
+        <>
+            <List>
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={()=>{ setPopUpAjout(true) }}
+                    startIcon={<AddCircleOutlineIcon/>}
+                >
+                    Ajouter {txtBtn}
+                </Button>
 
-            <ListItem>
-                test
-            </ListItem><ListItem>
-                test
-            </ListItem><ListItem>
-                test
-            </ListItem>
-            {listeCompo.map((element) =>
                 <ListItem>
-                    <ListItemText
-                        primary={element.nom+"  -  "+element.quantite}
-                        secondary='la description'
-                    />
-                    <ListItemSecondaryAction>
-                        <IconButton edge="end" aria-label="delete">
-                            <DeleteIcon />
-                        </IconButton>
-                    </ListItemSecondaryAction>
+                    test
+                </ListItem><ListItem>
+                    test
+                </ListItem><ListItem>
+                    test
                 </ListItem>
-            )}
-        </List>
+                {listeCompo.map((element) =>
+                    <ListItem>
+                        <ListItemText
+                            primary={element.nom+"  -  "+element.quantite}
+                            secondary='la description'
+                        />
+                        <ListItemSecondaryAction>
+                            <IconButton edge="end" aria-label="delete">
+                                <DeleteIcon />
+                            </IconButton>
+                        </ListItemSecondaryAction>
+                    </ListItem>
+                )}
+            </List>
 
+            <PopUpAjoutItem type={type} open={popUpAjout} handleClose={() => setPopUpAjout(false)}/>
+
+        </>
 
     );
 

@@ -35,18 +35,34 @@ export default function PageAjoutMenu({handleClose}) {
     const [listeDesserts, setListeDesserts] = React.useState([]);
     const [listeBoissons, setListeBoissons] = React.useState([]);
 
+
     const getListElements = (type) => {
         if (type === "entrees" && state.entrees){
-            return <ListeComposentMenu listeCompo={listeEntrees} txtBtn="une entrée"/>
+            return <ListeComposentMenu listeCompo={listeEntrees} txtBtn="une entrée" setListElements={setListElements} type="entrees"/>
         }
         if (type === "plats" && state.plats){
-            return <ListeComposentMenu listeCompo={listePlats} txtBtn="un plat"/>
+            return <ListeComposentMenu listeCompo={listePlats} txtBtn="un plat" setListElements={setListElements} type="plats"/>
         }
         if (type === "desserts" && state.desserts){
-            return <ListeComposentMenu listeCompo={listeDesserts} txtBtn="un dessert"/>
+            return <ListeComposentMenu listeCompo={listeDesserts} txtBtn="un dessert" setListElements={setListElements} type="desserts"/>
         }
         if (type === "boissons" && state.boissons){
-            return <ListeComposentMenu listeCompo={listeBoissons} txtBtn="une boisson"/>
+            return <ListeComposentMenu listeCompo={listeBoissons} txtBtn="une boisson" setListElements={setListElements} type="boissons"/>
+        }
+    };
+
+    const setListElements = (type, elements) => {
+        if (type === "entrees"){
+            setListeEntrees(elements);
+        }
+        if (type === "plats" && state.plats){
+            setListePlats(elements);
+        }
+        if (type === "desserts" && state.desserts){
+            setListeDesserts(elements);
+        }
+        if (type === "boissons" && state.boissons){
+            setListeBoissons(elements);
         }
     };
 
@@ -132,7 +148,7 @@ export default function PageAjoutMenu({handleClose}) {
                                 name="desserts"
                                 inputProps={{ 'aria-label': 'primary checkbox' }}
                             />}
-                            label={<Typography variant="h5">Déssert</Typography>}/>
+                            label={<Typography variant="h5">Dessert</Typography>}/>
 
                         {getListElements("desserts")}
                     </List>
