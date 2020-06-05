@@ -11,7 +11,7 @@ const ListeMenu = ({idResto}) => {
 
     useEffect(()=> {
 
-        const refCollection = firebase.firestore().collection("restaurant").doc(id).collection("menus");
+        const refCollection = firebase.firestore().collection("restaurant").doc(idResto).collection("menus");
 
         refCollection.get().then(function (doc) {
             setLoading(false);
@@ -56,7 +56,7 @@ const ListeMenu = ({idResto}) => {
                 <Grid container spacing={3}>
 
                     {listeMenus.map((menu) =>
-                        <Grid item xs key={id}>
+                        <Grid item xs key={menu.id}>
                             <CarteMenu
                                 menu={menu}
                             />

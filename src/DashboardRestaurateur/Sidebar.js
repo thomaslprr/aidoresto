@@ -32,6 +32,7 @@ import ListeBoissons from "./boissons/ListeBoissons";
 import ListeRepas from "./Repas/ListeRepas";
 import Commande from "./commandes/Commande";
 import {Copyright} from "../PiedDePage/PiedPage";
+import PageMenu from "./menu/PageMenu";
 
 const drawerWidth = 240;
 
@@ -163,7 +164,7 @@ function SideBar(props) {
                 break;
 
             case 6:
-                return <div>La création de menus arrive bientôt !</div>;
+                return <PageMenu idResto={props.id}/>;
                 break;
 
             case 7:
