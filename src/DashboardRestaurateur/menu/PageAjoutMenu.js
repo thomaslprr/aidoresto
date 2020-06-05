@@ -195,9 +195,10 @@ export default function PageAjoutMenu({handleClose, idResto}) {
                                     checked={state.entrees}
                                     onChange={handleChange}
                                     name="entrees"
-                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    color="primary"
                                 />}
-                                label={<Typography variant="h5">Entrée</Typography>}/>
+                                label={<Typography variant="h5">Entrée </Typography>}
+                                labelPlacement="start"/>
 
                             {getListElements("entrees")}
                         </List>
@@ -210,9 +211,10 @@ export default function PageAjoutMenu({handleClose, idResto}) {
                                     checked={state.plats}
                                     onChange={handleChange}
                                     name="plats"
-                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    color="primary"
                                 />}
-                                label={<Typography variant="h5">Plat</Typography>}/>
+                                label={<Typography variant="h5">Plat</Typography>}
+                                labelPlacement="start"/>
 
                             {getListElements("plats")}
                         </List>
@@ -225,9 +227,10 @@ export default function PageAjoutMenu({handleClose, idResto}) {
                                     checked={state.desserts}
                                     onChange={handleChange}
                                     name="desserts"
-                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    color="primary"
                                 />}
-                                label={<Typography variant="h5">Dessert</Typography>}/>
+                                label={<Typography variant="h5">Dessert</Typography>}
+                                labelPlacement="start"/>
 
                             {getListElements("desserts")}
                         </List>
@@ -240,9 +243,10 @@ export default function PageAjoutMenu({handleClose, idResto}) {
                                     checked={state.boissons}
                                     onChange={handleChange}
                                     name="boissons"
-                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                    color="primary"
                                 />}
-                                label={<Typography variant="h5">Boisson</Typography>}/>
+                                label={<Typography variant="h5">Boisson</Typography>}
+                                labelPlacement="start"/>
 
                             {getListElements("boissons")}
                         </List>
