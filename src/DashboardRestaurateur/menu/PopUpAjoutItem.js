@@ -114,11 +114,13 @@ export default function PopUpAjoutItem({open, handleClose, type, ajouter}){
                                 label={getVolumeLabel()}
                                 name="quantite"
                                 id="quantite"
+                                margin="dense"
                                 InputProps={{
                                     startAdornment: <InputAdornment position="start">{getVolumeIndic()}</InputAdornment>,
                                 }}
                                 variant="outlined"
                                 size="small"
+                                fullWidth
                                 value={quantite}
                                 onChange={(e) => setQuantite(e.target.value)}
                             />
@@ -131,6 +133,7 @@ export default function PopUpAjoutItem({open, handleClose, type, ajouter}){
                                 variant="outlined"
                                 size="small"
                                 value={desc}
+                                fullWidth
                                 onChange={(e) => setDesc(e.target.value)}
                             />
 
