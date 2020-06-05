@@ -2,12 +2,22 @@ import React, {useCallback, useEffect, useState} from 'react';
 import * as firebase from "firebase";
 import Grid from "@material-ui/core/Grid";
 import CarteMenu from "./CarteMenu";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+    liste: {
+        marginTop: "1rem",
+    },
+});
+
 
 const ListeMenu = ({idResto}) => {
 
     const [listeMenus,setListeMenus] = useState([]);
     const [aucunMenu,setAucunMenu] = useState(true);
     const [loading,setLoading] = useState(true);
+
+    const classes = useStyles();
 
     useEffect(()=> {
 
@@ -53,7 +63,7 @@ const ListeMenu = ({idResto}) => {
         return (
             <div>
                 {msgAucunMenu()}
-                <Grid container spacing={3}>
+                <Grid container spacing={3} className={classes.liste}>
 
                     {listeMenus.map((menu) =>
                         <Grid item xs key={menu.id}>
