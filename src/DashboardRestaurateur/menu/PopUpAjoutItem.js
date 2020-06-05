@@ -4,16 +4,9 @@ import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Grid from "@material-ui/core/Grid";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import clsx from "clsx";
 import InputAdornment from "@material-ui/core/InputAdornment";
-import ListeComposentMenu from "./ListeComposentsMenu";
 
 
 
@@ -21,7 +14,7 @@ export default function PopUpAjoutItem({open, handleClose, type, ajouter}){
 
     const [nom, setNom] = React.useState("");
     const [desc, setDesc] = React.useState("");
-    const [quantite, setQuantite] = React.useState(0);
+    const [quantite, setQuantite] = React.useState("");
 
 
     const getLabelNom = () =>{
@@ -67,6 +60,29 @@ export default function PopUpAjoutItem({open, handleClose, type, ajouter}){
         }else{
             return "Quantité";
         }
+    };
+
+    const getQuantite = () =>{
+        if (quantite !== "") {
+            if (type === "boissons") {
+                return quantite + " cL";
+            }else {
+                return quantite + " g";
+            }
+        }else {
+            return "";
+        }
+    };
+
+
+    const ajouterLElement = () =>{
+        var item = {
+            nom: nom,
+            desc: desc,
+            quantite: getQuantite()
+        };
+
+        ajouter(item);
     };
 
 
@@ -125,7 +141,7 @@ export default function PopUpAjoutItem({open, handleClose, type, ajouter}){
                     <Button onClick={handleClose} color="secondary">
                         Annuler
                     </Button>
-                    <Button onClick={ajouter} color="primary">
+                    <Button onClick={ajouterLElement} color="primary">
                         Ajouter
                     </Button>
                 </DialogActions>

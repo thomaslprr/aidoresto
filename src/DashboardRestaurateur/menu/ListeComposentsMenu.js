@@ -58,7 +58,7 @@ const ListeComposentMenu = ({listeCompo, type, txtBtn, setListElements}) => {
                 )}
             </List>
 
-            <PopUpAjoutItem type={type} open={popUpAjout} handleClose={() => setPopUpAjout(false)}/>
+            <PopUpAjoutItem type={type} open={popUpAjout} handleClose={() => setPopUpAjout(false)} ajouter={ajoutElement}/>
 
         </>
 
