@@ -76,6 +76,7 @@ export default function PageAjoutMenu({handleClose}) {
     });
 
     const [nomMenu, setNomMenu] = React.useState("");
+    const [prixMenu, setPrixMenu] = React.useState(0);
 
 
     const handleChange = (event) => {
@@ -169,6 +170,17 @@ export default function PageAjoutMenu({handleClose}) {
                     </List>
                 </ListItem>
             </List>
+            <TextField
+                required
+                variant="outlined"
+                autoFocus
+                margin="dense"
+                name="prix"
+                id="prix"
+                label="Prix du menu"
+                value={prixMenu}
+                onChange={(e) => setPrixMenu(e.target.value)}
+            />
         </>
     );
 }
