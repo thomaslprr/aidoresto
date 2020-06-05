@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
+import Switch from "@material-ui/core/Switch";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -28,6 +29,18 @@ export default function PageAjoutMenu({handleClose}) {
 
     const classes = useStyles();
 
+    const [state, setState] = React.useState({
+        entrees: false,
+        plats: false,
+        desserts: false,
+        boissons: false,
+    });
+
+
+    const handleChange = (event) => {
+        setState({ ...state, [event.target.name]: event.target.checked });
+    };
+
     return (
         <>
             <AppBar className={classes.appBar}>
@@ -36,20 +49,30 @@ export default function PageAjoutMenu({handleClose}) {
                         <CloseIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Sound
+                        Ajout d'un menu
                     </Typography>
-                    <Button autoFocus color="inherit" onClick={handleClose}>
-                        save
-                    </Button>
                 </Toolbar>
             </AppBar>
+
             <List>
-                <ListItem button>
-                    <ListItemText primary="Phone ringtone" secondary="Titania" />
+                <ListItem>
+                    <Typography variant="h5">Entrée</Typography>
+                    <Switch
+                        checked={state.entrees}
+                        onChange={handleChange}
+                        name="entrees"
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                    />
                 </ListItem>
                 <Divider />
-                <ListItem button>
-                    <ListItemText primary="Default notification ringtone" secondary="Tethys" />
+                <ListItem>
+                    <Typography variant="h5">Plat</Typography>
+                    <Switch
+                        checked={state.plats}
+                        onChange={handleChange}
+                        name="plats"
+                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                    />
                 </ListItem>
             </List>
         </>
