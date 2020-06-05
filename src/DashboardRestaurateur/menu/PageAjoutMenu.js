@@ -15,6 +15,9 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import GreenButton from "../../utils/ColoredButtons/GreenButton";
 import SaveIcon from '@material-ui/icons/Save';
 import firebase from "firebase";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -23,6 +26,26 @@ const useStyles = makeStyles((theme) => ({
     title: {
         marginLeft: theme.spacing(2),
         flex: 1,
+    },
+    layout: {
+        width: 'auto',
+        marginLeft: theme.spacing(2),
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+            width: 600,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        },
+    },
+    paper: {
+        marginTop: theme.spacing(3),
+        marginBottom: theme.spacing(3),
+        padding: theme.spacing(2),
+        [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+            marginTop: theme.spacing(6),
+            marginBottom: theme.spacing(6),
+            padding: theme.spacing(3),
+        },
     },
 }));
 
@@ -130,97 +153,109 @@ export default function PageAjoutMenu({handleClose, idResto}) {
                 </Toolbar>
             </AppBar>
 
-            <TextField
-                required
-                variant="outlined"
-                autoFocus
-                margin="dense"
-                name="nom"
-                id="nom"
-                label="Nom du menu"
-                type="nom"
-                value={nomMenu}
-                onChange={(e) => setNomMenu(e.target.value)}
-            />
+            <main className={classes.layout}>
+                <Paper className={classes.paper}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={9}>
+                            <TextField
+                                required
+                                variant="outlined"
+                                autoFocus
+                                margin="dense"
+                                name="nom"
+                                id="nom"
+                                label="Nom du menu"
+                                type="nom"
+                                fullWidth
+                                value={nomMenu}
+                                onChange={(e) => setNomMenu(e.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={3}>
+                            <TextField
+                                required
+                                variant="outlined"
+                                fullWidth
+                                autoFocus
+                                margin="dense"
+                                name="prix"
+                                id="prix"
+                                label="Prix du menu"
+                                value={prixMenu}
+                                onChange={(e) => setPrixMenu(e.target.value)}
+                            />
+                        </Grid>
+                    </Grid>
 
-            <List>
-                <ListItem>
-                    <List>
-                        <FormControlLabel
-                            control={<Switch
-                                checked={state.entrees}
-                                onChange={handleChange}
-                                name="entrees"
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />}
-                            label={<Typography variant="h5">Entrée</Typography>}/>
+                <List>
+                    <ListItem>
+                        <List>
+                            <FormControlLabel
+                                control={<Switch
+                                    checked={state.entrees}
+                                    onChange={handleChange}
+                                    name="entrees"
+                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                />}
+                                label={<Typography variant="h5">Entrée</Typography>}/>
 
-                        {getListElements("entrees")}
-                    </List>
-                </ListItem>
-                <Divider />
-                <ListItem>
-                    <List>
-                        <FormControlLabel
-                            control={<Switch
-                                checked={state.plats}
-                                onChange={handleChange}
-                                name="plats"
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />}
-                            label={<Typography variant="h5">Plat</Typography>}/>
+                            {getListElements("entrees")}
+                        </List>
+                    </ListItem>
+                    <Divider />
+                    <ListItem>
+                        <List>
+                            <FormControlLabel
+                                control={<Switch
+                                    checked={state.plats}
+                                    onChange={handleChange}
+                                    name="plats"
+                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                />}
+                                label={<Typography variant="h5">Plat</Typography>}/>
 
-                        {getListElements("plats")}
-                    </List>
-                </ListItem>
-                <Divider />
-                <ListItem>
-                    <List>
-                        <FormControlLabel
-                            control={<Switch
-                                checked={state.desserts}
-                                onChange={handleChange}
-                                name="desserts"
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />}
-                            label={<Typography variant="h5">Dessert</Typography>}/>
+                            {getListElements("plats")}
+                        </List>
+                    </ListItem>
+                    <Divider />
+                    <ListItem>
+                        <List>
+                            <FormControlLabel
+                                control={<Switch
+                                    checked={state.desserts}
+                                    onChange={handleChange}
+                                    name="desserts"
+                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                />}
+                                label={<Typography variant="h5">Dessert</Typography>}/>
 
-                        {getListElements("desserts")}
-                    </List>
-                </ListItem>
-                <Divider />
-                <ListItem>
-                    <List>
-                        <FormControlLabel
-                            control={<Switch
-                                checked={state.boissons}
-                                onChange={handleChange}
-                                name="boissons"
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />}
-                            label={<Typography variant="h5">Boisson</Typography>}/>
+                            {getListElements("desserts")}
+                        </List>
+                    </ListItem>
+                    <Divider />
+                    <ListItem>
+                        <List>
+                            <FormControlLabel
+                                control={<Switch
+                                    checked={state.boissons}
+                                    onChange={handleChange}
+                                    name="boissons"
+                                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                                />}
+                                label={<Typography variant="h5">Boisson</Typography>}/>
 
-                        {getListElements("boissons")}
-                    </List>
-                </ListItem>
-            </List>
-            <TextField
-                required
-                variant="outlined"
-                autoFocus
-                margin="dense"
-                name="prix"
-                id="prix"
-                label="Prix du menu"
-                value={prixMenu}
-                onChange={(e) => setPrixMenu(e.target.value)}
-            />
-            <GreenButton
-                startIcon={<SaveIcon/>}
-                onClick={ajouterMenu}
-            >
-                Enregistrer le menu
-            </GreenButton>
+                            {getListElements("boissons")}
+                        </List>
+                    </ListItem>
+                </List>
+                <GreenButton
+                    startIcon={<SaveIcon/>}
+                    onClick={ajouterMenu}
+                >
+                    Enregistrer le menu
+                </GreenButton>
+                </Paper>
+            </main>
 
         </>
     );
