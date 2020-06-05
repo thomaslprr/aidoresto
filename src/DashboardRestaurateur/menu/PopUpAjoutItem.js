@@ -76,11 +76,17 @@ export default function PopUpAjoutItem({open, handleClose, type, ajouter}){
 
 
     const ajouterLElement = () =>{
+        //element a ajouter
         var item = {
             nom: nom,
             desc: desc,
             quantite: getQuantite()
         };
+
+        //reset des champs
+        setNom("");
+        setDesc("");
+        setQuantite("");
 
         ajouter(item);
     };
