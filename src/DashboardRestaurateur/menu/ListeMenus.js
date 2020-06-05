@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as firebase from "firebase";
 import Grid from "@material-ui/core/Grid";
 import CarteMenu from "./CarteMenu";
@@ -47,6 +47,12 @@ const ListeMenu = ({idResto}) => {
                 }
                 lb.push(data);
             });
+
+            if (lb.length === 0){
+                setAucunMenu(true);
+            }else {
+                setAucunMenu(false);
+            }
 
             setListeMenus(lb);
         });
