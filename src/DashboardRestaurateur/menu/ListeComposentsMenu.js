@@ -7,13 +7,21 @@ import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import Button from "@material-ui/core/Button";
-import {element} from "prop-types";
 import PopUpAjoutItem from "./PopUpAjoutItem";
 
 const ListeComposentMenu = ({listeCompo, type, txtBtn, setListElements}) => {
 
-    const [listeComposent,setListeComposent] = useState(listeCompo);
+
     const [popUpAjout,setPopUpAjout] = useState(false);
+
+    function arrayRemove(arr, item) {
+        return arr.filter(function(ele){ return (ele.nom !== item.nom || ele.desc !== item.desc || ele.quantite !== item.quantite); });
+    }
+
+    const removeElement = (element) =>{
+        let liste = arrayRemove(listeCompo, element);
+        setListElements(type, liste);
+    }
 
 
     const ajoutElement = (element) =>{
@@ -36,21 +44,14 @@ const ListeComposentMenu = ({listeCompo, type, txtBtn, setListElements}) => {
                     Ajouter {txtBtn}
                 </Button>
 
-                <ListItem>
-                    test
-                </ListItem><ListItem>
-                    test
-                </ListItem><ListItem>
-                    test
-                </ListItem>
                 {listeCompo.map((element) =>
                     <ListItem>
                         <ListItemText
                             primary={element.nom+"  -  "+element.quantite}
-                            secondary='la description'
+                            secondary={element.desc}
                         />
                         <ListItemSecondaryAction>
-                            <IconButton edge="end" aria-label="delete">
+                            <IconButton edge="end" aria-label="delete" onClick={()=> removeElement(element)}>
                                 <DeleteIcon />
                             </IconButton>
                         </ListItemSecondaryAction>
