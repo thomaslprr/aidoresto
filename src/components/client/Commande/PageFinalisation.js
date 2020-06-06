@@ -11,7 +11,6 @@ import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import {makeStyles} from "@material-ui/core/styles";
 import NumberFormat from "react-number-format";
 import firebase from "firebase";
-import Grid from "@material-ui/core/Grid";
 
 
 
@@ -96,14 +95,12 @@ const PageFinalisation = (props) => {
         firebase.firestore().collection("restaurant").doc(props.idResto).collection("commandes").add(commandeData).then(function() {
             console.log("Document successfully written!");
             props.finDeCommande("valid");
-        })
-            .catch(function(error) {
-                console.error("Error writing document: ", error);
-                props.finDeCommande("error");
-            });
+        }).catch(function(error) {
+            console.error("Error writing document: ", error);
+            setTimeout(() => {envoieCommande(); }, 250);
+        });
 
-
-    }
+    };
 
     const modifCouvert = (event) => {
         setCouverts(event.target.value);
