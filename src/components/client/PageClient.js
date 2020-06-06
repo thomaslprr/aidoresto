@@ -154,7 +154,15 @@ const PageClient = ({ match: {params :{id}} }) => {
             });
         }
 
-    }
+    };
+
+    const getStatuBtn = () => {
+        if (Commande.elementsTotals(id) < 1){
+            return true;
+        }else{
+            return false;
+        }
+    };
 
     const ContenuCommande = () => {
         return(
@@ -211,6 +219,7 @@ const PageClient = ({ match: {params :{id}} }) => {
                     className={classes.button}
                     endIcon={<NavigateNextIcon/>}
                     onClick={handleFinalisation}
+                    disabled={getStatuBtn()}
                 >
                     Finaliser ma commande
                 </Button>
@@ -322,6 +331,6 @@ const PageClient = ({ match: {params :{id}} }) => {
 
         </>
     )
-}
+};
 
 export default PageClient
