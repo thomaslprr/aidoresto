@@ -30,13 +30,10 @@ class Commande {
                 }
 
             }else {
-                localStorage.clear();
-                this.commandes = {};
-                this.listeProduit = [];
+                this.suppressionLocalData();
             }
         }else{
-            this.commandes = {};
-            this.listeProduit = [];
+            this.suppressionLocalData();
         }
 
     }
@@ -105,7 +102,15 @@ class Commande {
         return total;
     }
 
-    elementsTotals(){
+    elementsTotals(idDuResto){
+
+        if (this.idResto === "" || idDuResto === this.idResto){
+            this.idResto = idDuResto;
+            localStorage.setItem('idResto', this.idResto );
+        }else {
+            this.suppressionLocalData();
+        }
+
         var count = 0;
 
         this.listeItems().forEach( element => count += element.quantite);

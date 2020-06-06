@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { Typography, Avatar, Grid, Box } from "@material-ui/core";
 import InfoResto from "./InfoResto";
 import Carte from "./Carte";
@@ -27,7 +27,6 @@ import Badge from "@material-ui/core/Badge";
 import PageFinalisation from "./Commande/PageFinalisation";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from '@material-ui/lab/Alert';
-
 
 
 const useStyles = makeStyles((theme) => ({
@@ -102,11 +101,13 @@ const PageClient = ({ match: {params :{id}} }) => {
         color: "",
     });
 
-    const [elementsPanier, setElementsPanier] = React.useState(Commande.elementsTotals());
+    const [elementsPanier, setElementsPanier] = React.useState(Commande.elementsTotals(id));
 
     const setCountPanier = () => {
-        setElementsPanier(Commande.elementsTotals());
-    }
+        if(elementsPanier !==  Commande.elementsTotals(id)){
+            setElementsPanier(Commande.elementsTotals(id));
+        }
+    };
 
     const handleClickOpen = () => {
         setOpen(true);
