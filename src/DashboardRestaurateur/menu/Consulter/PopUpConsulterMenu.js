@@ -5,13 +5,30 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
-
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 
 
 
 export default function PopUpConsulter({menu, open, handleClose}){
 
+    const ListeElements = ({liste, textElement}) => {
+        if (liste.length === 0){
+            return (
+                "Il n'y a "+textElement+" proposé dans ce menu."
+            )
+        }else {
+           return (
+               <List>
+               {liste.map((item) =>
+                   <ListItem>
+                       {item.nom}
+                   </ListItem>
+               )}
+               </List>
+           );
+        }
+    };
 
     return(
         <div>
@@ -25,7 +42,7 @@ export default function PopUpConsulter({menu, open, handleClose}){
                     <Typography variant="h6" component="h2">
                         Entrées
                     </Typography>
-
+                    <ListeElements liste={menu.entrees} textElement="aucune entrée"/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
