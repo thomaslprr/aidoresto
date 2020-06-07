@@ -7,6 +7,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import VisibilityIcon from '@material-ui/icons/Visibility';
+import PopUpConsulterMenu from "./Consulter/PopUpConsulterMenu";
 
 
 const useStyles = makeStyles({
@@ -30,9 +31,15 @@ export default function SimpleCardMenu({menu}) {
 
     const classes = useStyles();
 
+    const [openAfficher, setOpenAfficher] = React.useState(false);
+
+    const fermerPopUp = () => {
+      setOpenAfficher(false);
+    };
 
     return (
 
+        <>
         <Card className={classes.root}>
             <CardContent>
                 <Grid container spacing={1}>
@@ -42,7 +49,7 @@ export default function SimpleCardMenu({menu}) {
                         </Typography>
                     </Grid>
                     <Grid item xs={2} alignContent="center">
-                        <Button color="primary">
+                        <Button color="primary" onClick={() => {setOpenAfficher(true);}}>
                             <VisibilityIcon/>
                         </Button>
                     </Grid>
@@ -58,5 +65,8 @@ export default function SimpleCardMenu({menu}) {
             </CardActions>
         </Card>
 
+        <PopUpConsulterMenu open={openAfficher} menu={menu} handleClose={fermerPopUp} />
+
+        </>
     );
 }
