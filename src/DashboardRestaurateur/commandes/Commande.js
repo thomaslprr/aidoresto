@@ -2,6 +2,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import * as firebase from "firebase";
 import ListeCommandes from "./ListeCommandes";
 
+const add_minutes =  function (dt, minutes) {
+    return new Date(dt.getTime() + minutes*60000);
+};
+
 const Commande = ({id}) => {
 
 
@@ -11,7 +15,7 @@ const Commande = ({id}) => {
 
     useEffect(()=>{
 
-        firebase.firestore().collection("restaurant").doc(id).collection("commandes").where("etat", "in", ['attente', 'en cours'])
+        firebase.firestore().collection("restaurant").doc(id).collection("commandes").where("etat", "in", ['attente', 'en cours']).orderBy("date", "desc")
             .onSnapshot(function(querySnapshot) {
 
                 setListeCommande([]);
@@ -20,6 +24,9 @@ const Commande = ({id}) => {
                 querySnapshot.forEach(function(doc) {
 
                     let donnee = doc.data();
+
+                    let laDate = new Date(donnee.date.seconds * 1000);
+                    console.log(add_minutes(laDate));
 
                     let commande = {
                         id: doc.id,
