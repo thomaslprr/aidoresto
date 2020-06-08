@@ -128,66 +128,64 @@ const PageFinalisation = (props) => {
 
             <Box className={classes.typedContainer}>
 
-                <form className={classes.form} onSubmit={envoieCommande}>
+                <Box className={classes.inputStyle}>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        onChange={modifNom}
+                        value={nom}
+                        id="nom"
+                        label="Votre nom"
+                        name="nom"
+                        autoFocus
+                    />
+                </Box>
 
-                    <Box className={classes.inputStyle}>
-                        <TextField
-                            variant="outlined"
-                            margin="normal"
-                            required
-                            onChange={modifNom}
-                            value={nom}
-                            id="nom"
-                            label="Votre nom"
-                            name="nom"
-                            autoFocus
-                        />
-                    </Box>
+                <Box className={classes.inputStyle}>
+                    <TextField
+                        variant="outlined"
+                        label="Nombre de couverts"
+                        value={couverts}
+                        onChange={modifCouvert}
+                        name="couverts"
+                        id="couverts"
+                        InputProps={{
+                            inputComponent: NumberFormatCustom,
+                        }}
+                        required
+                    />
+                </Box>
 
-                    <Box className={classes.inputStyle}>
-                        <TextField
-                            variant="outlined"
-                            label="Nombre de couverts"
-                            value={couverts}
-                            onChange={modifCouvert}
-                            name="couverts"
-                            id="couverts"
-                            InputProps={{
-                                inputComponent: NumberFormatCustom,
-                            }}
-                            required
-                        />
-                    </Box>
+                <Box className={classes.inputStyle}>
+                    <TextField
+                        variant="outlined"
+                        label="Numéro de la table"
+                        value={numTable}
+                        onChange={modifNumTable}
+                        name="numTable"
+                        id="numTable"
+                    />
+                </Box>
 
-                    <Box className={classes.inputStyle}>
-                        <TextField
-                            variant="outlined"
-                            label="Numéro de la table"
-                            value={numTable}
-                            onChange={modifNumTable}
-                            name="numTable"
-                            id="numTable"
-                        />
-                    </Box>
+                <Box className={classes.inputStyle}>
+                    <Typography variant="subtitle2">
+                        Après avoir passé votre commande veuillez vous identifier auprès du personnel.
+                    </Typography>
+                </Box>
 
-                    <Box className={classes.inputStyle}>
-                        <Typography variant="subtitle2">
-                            Après avoir passé votre commande veuillez vous identifier auprès du personnel.
-                        </Typography>
-                    </Box>
+                <Box className={classes.inputStyle}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        type="submit"
+                        endIcon={<ShoppingBasketIcon/>}
+                        onClick={envoieCommande}
+                    >
+                        Commander
+                    </Button>
+                </Box>
 
-                    <Box className={classes.inputStyle}>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            type="submit"
-                            endIcon={<ShoppingBasketIcon/>}
-                            onClick={props.handleFinalisation}
-                        >
-                            Commander
-                        </Button>
-                    </Box>
-                </form>
 
             </Box>
 
