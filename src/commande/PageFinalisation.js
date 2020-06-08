@@ -138,7 +138,6 @@ const PageFinalisation = (props) => {
                         id="nom"
                         label="Votre nom"
                         name="nom"
-                        autoFocus
                     />
                 </Box>
 
