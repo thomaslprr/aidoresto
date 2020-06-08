@@ -1,7 +1,7 @@
 import React, {Suspense, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
-import { Typography, Avatar, Grid, Box } from "@material-ui/core";
-import PropTypes, {element} from 'prop-types';
+import { Typography, Grid, Box } from "@material-ui/core";
+import PropTypes from 'prop-types';
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TemplateBoisson from "./TemplateBoisson";

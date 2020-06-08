@@ -3,7 +3,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import MenuBookSharpIcon from '@material-ui/icons/MenuBookSharp';import {Menu} from "@material-ui/icons";
+import MenuBookSharpIcon from '@material-ui/icons/MenuBookSharp';
 
 
 const useStyle = makeStyles(theme =>({

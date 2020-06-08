@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Avatar, Grid, Box } from "@material-ui/core";
+import { Typography, Grid, Box } from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import AppBar from "@material-ui/core/AppBar";

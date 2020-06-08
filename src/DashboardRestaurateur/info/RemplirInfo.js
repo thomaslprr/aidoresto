@@ -1,4 +1,3 @@
-
 import React, {useEffect, useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -56,8 +55,6 @@ function RemplirInfo({id,donnee,setAffichage}){
     const classes = useStyles();
     const restaurantRef = firebase.firestore().collection("restaurant").doc(id);
 
-    const history = useHistory();
-
 
     const [chargementBouton,setChargementBouton] = useState(0);
 
@@ -89,7 +86,7 @@ function RemplirInfo({id,donnee,setAffichage}){
     }
 
     function chargementBoutonComposant() {
-        if(chargementBouton==0){
+        if(chargementBouton===0){
             return (<Button
                 type="submit"
                 fullWidth
@@ -100,7 +97,7 @@ function RemplirInfo({id,donnee,setAffichage}){
                 Compléter les informations
             </Button>)
 
-        }else if(chargementBouton==1){
+        }else if(chargementBouton===1){
             return (<Button
                 type="submit"
                 fullWidth
@@ -109,7 +106,7 @@ function RemplirInfo({id,donnee,setAffichage}){
             >
                 Chargement...
             </Button>)
-        }else if(chargementBouton==2){
+        }else if(chargementBouton===2){
             return (<Button
                 type="submit"
                 fullWidth
@@ -120,7 +117,7 @@ function RemplirInfo({id,donnee,setAffichage}){
                 Modification réussie
             </Button>)
         }
-        else if(chargementBouton==3){
+        else if(chargementBouton===3){
             return (<Button
                 type="submit"
                 fullWidth

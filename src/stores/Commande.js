@@ -66,10 +66,9 @@ class Commande {
             this.suppressionLocalData();
         }
 
-        var aInserer = true;
-        var present = false;
+        let aInserer = true;
         for (var i = 0; i < this.listeProduit.length; i++){
-            if(this.listeProduit[i].id == produit.id){
+            if(this.listeProduit[i].id === produit.id){
                 aInserer = false;
             }
         }
@@ -123,7 +122,7 @@ class Commande {
         //Verification présence dans le magasin
         var estPresent = false;
         for(var i = 0; i<this.listeProduit.length; i++){
-            if (id == this.listeProduit[i].id){
+            if (id === this.listeProduit[i].id){
                 estPresent = true;
             }
         }
@@ -153,7 +152,7 @@ class Commande {
     retraitProduit(id){
 
         for (let key in this.commandes){
-            if (id == key){
+            if (id === key){
                 if (this.commandes[id] > 1){
                     this.commandes[id]--;
                 }else {
@@ -172,7 +171,7 @@ class Commande {
 
     quantiteItem(itemId){
         for (var key in this.commandes){
-            if (itemId == key){
+            if (itemId === key){
                 return this.commandes[itemId];
             }
         }
@@ -182,18 +181,18 @@ class Commande {
     listeItems(){
 
         // Retourne la commande (Objets + Quantite)
-        var items = [];
+        let items = [];
 
         for (let idItem in this.commandes){
 
             for(var i = 0; i<this.listeProduit.length; i++){
 
-                if (idItem == this.listeProduit[i].id){
+                if (idItem === this.listeProduit[i].id){
 
-                    var obj = Object.assign({}, this.listeProduit[i]);
-                    var quantite = { quantite: this.quantiteItem(idItem)};
+                    let obj = Object.assign({}, this.listeProduit[i]);
+                    let quantite = { quantite: this.quantiteItem(idItem)};
 
-                    var res = Object.assign(obj,quantite);
+                    let res = Object.assign(obj,quantite);
 
                     items.push(res);
                     break;
@@ -209,6 +208,6 @@ class Commande {
 }
 decorate(Commande, {
     articlescles: computed
-})
+});
 
 export default new Commande();

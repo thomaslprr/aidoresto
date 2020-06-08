@@ -21,7 +21,7 @@ const PageDuResto = ({ match: {params :{id}} }) => {
 
     useEffect(()=>{
         verifResto();
-    },[]);
+    },[id]);
 
     const verifResto = () => {
         restaurantRef.get().then(function(doc) {

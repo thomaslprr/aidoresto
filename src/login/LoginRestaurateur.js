@@ -1,9 +1,7 @@
-import React, {useCallback, useContext, useState} from "react";
-import { withRouter, Redirect } from "react-router";
+import React, {useCallback, useState} from "react";
+import { withRouter } from "react-router";
 import app from "../index.js";
-import { AuthContext } from "./Auth.js";
 import Background from '../image/resto1.jpg';
-
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,12 +12,10 @@ import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import AlertDialogInscription from "../creationCompte/Popup";
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
-import {User} from "firebase";
 import {Copyright} from "../PiedDePage/PiedPage";
 
 const useStyles = makeStyles((theme) => ({
@@ -81,8 +77,6 @@ const LoginRestaurateur = ({ history }) => {
         [history]
     );
 
-    const { currentUser } = useContext(AuthContext);
-
     /**
     if (currentUser) {
         return <Redirect to="/" />;
@@ -91,7 +85,7 @@ const LoginRestaurateur = ({ history }) => {
     const classes = useStyles();
     const msgErreur = <>Impossible de se connecter !<br/>• Vérifiez votre connection internet <br/> • Assurez-vous que l'adresse mail saisie et le mot de passe soient corrects</>
     const afficherModale = ()=> {
-        if(showModal==1){
+        if(showModal===1){
             return  <AlertDialogInscription etat={1} changerEtat={setShowModal} msgErreur={msgErreur}/>
 
 
