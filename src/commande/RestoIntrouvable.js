@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import Typography from "@material-ui/core/Typography";
 
 
-const RestoIntrouvable = ({ match: {params :{id}} }) => {
+const RestoIntrouvable = () => {
 
     return (
         <>

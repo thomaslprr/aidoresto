@@ -6,7 +6,7 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import TemplateBoisson from "./TemplateBoisson";
 import TemplateNourriture from "./TemplateNourriture";
-import Commande from "../../stores/Commande";
+import Commande from "../stores/Commande";
 
 
 

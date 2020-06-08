@@ -1,5 +1,5 @@
 import React from "react";
-import Commande from "../../../stores/Commande";
+import Commande from "../stores/Commande";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";

@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
-import {Copyright} from "../../PiedDePage/PiedPage";
 import firebase from "firebase";
+import RestoIntrouvable from "./RestoIntrouvable";
+import CarteDuResto from "./CarteDuResto";
+import {Copyright} from "../PiedDePage/PiedPage";
 
 
 const PageDuResto = ({ match: {params :{id}} }) => {
@@ -9,7 +11,13 @@ const PageDuResto = ({ match: {params :{id}} }) => {
 
     const [estUnResto, setEstUnResto] = React.useState(false);
 
+    const [infoResto, setInfoResto] = React.useState({
+        nom: "",
+        adresse: {},
+    });
+
     const restaurantRef = firebase.firestore().collection("restaurant").doc(id);
+
 
     useEffect(()=>{
         verifResto();
@@ -18,6 +26,10 @@ const PageDuResto = ({ match: {params :{id}} }) => {
     const verifResto = () => {
         restaurantRef.get().then(function(doc) {
             if (doc.exists) {
+                setInfoResto({
+                        nom: doc.data().nom,
+                        adresse: doc.data().adresse,
+                    });
                 setEstUnResto(true);
                 setLoading(false);
             } else {
@@ -30,7 +42,7 @@ const PageDuResto = ({ match: {params :{id}} }) => {
         });
     };
 
-    const getContent = () => {
+    const GetContent = () => {
 
         if (loading) {
             return (
@@ -40,9 +52,13 @@ const PageDuResto = ({ match: {params :{id}} }) => {
             );
         }else {
             if (estUnResto){
-
+                return (
+                    <CarteDuResto idResto={id} infoResto={infoResto}/>
+                );
             }else {
-
+                return (
+                    <RestoIntrouvable />
+                );
             }
         }
     };
@@ -50,7 +66,7 @@ const PageDuResto = ({ match: {params :{id}} }) => {
     return (
         <>
 
-            {getContent}
+            <GetContent />
 
             <Copyright/>
 
