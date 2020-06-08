@@ -281,19 +281,22 @@ const FragmentALaCarte = (props) => {
     return (
         <>
             <div className={classes.root}>
-                <AppBar position="static">
-                    <Tabs
-                        variant="fullWidth"
-                        value={value}
-                        onChange={handleChange}
-                        aria-label="choix des plats">
 
-                        <LinkTab label="Entrée" href="/drafts" {...a11yProps(0)} />
-                        <LinkTab label="Plat" href="/trash" {...a11yProps(1)} />
-                        <LinkTab label="Dessert" href="/trash" {...a11yProps(2)} />
-                        <LinkTab label="Boisson" href="/trash" {...a11yProps(3)} />
-                    </Tabs>
-                </AppBar>
+                <Tabs
+                    variant="fullWidth"
+                    value={value}
+                    onChange={handleChange}
+                    aria-label="choix des plats"
+                    indicatorColor="secondary"
+                    textColor="secondary"
+                >
+
+                    <LinkTab label="Entrée" href="/drafts" {...a11yProps(0)} />
+                    <LinkTab label="Plat" href="/trash" {...a11yProps(1)} />
+                    <LinkTab label="Dessert" href="/trash" {...a11yProps(2)} />
+                    <LinkTab label="Boisson" href="/trash" {...a11yProps(3)} />
+                </Tabs>
+
 
                 <TabPanel value={value} index={0}>
                     <Grid container spacing={3}>

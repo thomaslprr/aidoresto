@@ -83,20 +83,22 @@ const Carte = (props) => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="static">
-                <Tabs
-                    variant="fullWidth"
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="nav tabs example"
-                >
 
-                    <LinkTab label="A la carte" href="/trash" {...a11yProps(1)} />
+            <Tabs
+                variant="fullWidth"
+                value={value}
+                onChange={handleChange}
+                aria-label="nav tabs example"
+                textColor="primary"
+                indicatorColor="primary"
+            >
 
-                    <LinkTab label="Menu" href="/drafts" {...a11yProps(0)} />
+                <LinkTab label="A la carte" href="/trash" {...a11yProps(1)} />
 
-                </Tabs>
-            </AppBar>
+                <LinkTab label="Menu" href="/drafts" {...a11yProps(0)} />
+
+            </Tabs>
+
             <TabPanel value={value} index={0}>
                 <Box>
                     <FragmentALaCarte idResto={props.idResto} setCountPanier={props.setCountPanier}/>
