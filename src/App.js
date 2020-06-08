@@ -1,14 +1,12 @@
 import React from 'react';
 import './App.css';
 import SignUp from "./creationCompte/CreationCompteRestaurateur";
-import {Route, Router, Switch} from "react-router";
+import {Route, Switch} from "react-router";
 import Home from "./Home";
 import {BrowserRouter} from "react-router-dom";
-import PageClient from "./components/client/PageClient";
 import {AuthProvider} from "./login/Auth";
 import LoginRestaurateur from "./login/LoginRestaurateur";
 import Dashboard from "./DashboardRestaurateur/Dashboard";
-import PrivateRoute from "./PrivateRoute";
 import PageDuResto from "./commande/PageDuResto";
 
 function App() {
