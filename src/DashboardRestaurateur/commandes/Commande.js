@@ -26,20 +26,24 @@ const Commande = ({id}) => {
                     let donnee = doc.data();
 
                     let laDate = new Date(donnee.date.seconds * 1000);
-                    console.log(add_minutes(laDate));
+                    let now = new Date();
 
-                    let commande = {
-                        id: doc.id,
-                        date: new Date(donnee.date.seconds * 1000),
-                        nom: donnee.nom,
-                        nombreCouverts: donnee.nombreCouverts,
-                        prixTotal:donnee.prixTotal,
-                        etat:donnee.etat || '',
-                        numTable: donnee.numTable || '',
-                        liste: donnee.listeItems
-                    };
+                    //Affichage commande de moins de 3 heures
+                    if (add_minutes(laDate, 60*3).getTime() > now.getTime()) {
 
-                    setListeCommande(listeCommande => listeCommande.concat(commande));
+                        let commande = {
+                            id: doc.id,
+                            date: new Date(donnee.date.seconds * 1000),
+                            nom: donnee.nom,
+                            nombreCouverts: donnee.nombreCouverts,
+                            prixTotal: donnee.prixTotal,
+                            etat: donnee.etat || '',
+                            numTable: donnee.numTable || '',
+                            liste: donnee.listeItems
+                        };
+
+                        setListeCommande(listeCommande => listeCommande.concat(commande));
+                    }
 
                 });
             });
