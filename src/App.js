@@ -9,6 +9,7 @@ import {AuthProvider} from "./login/Auth";
 import LoginRestaurateur from "./login/LoginRestaurateur";
 import Dashboard from "./DashboardRestaurateur/Dashboard";
 import PrivateRoute from "./PrivateRoute";
+import PageDuResto from "./commande/PageDuResto";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
               <Route exact path="/" component={Home}/>
                   <Route exact path="/login" component={LoginRestaurateur}/>
                   <Route exact path="/signup" component={SignUp}/>
-                  <Route exact path="/restaurant/:id" render={props => <PageClient {...props} />} />
+                  <Route exact path="/restaurant/:id" render={props => <PageDuResto {...props} />} />
 
 
                   <Route exact path="/dashboard/:id" render={props => <Dashboard {...props} type={0}/>} />

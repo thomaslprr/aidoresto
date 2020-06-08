@@ -14,7 +14,7 @@ import ButtonGroup from "@material-ui/core/ButtonGroup";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import Box from "@material-ui/core/Box";
-import Commande from "../../stores/Commande";
+import Commande from "../stores/Commande";
 import LocalMallIcon from '@material-ui/icons/LocalMall';
 
 

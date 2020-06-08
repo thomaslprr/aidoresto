@@ -12,7 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Badge from "@material-ui/core/Badge";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import Commande from "../../stores/Commande";
+import Commande from "../stores/Commande";
 import RemoveIcon from "@material-ui/icons/Remove";
 import AddIcon from "@material-ui/icons/Add";
 
