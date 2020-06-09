@@ -126,7 +126,7 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
     const Selecteur = ({nom, val, handleChange, listeItem}) =>{
 
         const getItemText = (item) =>{
-            if (item.quantite !== null && item.quantite !== ""){
+            if (item.quantite && item.quantite !== ""){
                 return item.nom+" - "+item.quantite;
             }else {
                 return item.nom;
