@@ -89,6 +89,26 @@ class Commande {
         this.sauvegardePanier();
     }
 
+    ajouterUnMenu(menu){
+        //Ajout panier
+        let estPresent = false;
+        for (let i = 0; i < this.commandes.length; i++){
+            if (menu.id === this.commandes[i].id){
+                estPresent = true;
+                this.commandes[i].quantite ++;
+            }
+        }
+
+        if (!estPresent){
+            let item = menu;
+            item.quantite = 1;
+            item.type = "menu";
+            this.commandes.push(item);
+        }
+
+        this.sauvegardePanier();
+    }
+
     arrayRemove(arr, item) {
         return arr.filter(function(ele){ return (ele.id !== item.id ); });
     }

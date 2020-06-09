@@ -14,6 +14,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import Grid from "@material-ui/core/Grid";
+import Commande from "../stores/Commande";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -74,6 +75,22 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
         }
 
         return false;
+    };
+
+    const ajoutMenuPanier = () =>{
+        let menuCommande = {
+            nom: menu.nom,
+            id: menu.id+selectedEntree+selectedPlat+selectedDessert+selectedBoisson,
+            prix: menu.prix,
+            entree: selectedEntree,
+            plat: selectedPlat,
+            dessert: selectedDessert,
+            boissons: selectedBoisson
+        };
+
+        Commande.ajouterUnMenu(menuCommande);
+
+        handleClose();
     };
 
     const Selecteur = ({nom, val, handleChange, listeItem}) =>{
@@ -189,7 +206,7 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
                     color="primary"
                     className={classes.button}
                     endIcon={<NavigateNextIcon/>}
-                    onClick={()=>{ }}
+                    onClick={ajoutMenuPanier}
                     disabled={getStatutBtn()}
                 >
                     Ajouter le menu à la commande
