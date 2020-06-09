@@ -9,13 +9,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import Button from "@material-ui/core/Button";
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Slide from "@material-ui/core/Slide";
-import Paper from "@material-ui/core/Paper";
-import Grid from "@material-ui/core/Grid";
-import MenuCard from "./MenuCard";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
+import Grid from "@material-ui/core/Grid";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -30,13 +28,14 @@ const useStyles = makeStyles((theme) => ({
         margin: "auto"
     },
     indication: {
-        marginTop: "1em"
+        marginTop: "1em",
+        marginBottom: "1em",
     },
     itemsSelect: {
         margin:"1em",
     },
     formControl: {
-        margin: theme.spacing(1),
+        margin: "1em 0",
         minWidth: 300,
     },
 }));
@@ -59,28 +58,51 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
     const [selectedDessert, setSelectedDessert] = React.useState("");
     const [selectedBoisson, setSelectedBoisson] = React.useState("");
 
-    const Selecteur = ({nom, val, handleChange, texte, listeItem}) =>{
-      return (
-          <>
-              <FormControl variant="outlined" className={classes.formControl}>
-                  <InputLabel id={"item-selector-"+nom}>{nom}</InputLabel>
-                  <Select
-                      labelId={"item-selector-"+nom}
-                      id={"select-"+nom}
-                      value={val}
-                      onChange={handleChange}
-                  >
+    const Selecteur = ({nom, val, handleChange, listeItem}) =>{
 
-                      {listeItem.map((item) =>
-                          <MenuItem value={item.nom+item.desc+item.quantite}>
-                              {item.nom}
-                          </MenuItem>
-                      )}
+        const getItemText = (item) =>{
+            if (item.quantite !== null && item.quantite !== ""){
+                return item.nom+" - "+item.quantite;
+            }else {
+                return item.nom;
+            }
+        };
 
-                  </Select>
-              </FormControl>
-          </>
-      );
+        if (listeItem.length > 0) {
+            return (
+                <Grid
+                    container
+                    alignItems="center"
+                    justify="center"
+                >
+                    <Grid item>
+                    <FormControl variant="outlined" className={classes.formControl}>
+                        <InputLabel id={"item-selector-" + nom}>{nom}</InputLabel>
+                        <Select
+                            labelId={"item-selector-" + nom}
+                            id={"select-" + nom}
+                            value={val}
+                            onChange={handleChange}
+                            label={nom}
+                        >
+
+                            {listeItem.map((item) =>
+                                <MenuItem value={item.nom + item.desc + item.quantite}>
+                                    {getItemText(item)}
+                                </MenuItem>
+                            )}
+
+                        </Select>
+                    </FormControl>
+                    </Grid>
+                </Grid>
+            );
+        }else {
+            return (
+              <>
+              </>
+            );
+        }
     };
 
     return (
@@ -107,12 +129,38 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
 
                     <Selecteur
                         nom="Entrée"
-                        texte="une entrée"
                         val={selectedEntree}
                         handleChange={(event) => {
                             setSelectedEntree(event.target.value);
                         }}
                         listeItem={menu.entrees}
+                    />
+
+                    <Selecteur
+                        nom="Plat"
+                        val={selectedPlat}
+                        handleChange={(event) => {
+                            setSelectedPlat(event.target.value);
+                        }}
+                        listeItem={menu.plats}
+                    />
+
+                    <Selecteur
+                        nom="Dessert"
+                        val={selectedDessert}
+                        handleChange={(event) => {
+                            setSelectedDessert(event.target.value);
+                        }}
+                        listeItem={menu.desserts}
+                    />
+
+                    <Selecteur
+                        nom="Boisson"
+                        val={selectedBoisson}
+                        handleChange={(event) => {
+                            setSelectedBoisson(event.target.value);
+                        }}
+                        listeItem={menu.boissons}
                     />
 
                 </Box>
