@@ -140,10 +140,38 @@ function Row({laCom, id}) {
         console.log(item.item);
 
         if (item.item.categorie && item.item.categorie === "menu"){
+
+            let ingredients = [];
+
+            if (item.item.entree){
+                let x = item.item.entree;
+                x.text = "Entrée";
+                ingredients.push(x);
+            }if (item.item.plat){
+                let x = item.item.plat;
+                x.text = "Plat";
+                ingredients.push(x);
+            }if (item.item.dessert){
+                let x = item.item.dessert;
+                x.text = "Dessert";
+                ingredients.push(x);
+            }if (item.item.boisson){
+                let x = item.item.boisson;
+                x.text = "Boisson";
+                ingredients.push(x);
+            }
+
+
             return (
-                <Typography variant="subtitle2" color="textSecondary">
-                    test ingredients
-                </Typography>
+
+                <>
+                {ingredients.map((ing) => (
+                    <Typography variant="subtitle2" color="textSecondary">
+                        {ing.text} : {ing.nom} {ing.quantite}
+                    </Typography>
+                    ))}
+
+                </>
             );
         }else{
             return(
