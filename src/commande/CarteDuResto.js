@@ -285,7 +285,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Box>
-                        <Menus listeMenus={dataMenu}/>
+                        <Menus listeMenus={dataMenu} setCountPanier={setCountPanier}/>
                     </Box>
                 </TabPanel>
 

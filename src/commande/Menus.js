@@ -11,7 +11,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function Menus({listeMenus}) {
+export default function Menus({listeMenus, setCountPanier}) {
 
     const classes = useStyles();
 
@@ -27,6 +27,7 @@ export default function Menus({listeMenus}) {
     const fermerPageAjout = () => {
         setMenuChoisit({});
         setOpenAjout(false);
+        setCountPanier();
     };
 
     const GetContent = () => {
