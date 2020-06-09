@@ -49,14 +49,32 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
 
     const classes = useStyles();
 
-    const getStatutBtn = () => {
-        return false;
-    };
-
     const [selectedEntree, setSelectedEntree] = React.useState("");
     const [selectedPlat, setSelectedPlat] = React.useState("");
     const [selectedDessert, setSelectedDessert] = React.useState("");
     const [selectedBoisson, setSelectedBoisson] = React.useState("");
+
+    //Vérifie que tout les champs sont select
+    const getStatutBtn = () => {
+
+        if (menu && menu.entrees && menu.entrees.length > 0 && selectedEntree === ""){
+            return true;
+        }
+
+        if (menu && menu.plats && menu.plats.length > 0 && selectedPlat === ""){
+            return true;
+        }
+
+        if (menu && menu.desserts && menu.desserts.length > 0 && selectedDessert === ""){
+            return true;
+        }
+
+        if (menu && menu.boissons && menu.boissons.length > 0 && selectedBoisson === ""){
+            return true;
+        }
+
+        return false;
+    };
 
     const Selecteur = ({nom, val, handleChange, listeItem}) =>{
 
@@ -172,7 +190,7 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
                     className={classes.button}
                     endIcon={<NavigateNextIcon/>}
                     onClick={()=>{ }}
-                    disabled={getStatutBtn}
+                    disabled={getStatutBtn()}
                 >
                     Ajouter le menu à la commande
                 </Button>
