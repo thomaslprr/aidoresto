@@ -59,7 +59,7 @@ export default function MenuCard({menu}) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" onClick={()=>{}}>Ajouter</Button>
+                    <Button size="small" color="primary" onClick={()=>{}}>Ajouter</Button>
                 </CardActions>
             </Card>
 
