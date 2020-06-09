@@ -105,6 +105,8 @@ const CarteDuResto = ({idResto, infoResto}) => {
     const[dataPlat, setDataPlat] = useState([]);
     const[dataDessert, setDataDessert] = useState([]);
 
+    const [dataMenu, setDataMenus] = useState([]);
+
     //Statut panier
     const[panierOuver, setPanierOuver] = useState(false);
 
@@ -211,6 +213,33 @@ const CarteDuResto = ({idResto, infoResto}) => {
                     setDataDessert(dataDessert => dataDessert.concat(dessert));
                 });
             });
+
+
+        let refCollectionMenus = firebase.firestore().collection("restaurant").doc(idResto).collection("menus");
+        refCollectionMenus.onSnapshot(function(querySnapshot) {
+
+            setDataMenus([]);
+
+            let lb = [];
+
+            querySnapshot.forEach(function(doc) {
+
+                let donneesMenu = doc.data();
+                let data = {
+                    id: doc.id,
+                    id_resto: idResto,
+                    nom: donneesMenu.nom,
+                    prix: donneesMenu.prix,
+                    entrees: donneesMenu.entrees,
+                    plats: donneesMenu.plats,
+                    desserts: donneesMenu.desserts,
+                    boissons: donneesMenu.boissons
+                };
+                lb.push(data);
+            });
+
+            setDataMenus(lb);
+        });
 
     };
 
