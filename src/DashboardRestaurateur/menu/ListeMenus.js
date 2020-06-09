@@ -42,9 +42,9 @@ const ListeMenu = ({idResto}) => {
                     prix: donneesMenu.prix,
                     entrees: donneesMenu.entrees,
                     plats: donneesMenu.plats,
-                    desserts: donneesMenu.dessert,
+                    desserts: donneesMenu.desserts,
                     boissons: donneesMenu.boissons
-                }
+                };
                 lb.push(data);
             });
 

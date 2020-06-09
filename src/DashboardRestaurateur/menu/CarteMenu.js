@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SimpleCardMenu({menu}) {
+export default function CarteMenu({menu}) {
 
     const classes = useStyles();
 
