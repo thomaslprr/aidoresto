@@ -2,8 +2,7 @@ import {computed, decorate, observable} from 'mobx';
 
 class Commande {
 
-    listeProduit = observable.box([]);
-    commandes = observable.box({});
+    commandes = observable.box([]);
     idResto = "";
 
 
@@ -23,11 +22,6 @@ class Commande {
                     this.idResto = localStorage.getItem('idResto');
                 }
 
-                if ('listeProduit' in localStorage) {
-                    this.listeProduit = JSON.parse(localStorage.getItem('listeProduit'));
-                } else {
-                    this.listeProduit = [];
-                }
 
             }else {
                 this.suppressionLocalData();
@@ -43,60 +37,17 @@ class Commande {
         localStorage.setItem('dateModif', ''+(Date.now()+(3600*1000)) );
     }
 
-    clearListeProduit(){
-        this.listeProduit = [];
-    }
-
     suppressionLocalData(){
-
         this.idResto = "";
-        this.listeProduit = [];
-        this.commandes = {};
+        this.commandes = [];
         localStorage.clear();
-
     }
 
-    ajouterProduitListe(produit, idDuResto){
-
-        // Clear du local storage au changement de resto
-        if (this.idResto === "" || idDuResto === this.idResto){
-            this.idResto = idDuResto;
-            localStorage.setItem('idResto', this.idResto );
-        }else {
-            this.suppressionLocalData();
-        }
-
-        let aInserer = true;
-        for (var i = 0; i < this.listeProduit.length; i++){
-            if(this.listeProduit[i].id === produit.id){
-                aInserer = false;
-            }
-        }
-
-        if (aInserer){
-            this.listeProduit = this.listeProduit.concat(produit);
-        }else {
-
-            //Suppression de l'ancien
-            let removeIndex = this.listeProduit.map(function(item) { return item.id; }).indexOf(produit.id);
-            this.listeProduit.splice(removeIndex, 1);
-
-
-            //Ajout du nouveau
-            this.listeProduit = this.listeProduit.concat(produit);
-        }
-
-        localStorage.setItem('listeProduit', JSON.stringify(this.listeProduit));
-        localStorage.setItem('dateModif', ''+(Date.now()+(3600*1000)) );
-
-    }
 
     prixTotal(){
-        var items = this.listeItems();
+        let total = 0;
 
-        var total = 0;
-
-        items.forEach( element => total += (element.prix * element.quantite));
+        this.commandes.forEach( element => total += (element.prix * element.quantite));
 
         return total;
     }
@@ -110,100 +61,77 @@ class Commande {
             this.suppressionLocalData();
         }
 
-        var count = 0;
+        let count = 0;
 
-        this.listeItems().forEach( element => count += element.quantite);
+        this.commandes.forEach( element => count += element.quantite);
 
         return count;
     }
 
-    ajouterUnElementAuPanier(id){
-
-        //Verification présence dans le magasin
-        var estPresent = false;
-        for(var i = 0; i<this.listeProduit.length; i++){
-            if (id === this.listeProduit[i].id){
-                estPresent = true;
-            }
-        }
-
-        if(!estPresent){
-            console.log("L'element n'est pas présent dans la liste des produits du magasin");
-            return;
-        }
+    ajouterUnElementAuPanier(element){
 
         //Ajout panier
-        estPresent = false;
-        for (let key in this.commandes){
-            if (id === key){
+        let estPresent = false;
+        for (let i = 0; i < this.commandes.length; i++){
+            if (element.id === this.commandes[i].id){
                 estPresent = true;
+                this.commandes[i].quantite ++;
             }
         }
 
-        if (estPresent){
-            this.commandes[id] ++;
-        }else {
-            this.commandes[id] = 1;
+        if (!estPresent){
+            let item = element;
+            item.quantite = 1;
+            item.type = "aLaCarte";
+            this.commandes.push(item);
         }
 
         this.sauvegardePanier();
+    }
+
+    arrayRemove(arr, item) {
+        return arr.filter(function(ele){ return (ele.id !== item.id ); });
+    }
+
+    listeItems(){
+        return this.commandes;
     }
 
     retraitProduit(id){
 
-        for (let key in this.commandes){
-            if (id === key){
-                if (this.commandes[id] > 1){
-                    this.commandes[id]--;
+        let modifArr = false;
+        let newArray;
+
+        for (let i = 0; i < this.commandes.length; i++){
+            if (id === this.commandes[i].id){
+                if (this.commandes[i].quantite > 1){
+                    console.log(this.commandes[i].quantite);
+                    this.commandes[i].quantite--;
+                    console.log(this.commandes[i].quantite);
                 }else {
-                    delete this.commandes[id];
+                    newArray = this.arrayRemove(this.commandes, this.commandes[i]);
+                    modifArr = true;
                 }
             }
+        }
+
+        if (modifArr){
+            this.commandes = newArray;
         }
 
         this.sauvegardePanier();
     }
 
 
-    get articles() {
-        return this.listeProduit;
-    }
-
     quantiteItem(itemId){
-        for (var key in this.commandes){
-            if (itemId === key){
-                return this.commandes[itemId];
+        for (let i = 0; i < this.commandes.length; i++){
+            if (itemId === this.commandes[i].id){
+                return this.commandes[i].quantite;
             }
         }
         return 0;
     }
 
-    listeItems(){
-
-        // Retourne la commande (Objets + Quantite)
-        let items = [];
-
-        for (let idItem in this.commandes){
-
-            for(var i = 0; i<this.listeProduit.length; i++){
-
-                if (idItem === this.listeProduit[i].id){
-
-                    let obj = Object.assign({}, this.listeProduit[i]);
-                    let quantite = { quantite: this.quantiteItem(idItem)};
-
-                    let res = Object.assign(obj,quantite);
-
-                    items.push(res);
-                    break;
-                }
-            }
-        }
-
-        console.log(items);
-        return items;
-
-    }
 
 }
 decorate(Commande, {

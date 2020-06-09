@@ -221,7 +221,7 @@ const Panier = ({open, handleClose, modifNotif, idResto}) => {
                                     <Button
                                         aria-label="increase"
                                         onClick={() => {
-                                            Commande.ajouterUnElementAuPanier(item.id);
+                                            Commande.ajouterUnElementAuPanier(item);
                                             setRefresh(!refresh);
                                         }}
                                     >

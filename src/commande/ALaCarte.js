@@ -86,7 +86,6 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
 
 
     const ListBoisson = () => {
-        boissons.forEach(element => Commande.ajouterProduitListe(element, idResto));
         return (
             <>
                 {boissons.map( item => (
@@ -97,7 +96,6 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
     };
 
     const ListEntree = () => {
-        entrees.forEach(element => Commande.ajouterProduitListe(element, idResto));
         return (
             <>
                 {entrees.map( item => (
@@ -108,7 +106,6 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
     };
 
     const ListPlat= () => {
-        plats.forEach(element => Commande.ajouterProduitListe(element, idResto));
         return (
             <>
                 {plats.map( item => (
@@ -119,7 +116,6 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
     };
 
     const ListDessert = () => {
-        desserts.forEach(element => Commande.ajouterProduitListe(element, idResto));
         return (
             <>
                 {desserts.map( item => (

@@ -1,16 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
+import React from 'react';
 import {Typography} from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
 import {makeStyles} from "@material-ui/core/styles";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import Badge from "@material-ui/core/Badge";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Commande from "../stores/Commande";
 import RemoveIcon from "@material-ui/icons/Remove";
@@ -137,7 +132,7 @@ const TemplateBoisson = ({boisson, setCountPanier}) => {
                                     aria-label="increase"
                                     onClick={() => {
                                         setCount(count + 1);
-                                        Commande.ajouterUnElementAuPanier(boisson.id);
+                                        Commande.ajouterUnElementAuPanier(boisson);
                                         setCountPanier();
                                     }}
                                 >
