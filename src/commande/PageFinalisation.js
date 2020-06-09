@@ -84,7 +84,7 @@ const PageFinalisation = (props) => {
         const commandeData = {
             nom: nom,
             nombreCouverts: couverts,
-            listeItems: Commande.listeItems(),
+            listeItems: JSON.parse(JSON.stringify(Commande.listeItems())),
             prixTotal: Commande.prixTotal(),
             date: firebase.firestore.FieldValue.serverTimestamp(),
             etat: "attente",
