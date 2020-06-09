@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
-const Panier = ({open, handleClose, modifNotif, idResto}) => {
+const Panier = ({open, handleClose, modifNotif, idResto, setCountPanier}) => {
 
     const classes = useStyles();
 
@@ -86,6 +86,8 @@ const Panier = ({open, handleClose, modifNotif, idResto}) => {
 
         //Ouvrir notif
         if (statut === "valid"){
+            Commande.viderLePanier();
+            setCountPanier();
             modifNotif({
                 open: true,
                 text: "Votre commande a bien été prise en compte",

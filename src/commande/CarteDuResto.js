@@ -296,6 +296,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 idResto={idResto}
                 handleClose={handleClosePanier}
                 modifNotif={modifNotif}
+                setCountPanier={setCountPanier}
             />
 
             <Fab aria-label='Expand' className={clsx(classes.fab, classes.fabGreen)} onClick={handleOpenPanier} color='inherit'>

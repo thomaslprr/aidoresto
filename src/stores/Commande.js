@@ -152,6 +152,10 @@ class Commande {
         return 0;
     }
 
+    viderLePanier(){
+        this.commandes = [];
+        this.sauvegardePanier();
+    }
 
 }
 decorate(Commande, {
