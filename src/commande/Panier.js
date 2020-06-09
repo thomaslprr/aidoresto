@@ -188,7 +188,7 @@ const Panier = ({open, handleClose, modifNotif, idResto}) => {
     };
 
     const InfoProduit = ({produit}) =>{
-        if (produit.type && produit.type === "menu"){
+        if (produit.categorie && produit.categorie === "menu"){
 
             let ingredientsString = "";
             let ingredients = [];

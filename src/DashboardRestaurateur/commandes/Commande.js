@@ -39,7 +39,8 @@ const Commande = ({id}) => {
                             prixTotal: donnee.prixTotal,
                             etat: donnee.etat || '',
                             numTable: donnee.numTable || '',
-                            liste: donnee.listeItems
+                            liste: donnee.listeItems,
+                            categorie: donnee.categorie,
                         };
 
                         setListeCommande(listeCommande => listeCommande.concat(commande));

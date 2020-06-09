@@ -115,7 +115,7 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
             entree: getValue("entree"),
             plat: getValue("plat"),
             dessert: getValue("dessert"),
-            boissons: getValue("boisson")
+            boisson: getValue("boisson")
         };
 
         Commande.ajouterUnMenu(menuCommande);

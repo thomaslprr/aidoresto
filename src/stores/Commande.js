@@ -82,7 +82,7 @@ class Commande {
         if (!estPresent){
             let item = element;
             item.quantite = 1;
-            item.type = "aLaCarte";
+            item.categorie = "aLaCarte";
             this.commandes.push(item);
         }
 
@@ -102,7 +102,7 @@ class Commande {
         if (!estPresent){
             let item = menu;
             item.quantite = 1;
-            item.type = "menu";
+            item.categorie = "menu";
             this.commandes.push(item);
         }
 

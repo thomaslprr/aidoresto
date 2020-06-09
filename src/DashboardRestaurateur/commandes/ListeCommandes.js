@@ -133,7 +133,26 @@ function Row({laCom, id}) {
 
         return heure;
 
-    }
+    };
+
+    const GetInfoMenu = (item) =>{
+
+        console.log(item.item);
+
+        if (item.item.categorie && item.item.categorie === "menu"){
+            return (
+                <Typography variant="subtitle2" color="textSecondary">
+                    test ingredients
+                </Typography>
+            );
+        }else{
+            return(
+              <>
+              </>
+            );
+        }
+    };
+
 
     return (
         <>
@@ -170,7 +189,10 @@ function Row({laCom, id}) {
                                     {laCom.liste.map((item) => (
                                         <TableRow key={item.id}>
                                             <TableCell component="th" scope="row" align="center">
-                                                {item.nom}
+                                                <Typography variant="body1">
+                                                    {item.nom}
+                                                </Typography>
+                                                <GetInfoMenu item={item}/>
                                             </TableCell>
                                             <TableCell align="center">{item.quantite}</TableCell>
                                             <TableCell align="center">
