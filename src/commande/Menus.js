@@ -3,6 +3,7 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import {makeStyles} from "@material-ui/core/styles";
 import MenuCard from "./MenuCard";
+import PageChoixMenu from "./PageChoixMenu";
 
 const useStyles = makeStyles({
     liste: {
@@ -14,7 +15,21 @@ export default function Menus({listeMenus}) {
 
     const classes = useStyles();
 
-    var GetContent = () => {
+    //creation du menu
+    const [openAjout, setOpenAjout] = React.useState(false);
+    const [menuChoisit, setMenuChoisit] = React.useState({});
+
+    const ouvrirPageAjout = (menu) => {
+        setMenuChoisit(menu);
+        setOpenAjout(true);
+    };
+
+    const fermerPageAjout = () => {
+        setMenuChoisit({});
+        setOpenAjout(false);
+    };
+
+    const GetContent = () => {
         if (listeMenus === null || listeMenus.length === 0){
             return (
               <Typography variant="h5">
@@ -30,10 +45,16 @@ export default function Menus({listeMenus}) {
                           <Grid item xs key={menu.id}>
                               <MenuCard
                                   menu={menu}
+                                  ouvrirChoix={ouvrirPageAjout}
                               />
                           </Grid>
                       )}
                   </Grid>
+                  <PageChoixMenu
+                      open={openAjout}
+                      handleClose={fermerPageAjout}
+                      menu={menuChoisit}
+                  />
               </>
             );
         }

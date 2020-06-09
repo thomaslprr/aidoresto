@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function MenuCard({menu}) {
+export default function MenuCard({menu, ouvrirChoix}) {
 
     const classes = useStyles();
 
@@ -59,7 +59,7 @@ export default function MenuCard({menu}) {
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Button size="small" color="primary" onClick={()=>{}}>Ajouter</Button>
+                    <Button size="small" color="primary" onClick={() => ouvrirChoix(menu)}>Ajouter</Button>
                 </CardActions>
             </Card>
 
