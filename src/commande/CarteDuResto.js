@@ -16,6 +16,7 @@ import Fab from "@material-ui/core/Fab";
 import blue from "@material-ui/core/colors/blue";
 import Panier from "./Panier";
 import MuiAlert from '@material-ui/lab/Alert';
+import Menus from "./Menus";
 
 
 const useStyle = makeStyles(theme =>({
@@ -284,7 +285,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <Box>
-                        Bientôt disponible
+                        <Menus listeMenus={dataMenu}/>
                     </Box>
                 </TabPanel>
 
