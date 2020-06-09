@@ -77,15 +77,45 @@ const PageChoixMenu = ({menu, handleClose, open}) => {
         return false;
     };
 
+    const getValue = (type) =>{
+        let rep;
+        if (type === "entree" && selectedEntree !== ""){
+            for (let i = 0; i < menu.entrees.length; i++){
+                if (selectedEntree === menu.entrees[i].nom+menu.entrees[i].desc+menu.entrees[i].quantite){
+                    rep = menu.entrees[i];
+                }
+            }
+        }if (type === "plat" && selectedEntree !== ""){
+            for (let i = 0; i < menu.plats.length; i++){
+                if (selectedPlat === menu.plats[i].nom+menu.plats[i].desc+menu.plats[i].quantite){
+                    rep = menu.plats[i];
+                }
+            }
+        }if (type === "dessert" && selectedEntree !== ""){
+            for (let i = 0; i < menu.desserts.length; i++){
+                if (selectedDessert === menu.desserts[i].nom+menu.desserts[i].desc+menu.desserts[i].quantite){
+                    rep = menu.desserts[i];
+                }
+            }
+        }if (type === "boisson" && selectedEntree !== ""){
+            for (let i = 0; i < menu.boissons.length; i++){
+                if (selectedBoisson === menu.boissons[i].nom+menu.boissons[i].desc+menu.boissons[i].quantite){
+                    rep = menu.boissons[i];
+                }
+            }
+        }
+        return rep;
+    };
+
     const ajoutMenuPanier = () =>{
         let menuCommande = {
             nom: menu.nom,
             id: menu.id+selectedEntree+selectedPlat+selectedDessert+selectedBoisson,
             prix: menu.prix,
-            entree: selectedEntree,
-            plat: selectedPlat,
-            dessert: selectedDessert,
-            boissons: selectedBoisson
+            entree: getValue("entree"),
+            plat: getValue("plat"),
+            dessert: getValue("dessert"),
+            boissons: getValue("boisson")
         };
 
         Commande.ajouterUnMenu(menuCommande);

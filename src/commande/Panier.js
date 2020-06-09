@@ -187,6 +187,50 @@ const Panier = ({open, handleClose, modifNotif, idResto}) => {
         }
     };
 
+    const InfoProduit = ({produit}) =>{
+        if (produit.type && produit.type === "menu"){
+
+            let ingredientsString = "";
+            let ingredients = [];
+            if (produit.entree && produit.entree !== {}){
+                ingredients.push(produit.entree);
+            }
+            if (produit.plat && produit.plat !== {}){
+                ingredients.push(produit.plat);
+            }
+            if (produit.dessert && produit.dessert !== {}){
+                ingredients.push(produit.dessert);
+            }
+            if (produit.boisson && produit.boisson !== {}){
+                ingredients.push(produit.boisson);
+            }
+
+            for(let i = 0; i < ingredients.length; i++){
+                ingredientsString += ingredients[i].nom;
+                if (i !== ingredients.length-1){
+                    ingredientsString += " - ";
+                }
+            }
+
+            return (
+                <>
+                    <Typography align="center">
+                        {produit.nom}
+                    </Typography>
+                    <Typography align="center" variant="subtitle2" color={"textSecondary"}>
+                        {ingredientsString}
+                    </Typography>
+                </>
+            );
+        }else {
+            return (
+                <Typography align="center">
+                    {produit.nom}
+                </Typography>
+            );
+        }
+    };
+
     const ListElements = () => {
 
         return (
@@ -197,9 +241,7 @@ const Panier = ({open, handleClose, modifNotif, idResto}) => {
 
                         <Grid container spacing={1}>
                             <Grid item xs={6}>
-                                <Typography align="center">
-                                    {item.nom}
-                                </Typography>
+                                <InfoProduit produit={item}/>
                             </Grid>
                             <Grid item xs={4} alignItems="center">
 
