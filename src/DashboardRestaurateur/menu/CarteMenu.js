@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import PopUpConsulterMenu from "./Consulter/PopUpConsulterMenu";
+import firebase from "firebase";
 
 
 const useStyles = makeStyles({
@@ -27,7 +28,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function CarteMenu({menu}) {
+export default function CarteMenu({menu, idResto}) {
 
     const classes = useStyles();
 
@@ -38,7 +39,11 @@ export default function CarteMenu({menu}) {
     };
 
     const suppressionMenu = () => {
-
+        firebase.firestore().collection("restaurant").doc(idResto).collection("menus").doc(menu.id).delete().then(
+            () => {console.log('Success deleting menu');}
+        ).catch(function(error){
+            console.log(error);
+        });
     };
 
     return (

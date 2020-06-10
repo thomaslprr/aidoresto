@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import * as firebase from "firebase";
+import firebase from "firebase";
 import Grid from "@material-ui/core/Grid";
 import CarteMenu from "./CarteMenu";
 import {makeStyles} from "@material-ui/core/styles";
@@ -78,6 +78,7 @@ const ListeMenu = ({idResto}) => {
                         <Grid item xs key={menu.id}>
                             <CarteMenu
                                 menu={menu}
+                                idResto={idResto}
                             />
                         </Grid>
                     )}
