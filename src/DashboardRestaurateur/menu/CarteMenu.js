@@ -38,6 +38,7 @@ export default function CarteMenu({menu, idResto}) {
       setOpenAfficher(false);
     };
 
+    //TODO Ajouter pop up confirmation avant de supp
     const suppressionMenu = () => {
         firebase.firestore().collection("restaurant").doc(idResto).collection("menus").doc(menu.id).delete().then(
             () => {console.log('Success deleting menu');}
