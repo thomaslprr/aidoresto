@@ -37,6 +37,10 @@ export default function CarteMenu({menu}) {
       setOpenAfficher(false);
     };
 
+    const suppressionMenu = () => {
+
+    };
+
     return (
 
         <>
@@ -60,7 +64,7 @@ export default function CarteMenu({menu}) {
             </CardContent>
             <CardActions>
                 <Button size="small" onClick={()=>{}}>Modifier</Button>
-                <Button size="small" onClick={()=>{}}>Supprimer</Button>
+                <Button size="small" onClick={suppressionMenu}>Supprimer</Button>
 
             </CardActions>
         </Card>
