@@ -13,6 +13,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const PageMenu = ({idResto}) => {
 
     const [openAjoutMenu, setOpenAjoutMenu] = React.useState(false);
+    const [selectedMenu, setSelectedMenu] = React.useState(null);
 
     const handleClickOpenAjoutMenu = () => {
         setOpenAjoutMenu(true);
@@ -20,7 +21,13 @@ const PageMenu = ({idResto}) => {
 
     const handleCloseAjoutMenu = () => {
         setOpenAjoutMenu(false);
+        setSelectedMenu(null);
     };
+
+    const modifierMenu = (menu) =>{
+        setSelectedMenu(menu);
+        setOpenAjoutMenu(true);
+    }
 
     return(
         <>
@@ -30,12 +37,12 @@ const PageMenu = ({idResto}) => {
 
             <br/>
 
-            <ListeMenu idResto={idResto}/>
+            <ListeMenu idResto={idResto} modifierMenu={modifierMenu}/>
 
 
             <Dialog fullScreen open={openAjoutMenu} onClose={handleCloseAjoutMenu} TransitionComponent={Transition}>
 
-                <PageAjoutMenu handleClose={handleCloseAjoutMenu} idResto={idResto}/>
+                <PageAjoutMenu handleClose={handleCloseAjoutMenu} idResto={idResto} menu={selectedMenu}/>
 
             </Dialog>
         </>

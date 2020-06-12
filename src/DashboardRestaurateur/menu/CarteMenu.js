@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function CarteMenu({menu, idResto}) {
+export default function CarteMenu({menu, idResto, modifierMenu}) {
 
     const classes = useStyles();
 
@@ -70,7 +70,7 @@ export default function CarteMenu({menu, idResto}) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <Button size="small" onClick={()=>{}}>Modifier</Button>
+                <Button size="small" onClick={() => modifierMenu(menu)}>Modifier</Button>
                 <Button size="small" onClick={suppressionMenu}>Supprimer</Button>
 
             </CardActions>

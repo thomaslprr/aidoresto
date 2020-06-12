@@ -11,7 +11,7 @@ const useStyles = makeStyles({
 });
 
 
-const ListeMenu = ({idResto}) => {
+const ListeMenu = ({idResto, modifierMenu}) => {
 
     const [listeMenus,setListeMenus] = useState([]);
     const [aucunMenu,setAucunMenu] = useState(true);
@@ -79,6 +79,7 @@ const ListeMenu = ({idResto}) => {
                             <CarteMenu
                                 menu={menu}
                                 idResto={idResto}
+                                modifierMenu={modifierMenu}
                             />
                         </Grid>
                     )}
