@@ -126,17 +126,29 @@ export default function PageAjoutMenu({handleClose, idResto, menu}) {
                 nom: nomMenu,
             }
 
-            refCollection.add(dataMenu).then(function() {
-                console.log("Document successfully written!");
-                //TODO Notif succes, bouton envoie bloquer, attendre 3s et fermer la pop up
+            if (menu){
+                refCollection.doc(menu.id).update(dataMenu).then(function() {
+                    console.log("Modifier avec succes");
+                    //TODO Notif succes, bouton envoie bloquer, attendre 3s et fermer la pop up
 
-                //Provisoire
-                handleClose();
-            })
-                .catch(function(error) {
+                    //Provisoire
+                    handleClose();
+                }).catch(function(error) {
                     console.error("Error writing document: ", error);
                     //TODO notif erreur reessayer de 3s rester sur la pop up
                 });
+            }else {
+                refCollection.add(dataMenu).then(function() {
+                    console.log("Inserer avec succes");
+                    //TODO Notif succes, bouton envoie bloquer, attendre 3s et fermer la pop up
+
+                    //Provisoire
+                    handleClose();
+                }).catch(function(error) {
+                    console.error("Error writing document: ", error);
+                    //TODO notif erreur reessayer de 3s rester sur la pop up
+                });
+            }
 
         }
     };
