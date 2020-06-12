@@ -103,8 +103,8 @@ export default function PageAjoutMenu({handleClose, idResto, menu}) {
         boissons: menu ? menu.boissons ? menu.boissons.length > 0 :false : false,
     });
 
-    const [nomMenu, setNomMenu] = React.useState("");
-    const [prixMenu, setPrixMenu] = React.useState(0);
+    const [nomMenu, setNomMenu] = React.useState(menu ? menu.nom ?? "" : "");
+    const [prixMenu, setPrixMenu] = React.useState(menu ? menu.prix ?? "" : "");
 
 
     const ajouterMenu = () =>{
@@ -154,7 +154,7 @@ export default function PageAjoutMenu({handleClose, idResto, menu}) {
                         <CloseIcon />
                     </IconButton>
                     <Typography variant="h6" className={classes.title}>
-                        Ajout d'un menu
+                        { menu ? "Modification du menu" : "Ajout d'un menu"}
                     </Typography>
                 </Toolbar>
             </AppBar>
