@@ -97,10 +97,10 @@ export default function PageAjoutMenu({handleClose, idResto, menu}) {
     const classes = useStyles();
 
     const [state, setState] = React.useState({
-        entrees: false,
-        plats: false,
-        desserts: false,
-        boissons: false,
+        entrees: menu ? menu.entrees ? menu.entrees.length > 0 :false : false,
+        plats: menu ? menu.plats ? menu.plats.length > 0 :false : false,
+        desserts: menu ? menu.desserts ? menu.desserts.length > 0 :false : false,
+        boissons: menu ? menu.boissons ? menu.boissons.length > 0 :false : false,
     });
 
     const [nomMenu, setNomMenu] = React.useState("");
