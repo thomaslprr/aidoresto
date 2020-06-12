@@ -16,7 +16,6 @@ import GreenButton from "../../utils/ColoredButtons/GreenButton";
 import SaveIcon from '@material-ui/icons/Save';
 import firebase from "firebase";
 import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
 import Paper from "@material-ui/core/Paper";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,12 +56,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function PageAjoutMenu({handleClose, idResto}) {
+export default function PageAjoutMenu({handleClose, idResto, menu}) {
 
-    const [listeEntrees, setListeEntrees] = React.useState([]);
-    const [listePlats, setListePlats] = React.useState([]);
-    const [listeDesserts, setListeDesserts] = React.useState([]);
-    const [listeBoissons, setListeBoissons] = React.useState([]);
+    const [listeEntrees, setListeEntrees] = React.useState(menu ? menu.entrees ? menu.entrees : [] : []);
+    const [listePlats, setListePlats] = React.useState(menu ? menu.plats ? menu.plats : [] : []);
+    const [listeDesserts, setListeDesserts] = React.useState(menu ? menu.desserts ? menu.desserts : [] : []);
+    const [listeBoissons, setListeBoissons] = React.useState(menu ? menu.boissons ? menu.boissons : [] : []);
 
 
     const getListElements = (type) => {
