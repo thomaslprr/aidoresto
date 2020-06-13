@@ -197,55 +197,67 @@ function SideBar(props) {
     const history = useHistory();
 
     function changerOnglet(id,clickVal){
+        if(mobileOpen){
+            handleDrawerToggle();
+        }
         history.push('/dashboard/'+id+'/'+clickVal);
     }
 
+    const selection = (number)=> {
+
+        if(props.type==number){
+            return true;
+        }
+
+            return false;
+    };
+
     const drawer = (
         <div>
-            <div className={classes.toolbar} />
+            <div className={classes.toolbar}/>
             <List>
-                <ListItem button onClick={()=> changerOnglet(props.id,"commandes") }>
+                <ListItem button onClick={()=> changerOnglet(props.id,"commandes") } selected={selection(1)}>
                     <ListItemIcon><SendIcon color={"secondary"}/></ListItemIcon>
                     <ListItemText primary="Mes commandes" />
                 </ListItem>
             </List>
             <Divider />
             <List>
-                    <ListItem button onClick={()=> changerOnglet(props.id,"boissons") }>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"boissons")} selected={selection(2)}>
                     <ListItemIcon><LocalBarIcon/></ListItemIcon>
                     <ListItemText primary="Boissons" />
                     </ListItem>
 
-                    <ListItem button onClick={()=> changerOnglet(props.id,"entrees") }>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"entrees") } selected={selection(3)}>
                     <ListItemIcon><SpaIcon/></ListItemIcon>
                     <ListItemText primary="Entrées" />
                     </ListItem>
 
-                    <ListItem button onClick={()=> changerOnglet(props.id,"repas") }>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"repas") } selected={selection(4)}>
                     <ListItemIcon><FastfoodIcon/></ListItemIcon>
                     <ListItemText primary="Plats" />
                     </ListItem >
 
-                    <ListItem button onClick={()=> changerOnglet(props.id,"dessert") }>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"dessert") } selected={selection(5)}>
                     <ListItemIcon><CakeIcon/></ListItemIcon>
                     <ListItemText primary="Desserts" />
                     </ListItem>
 
-                    <ListItem button onClick={()=> changerOnglet(props.id,"menus") }>
+                    <ListItem button onClick={()=> changerOnglet(props.id,"menus") } selected={selection(6)}>
                     <ListItemIcon><MenuBookIcon/></ListItemIcon>
                     <ListItemText primary="Menus" />
                     </ListItem>
             </List>
             <Divider />
             <List>
-                <ListItem button onClick={()=> changerOnglet(props.id,"info") }>
+                <ListItem button onClick={()=> changerOnglet(props.id,"info") } selected={selection(7)}>
                 <ListItemIcon><InfoIcon/></ListItemIcon>
                 <ListItemText primary="Informations" />
             </ListItem>
             </List>
             <Divider />
             <List>
-                <ListItem button onClick={()=> changerOnglet(props.id,"deconnexion") }>
+                <ListItem button onClick={()=> changerOnglet(props.id,"deconnexion") } selected={selection(8)}>
                     <ListItemIcon><ExitToAppIcon/></ListItemIcon>
                     <ListItemText primary="Déconnexion" />
                 </ListItem>
