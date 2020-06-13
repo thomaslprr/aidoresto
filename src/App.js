@@ -28,6 +28,8 @@ function App() {
                   <Route exact path="/dashboard/:id/dessert" render={props => <Dashboard {...props} type={5} />} />
                   <Route exact path="/dashboard/:id/menus" render={props => <Dashboard {...props} type={6} />} />
                   <Route exact path="/dashboard/:id/info" render={props => <Dashboard {...props} type={7} />} />
+                  <Route exact path="/dashboard/:id/deconnexion" render={props => <Dashboard {...props} type={8} />} />
+
 
               </Switch>
           </BrowserRouter>

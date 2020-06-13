@@ -100,23 +100,6 @@ const Information = ({id}) => {
 
     const [afficherQrCode, setAfficherQrCode] = useState(false);
 
-    const downloadQR = () => {
-        const canvas = document.getElementById(id);
-        const pngUrl = canvas
-            .toDataURL("image/png")
-            .replace("image/png", "image/octet-stream");
-
-        let downloadLink = document.createElement(<PDFDownloadLink document={PDFResto(restaurantInfo.nom,adresse,pngUrl,restaurantInfo.code_resto)} fileName="somename.pdf">
-            {({ blob, url, loading, error }) => {
-                return ("Clique");
-            }}
-        </PDFDownloadLink>);
-        //downloadLink.href = pngUrl;
-        //downloadLink.download = "QR Code "+restaurantInfo.nom+".png";
-        //document.body.appendChild(downloadLink);
-        //downloadLink.click();
-        //document.body.removeChild(downloadLink);
-    };
 
     const afficherBoutton= () => {
         if(afficherQrCode){

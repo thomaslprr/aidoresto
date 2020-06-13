@@ -22,6 +22,8 @@ import CakeIcon from '@material-ui/icons/Cake';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import InfoIcon from '@material-ui/icons/Info';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 import SendIcon from '@material-ui/icons/Send';
 import { useHistory } from "react-router-dom";
 import Information from "./info/Information";
@@ -33,6 +35,7 @@ import ListeRepas from "./Repas/ListeRepas";
 import Commande from "./commandes/Commande";
 import {Copyright} from "../PiedDePage/PiedPage";
 import PageMenu from "./menu/PageMenu";
+import PopUpDeconnexion from "./PopupDeconnexion";
 
 const drawerWidth = 240;
 
@@ -96,6 +99,9 @@ function texteAAfficher(id){
             break;
         case 7:
             txt+="Informations";
+            break;
+        case 8:
+            txt+="Déconnexion";
             break;
         case undefined:
             return "";
@@ -170,6 +176,9 @@ function SideBar(props) {
             case 7:
                 return <Information id={props.id}/>;
                 break;
+            case 8:
+                return <PopUpDeconnexion id={props.id} />;
+                break;
         }
     }
 
@@ -233,6 +242,13 @@ function SideBar(props) {
                 <ListItemIcon><InfoIcon/></ListItemIcon>
                 <ListItemText primary="Informations" />
             </ListItem>
+            </List>
+            <Divider />
+            <List>
+                <ListItem button onClick={()=> changerOnglet(props.id,"deconnexion") }>
+                    <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+                    <ListItemText primary="Déconnexion" />
+                </ListItem>
             </List>
         </div>
     );
