@@ -2,12 +2,14 @@ import {computed, decorate, observable} from 'mobx';
 
 class Commande {
 
+    //Panier d'article
     commandes = observable.box([]);
     idResto = "";
 
 
     constructor() {
 
+        //On récupère les éléments du panier si cela fait moins de 1h et le resto et le meme
         if ('dateModif' in localStorage) {
 
             if(Date.now() < parseInt(localStorage.getItem('dateModif'), 10)) {
@@ -32,6 +34,7 @@ class Commande {
 
     }
 
+    //Sauvegarde dans le local storage
     sauvegardePanier(){
         localStorage.setItem('commande', JSON.stringify(this.commandes));
         localStorage.setItem('dateModif', ''+(Date.now()+(3600*1000)) );
