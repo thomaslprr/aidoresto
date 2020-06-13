@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function ModifierRepas({idresto,idrepas,nm,pri,description,ingredients,cat,changerEtat}){
+export default function ModifierRepas({idresto,idrepas,nm,pri,description,ingredients,cat,changerEtat,ortographe}){
 
 
 
@@ -85,9 +85,23 @@ export default function ModifierRepas({idresto,idrepas,nm,pri,description,ingred
 
     function chargementBoutonComposant() {
         if(etatAjout==0){
-            return (<Button onClick={handleModifierBoisson} color="primary">
-                Modifier
-            </Button>)
+
+            if(nom==""){
+                return (<Button disabled={true} color="secondary">
+                    Saisissez un nom
+                </Button>)
+            }
+            if(prix==""){
+                return (<Button disabled={true} color="secondary">
+                    Saisissez un prix
+                </Button>)
+            }else {
+
+
+                return (<Button onClick={handleModifierBoisson} color="primary">
+                    Modifier
+                </Button>)
+            }
 
         }else if(etatAjout==1){
             return (<Button
@@ -128,14 +142,11 @@ export default function ModifierRepas({idresto,idrepas,nm,pri,description,ingred
     return (
         <div>
             <Dialog open={true} onClose={()=>changerEtat(0)}  aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Repas</DialogTitle>
+                <DialogTitle id="form-dialog-title">{ortographe[0]}</DialogTitle>
                 <DialogContent>
-                    <DialogContentText>
-                        Modification de repas.
-                    </DialogContentText>
                     <Grid container spacing={2}>
 
-                        <Grid item xs={9}>
+                        <Grid item xs={12}>
 
                             <TextField
                                 required
@@ -144,14 +155,14 @@ export default function ModifierRepas({idresto,idrepas,nm,pri,description,ingred
                                 margin="dense"
                                 name="nom"
                                 id="nom"
-                                label="Nom du repas"
+                                label={ortographe[1]}
                                 type="nom"
                                 fullWidth
                                 value={nom}
                                 onChange={(e) => setNom(e.target.value)}
                             />
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={12}>
                             <TextField
                                 required
                                 label="Prix"
@@ -174,7 +185,6 @@ export default function ModifierRepas({idresto,idrepas,nm,pri,description,ingred
                             <TextField
                                 required
                                 variant="outlined"
-                                autoFocus
                                 margin="dense"
                                 name="description"
                                 id="description"

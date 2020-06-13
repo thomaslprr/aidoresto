@@ -107,9 +107,29 @@ export default function Repas({id,categoriee,orthographe}){
 
     function chargementBoutonComposant() {
         if(etatAjout==0){
-            return (<Button onClick={handleAjouterBoisson} color="primary">
-                Ajouter
-            </Button>)
+
+            if(nom==""){
+                return (<Button disabled={true} color="secondary">
+                    Saisissez un nom
+                </Button>)
+            }
+            if(prix==""){
+                return (<Button disabled={true} color="secondary">
+                    Saisissez un prix
+                </Button>)
+            }
+
+            else{
+                return (<Button onClick={handleAjouterBoisson} color="primary">
+                    Ajouter
+                </Button>)
+            }
+
+
+
+
+
+
 
         }else if(etatAjout==1){
             return (<Button
@@ -151,14 +171,14 @@ export default function Repas({id,categoriee,orthographe}){
                 Ajouter {orthographe[3]} {orthographe[0]}
             </Button>
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">{categoriee}</DialogTitle>
+                <DialogTitle id="form-dialog-title">{orthographe[4]}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         Ajouter {orthographe[3]} {orthographe[0]} à votre catalogue afin de {orthographe[1]} proposer à vos clients.
                     </DialogContentText>
                     <Grid container spacing={2}>
 
-                        <Grid item xs={9}>
+                        <Grid item xs={12}>
 
                             <TextField
                                 required
@@ -167,14 +187,14 @@ export default function Repas({id,categoriee,orthographe}){
                                 margin="dense"
                                 name="nom"
                                 id="nom"
-                                label="Nom du repas"
+                                label={"Nom "+orthographe[5]}
                                 type="nom"
                                 fullWidth
                                 value={nom}
                                 onChange={(e) => setNom(e.target.value)}
                             />
                         </Grid>
-                        <Grid item xs={3}>
+                        <Grid item xs={12}>
                             <TextField
                                 required
                                 label="Prix"
@@ -197,7 +217,6 @@ export default function Repas({id,categoriee,orthographe}){
                             <TextField
                                 required
                                 variant="outlined"
-                                autoFocus
                                 margin="dense"
                                 name="description"
                                 id="description"

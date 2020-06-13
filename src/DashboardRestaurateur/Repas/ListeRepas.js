@@ -3,7 +3,7 @@ import * as firebase from "firebase";
 import Grid from "@material-ui/core/Grid";
 import SimpleCardRepas from "./CarteRepas";
 
-const ListeRepas = ({id,categorie,texteAucuneQuantite,texteUnOuUne}) => {
+const ListeRepas = ({id,categorie,texteAucuneQuantite,texteUnOuUne,orto}) => {
 
     const [listeRepas,setListeRepas] = useState([]);
     const [aucunRepas,setAucunRepas] = useState(true);
@@ -64,6 +64,7 @@ const ListeRepas = ({id,categorie,texteAucuneQuantite,texteUnOuUne}) => {
                                 categorie={categorie}
                                 description={description}
                                 ingredients={ingredients}
+                                orto={orto}
                             />
                         </Grid>
                     )}

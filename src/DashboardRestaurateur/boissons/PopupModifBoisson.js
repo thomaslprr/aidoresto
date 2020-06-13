@@ -90,9 +90,27 @@ export default function ModifierBoisson({idresto,idboisson,nm,pri,vol,ann,cat,ch
 
     function chargementBoutonComposant() {
         if(etatAjout==0){
-            return (<Button onClick={handleModifierBoisson} color="primary">
-                Modifier
-            </Button>)
+            if(categorie==""){
+                return (<Button disabled={true} color="secondary">
+                    Choisissez une catégorie
+                </Button>)
+            }
+            if(nom==""){
+                return (<Button disabled={true} color="secondary">
+                    Saisissez un nom
+                </Button>)
+            }
+            if(prix==""){
+                return (<Button disabled={true} color="secondary">
+                    Saisissez un prix
+                </Button>)
+            }
+            else{
+                return (<Button onClick={handleModifierBoisson} color="primary">
+                    Ajouter
+                </Button>)
+            }
+
 
         }else if(etatAjout==1){
             return (<Button

@@ -116,6 +116,7 @@ function SideBar(props) {
 
     function recupererModule(id){
         let orto;
+        let orto2;
         switch(id){
             case 0:
                 return <><Typography paragraph>
@@ -135,36 +136,44 @@ function SideBar(props) {
                 return <><Boisson id={props.id}/><br/><ListeBoissons id={props.id}/></>;
                 break;
             case 3:
-                 orto = ["entrée", "la", "ajoutée","une"];
+                 orto = ["entrée", "la", "ajoutée","une","Entrée","de l'entrée"];
+                 orto2 = ["Modification de l'entrée", "Nom de l'entrée"];
                 return <><Repas id={props.id} categoriee={"Entrée"} orthographe={orto}/><br/>
                         <ListeRepas
                             id={props.id}
                             categorie="Entrée"
                             texteAucuneQuantite={"aucune entrée"}
                             texteUnOuUne={"une"}
+                            orto={orto2}
                         />
 
                         </>;
                 break;
             case 4:
-                 orto = ["repas", "le", "ajouté","un"];
+                 orto = ["repas", "le", "ajouté","un","Repas","du repas"];
+                orto2 = ["Modification du repas", "Nom du repas"];
+
                 return <><Repas id={props.id} categoriee={"Déjeuné"} orthographe={orto}/><br/>
                         <ListeRepas
                             id={props.id}
                             categorie="Déjeuné"
                             texteAucuneQuantite={"aucun repas"}
                             texteUnOuUne={"un"}
+                            orto={orto2}
                         />
                         </>;
                 break;
             case 5:
-                orto = ["dessert", "le", "ajouté","un"];
+                orto = ["dessert", "le", "ajouté","un","Dessert","du dessert"];
+                orto2 = ["Modification du dessert", "Nom du dessert"];
+
                 return <><Repas id={props.id} categoriee={"Dessert"} orthographe={orto}/><br/>
                         <ListeRepas
                             id={props.id}
                             categorie="Dessert"
                             texteAucuneQuantite={"aucun dessert"}
                             texteUnOuUne={"un"}
+                            orto={orto2}
                         />
                         </>;
                 break;

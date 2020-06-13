@@ -115,9 +115,27 @@ export default function Boisson({id}){
 
     function chargementBoutonComposant() {
         if(etatAjout==0){
-            return (<Button onClick={handleAjouterBoisson} color="primary">
-                Ajouter
-            </Button>)
+
+            if(categorie==""){
+                return (<Button disabled={true} color="secondary">
+                    Choisissez une catégorie
+                </Button>)
+            }
+            if(nom==""){
+                return (<Button disabled={true} color="secondary">
+                    Saisissez un nom
+                </Button>)
+            }
+            if(prix==""){
+                return (<Button disabled={true} color="secondary">
+                    Saisissez un prix
+                </Button>)
+            }
+            else{
+                return (<Button onClick={handleAjouterBoisson} color="primary">
+                    Ajouter
+                </Button>)
+            }
 
         }else if(etatAjout==1){
             return (<Button

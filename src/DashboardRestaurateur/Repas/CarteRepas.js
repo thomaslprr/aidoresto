@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     },
 });
 
-export default function SimpleCardRepas({nom,prix,ingredients,categorie,description,id,idresto}) {
+export default function SimpleCardRepas({nom,prix,ingredients,categorie,description,id,idresto,orto}) {
     const classes = useStyles();
     const [nm,setNm] = useState(nom);
     const [pri,setPri] = useState(prix);
@@ -53,7 +53,7 @@ export default function SimpleCardRepas({nom,prix,ingredients,categorie,descript
 
     const modaleAAfficher = ()=> {
         if(showModal==1){
-            return <ModifierRepas idresto={idresto} idrepas={id} ingredients={ingre} cat={categorie} pri={prix} description={desc} nm={nom} changerEtat={setShowModal}/>;
+            return <ModifierRepas idresto={idresto} idrepas={id} ingredients={ingre} cat={categorie} pri={prix} description={desc} nm={nom} ortographe={orto} changerEtat={setShowModal}/>;
         }else{
             return <></>
         }
