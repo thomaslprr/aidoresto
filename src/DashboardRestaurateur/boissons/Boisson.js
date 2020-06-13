@@ -152,7 +152,7 @@ export default function Boisson({id}){
 
     function champDate (){
         if(categorie=="Alcool"){
-            return <Grid item xs={4}>
+            return <Grid item xs={12}>
                 <TextField
                     autoComplete="fname"
                     name="annee"
@@ -184,8 +184,8 @@ export default function Boisson({id}){
                             Ajouter une boisson à votre catalogue afin de la proposer à vos clients.
                         </DialogContentText>
                         <Grid container spacing={2}>
-                            <Grid item xs={4}>
-                                <FormControl className={classes.formControl}>
+                            <Grid item xs={12}>
+                                <FormControl className={classes.formControl} required={true}>
                                     <InputLabel id="categorie">Catégorie</InputLabel>
                                     <Select
                                         labelId="categorie_"
@@ -193,6 +193,7 @@ export default function Boisson({id}){
                                         name="categorie"
                                         value={categorie}
                                         onChange={handleChange}
+                                        style={{width:65+'vw'}}
                                     >
                                         <MenuItem value="Boisson fraîche">Boisson fraîche</MenuItem>
                                         <MenuItem value="Boisson chaude">Boisson chaude</MenuItem>
@@ -202,7 +203,7 @@ export default function Boisson({id}){
                                     </Select>
                                 </FormControl>
                             </Grid>
-                        <Grid item xs={8}>
+                        <Grid item xs={12}>
 
                         <TextField
                             required
@@ -219,7 +220,7 @@ export default function Boisson({id}){
                         />
                         </Grid>
 
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <TextField
                                     required
                                     label="Volume"
@@ -235,7 +236,7 @@ export default function Boisson({id}){
                                     onChange={(e) => setVolume(e.target.value)}
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <TextField
                                     required
                                     label="Prix"
