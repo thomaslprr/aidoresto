@@ -127,7 +127,7 @@ export default function ModifierBoisson({idresto,idboisson,nm,pri,vol,ann,cat,ch
 
     function champDate (){
         if(categorie=="Alcool"){
-            return <Grid item xs={4}>
+            return <Grid item xs={12}>
                 <TextField
                     autoComplete="fname"
                     name="annee"
@@ -155,7 +155,7 @@ export default function ModifierBoisson({idresto,idboisson,nm,pri,vol,ann,cat,ch
                     <DialogTitle id="form-dialog-title">Modifier une boisson</DialogTitle>
                     <DialogContent>
                         <Grid container spacing={2}>
-                            <Grid item xs={4}>
+                            <Grid item xs={12}>
                                 <FormControl className={classes.formControl}>
                                     <InputLabel id="categorie">Catégorie</InputLabel>
                                     <Select
@@ -164,6 +164,7 @@ export default function ModifierBoisson({idresto,idboisson,nm,pri,vol,ann,cat,ch
                                         name="categorie"
                                         value={categorie}
                                         onChange={handleChange}
+                                        style={{width:65+'vw'}}
                                     >
                                         <MenuItem value="Boisson fraîche">Boisson fraîche</MenuItem>
                                         <MenuItem value="Boisson chaude">Boisson chaude</MenuItem>
@@ -173,7 +174,7 @@ export default function ModifierBoisson({idresto,idboisson,nm,pri,vol,ann,cat,ch
                                     </Select>
                                 </FormControl>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={12}>
 
                                 <TextField
                                     required
@@ -190,7 +191,7 @@ export default function ModifierBoisson({idresto,idboisson,nm,pri,vol,ann,cat,ch
                                 />
                             </Grid>
 
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <TextField
                                     required
                                     label="Volume"
@@ -206,7 +207,7 @@ export default function ModifierBoisson({idresto,idboisson,nm,pri,vol,ann,cat,ch
                                     onChange={(e) => setVolume(e.target.value)}
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={6}>
                                 <TextField
                                     required
                                     label="Prix"
