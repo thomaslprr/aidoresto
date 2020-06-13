@@ -13,7 +13,9 @@ const Commande = ({id}) => {
 
     const [loading, setLoading] = useState(true);
 
+
     useEffect(()=>{
+
 
         firebase.firestore().collection("restaurant").doc(id).collection("commandes").where("etat", "in", ['attente', 'en cours']).orderBy("date", "desc")
             .onSnapshot(function(querySnapshot) {
@@ -28,8 +30,8 @@ const Commande = ({id}) => {
                     let laDate = new Date(donnee.date.seconds * 1000);
                     let now = new Date();
 
-                    //Affichage commande de moins de 3 heures
-                    if (add_minutes(laDate, 60*3).getTime() > now.getTime()) {
+                    //Affichage commande de moins de 6 heures
+                    if (add_minutes(laDate, 60*6).getTime() > now.getTime()) {
 
                         let commande = {
                             id: doc.id,
@@ -52,14 +54,25 @@ const Commande = ({id}) => {
 
     },[]);
 
+    const commandeOuPas = ()=> {
+      if(listeCommande.length<=0){
+          return false;
+      }
+      return true;
+    };
 
     if(loading){
         return(
         <div>Chargement...</div>
         );
-    }else{
-       return  <ListeCommandes key={listeCommande} commandes={listeCommande} idResto={id}/>;
     }
+
+    if(!commandeOuPas()){
+        return <div>Aucune commande en attente !</div>
+    }
+
+    return  <ListeCommandes key={listeCommande} commandes={listeCommande} idResto={id}/>;
+
 
 };
 
