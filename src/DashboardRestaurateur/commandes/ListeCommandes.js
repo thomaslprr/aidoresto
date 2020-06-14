@@ -100,19 +100,19 @@ function Row({laCom, id}) {
 
 
 
-    }
+    };
 
     const validerCommande = () => {
         setEtatCommande("en cours");
-    }
+    };
 
     const terminerCommande = () => {
         setEtatCommande("fini");
-    }
+    };
 
     const refuserCommande = () => {
         setEtatCommande("refusé");
-    }
+    };
 
     const getTime = (date) =>{
         var heure = "";
