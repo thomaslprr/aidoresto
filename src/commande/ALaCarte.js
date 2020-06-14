@@ -90,6 +90,9 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
 
 
     const ListBoisson = () => {
+
+        let res = boissons
+            .filter(boisson => (boisson.categorie === filtreBoisson || filtreBoisson === ""));
         return (
             <>
                 <SelectCategorieBoisson
@@ -98,15 +101,7 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
 
                 /><br/><br/><br/><br/>
                 <Grid container spacing={3}>
-                {boissons
-                    .filter(function (bois) {
-                        if(filtreBoisson!=""){
-                            return bois.categorie == filtreBoisson;
-                        }else{
-                            return bois;
-                        }
-                    })
-                    .map( item => (
+                {res.map( item => (
                     <TemplateBoisson boisson={item} setCountPanier={setCountPanier}/>
                 ))}
                 </Grid>
