@@ -52,7 +52,7 @@ class Commande {
 
         this.commandes.forEach( element => total += (parseFloat(element.prix.replace(',', '.')) * element.quantite));
 
-        return total;
+        return total.toFixed(2);
     }
 
     elementsTotals(idDuResto){
