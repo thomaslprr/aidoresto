@@ -100,19 +100,19 @@ function Row({laCom, id}) {
 
 
 
-    }
+    };
 
     const validerCommande = () => {
         setEtatCommande("en cours");
-    }
+    };
 
     const terminerCommande = () => {
         setEtatCommande("fini");
-    }
+    };
 
     const refuserCommande = () => {
         setEtatCommande("refusé");
-    }
+    };
 
     const getTime = (date) =>{
         var heure = "";
@@ -139,7 +139,7 @@ function Row({laCom, id}) {
 
         console.log(item.item);
 
-        if (item.item.categorie && item.item.categorie === "menu"){
+        if (item.item.type && item.item.type === "menu"){
 
             let ingredients = [];
 

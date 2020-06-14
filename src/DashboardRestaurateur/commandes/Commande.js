@@ -42,7 +42,7 @@ const Commande = ({id}) => {
                             etat: donnee.etat || '',
                             numTable: donnee.numTable || '',
                             liste: donnee.listeItems,
-                            categorie: donnee.categorie,
+                            type: donnee.type ?? '',
                         };
 
                         setListeCommande(listeCommande => listeCommande.concat(commande));
