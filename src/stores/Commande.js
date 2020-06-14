@@ -50,7 +50,7 @@ class Commande {
     prixTotal(){
         let total = 0;
 
-        this.commandes.forEach( element => total += (element.prix * element.quantite));
+        this.commandes.forEach( element => total += (parseFloat(element.prix.replace(',', '.')) * element.quantite));
 
         return total;
     }
