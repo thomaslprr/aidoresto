@@ -1,4 +1,4 @@
-import React, {Suspense, useState} from 'react';
+import React, {Suspense, useEffect, useState} from 'react';
 import {makeStyles} from "@material-ui/core/styles";
 import { Typography, Grid, Box } from "@material-ui/core";
 import PropTypes from 'prop-types';
@@ -7,6 +7,7 @@ import Tabs from "@material-ui/core/Tabs";
 import TemplateBoisson from "./TemplateBoisson";
 import TemplateNourriture from "./TemplateNourriture";
 import Commande from "../stores/Commande";
+import SelectCategorieBoisson from "./SelectCategorieBoisson";
 
 
 
@@ -78,6 +79,8 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
 
     const classes = useStyle();
 
+    const [filtreBoisson, setFiltreBoisson] = useState("");
+
     //valueTab
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
@@ -85,12 +88,28 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
     };
 
 
+
     const ListBoisson = () => {
         return (
             <>
-                {boissons.map( item => (
+                <SelectCategorieBoisson
+                    filtre={filtreBoisson}
+                    changerFiltre={setFiltreBoisson}
+
+                /><br/><br/><br/><br/>
+                <Grid container spacing={3}>
+                {boissons
+                    .filter(function (bois) {
+                        if(filtreBoisson!=""){
+                            return bois.categorie == filtreBoisson;
+                        }else{
+                            return bois;
+                        }
+                    })
+                    .map( item => (
                     <TemplateBoisson boisson={item} setCountPanier={setCountPanier}/>
                 ))}
+                </Grid>
             </>
         );
     };

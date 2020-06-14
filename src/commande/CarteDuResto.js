@@ -150,7 +150,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
 
     const getElementsCarte = () => {
 
-        firebase.firestore().collection("restaurant").doc(idResto).collection("boisson")
+        firebase.firestore().collection("restaurant").doc(idResto).collection("boisson").orderBy("nom")
             .onSnapshot(function(querySnapshot) {
 
                 setDataBoisson([]);
@@ -161,7 +161,8 @@ const CarteDuResto = ({idResto, infoResto}) => {
                         date: doc.data().date,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
-                        volume: doc.data().volume
+                        volume: doc.data().volume,
+                        categorie: doc.data().categorie
                     };
                     setDataBoisson(dataBoisson => dataBoisson.concat(boisson));
                 });
