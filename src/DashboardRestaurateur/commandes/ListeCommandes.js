@@ -139,7 +139,7 @@ function Row({laCom, id}) {
 
         console.log(item.item);
 
-        if (item.item.categorie && item.item.categorie === "menu"){
+        if (item.item.type && item.item.type === "menu"){
 
             let ingredients = [];
 
