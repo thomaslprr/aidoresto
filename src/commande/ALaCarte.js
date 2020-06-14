@@ -91,8 +91,13 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
 
     const ListBoisson = () => {
 
+        console.log("Liste des boissons");
+        console.log(boissons);
         let res = boissons
             .filter(boisson => (boisson.categorie === filtreBoisson || filtreBoisson === ""));
+
+        console.log(res);
+
         return (
             <>
                 <SelectCategorieBoisson
