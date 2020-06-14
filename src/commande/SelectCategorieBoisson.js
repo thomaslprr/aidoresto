@@ -21,7 +21,7 @@ const SelectCategorieBoisson = ({filtre,changerFiltre}) => {
 
        setCategorie(filtre);
 
-    },filtre);
+    },[]);
 
     return (
         <div>
