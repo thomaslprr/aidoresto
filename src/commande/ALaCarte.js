@@ -87,8 +87,6 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
         setValue(newValue);
     };
 
-
-
     const ListBoisson = () => {
 
         console.log("Liste des boissons");

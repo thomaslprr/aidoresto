@@ -22,7 +22,7 @@ export default function PopUpAjoutItem({open, handleClose, type, ajouter}){
             return "Nom de l'entrée";
         }
         if (type === "plats"){
-            return "Nom du plats";
+            return "Nom du plat";
         }
         if (type === "desserts"){
             return "Nom du dessert";

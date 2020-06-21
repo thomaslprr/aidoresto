@@ -13,6 +13,11 @@ import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import clsx from "clsx";
 import * as firebase from "firebase";
+import FormControl from "@material-ui/core/FormControl";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import AjouterOptions from "./AjouterOptions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -68,6 +73,8 @@ export default function Repas({id,categoriee,orthographe}){
 
     const classes = useStyles();
     const [categorie, setCategorie] = useState('');
+    const [type, setType] = useState("");
+
     const [ingredients,setIngredients] = useState("");
     const [prix,setPrix] = useState("");
     const [nom,setNom] = useState("");
@@ -75,6 +82,10 @@ export default function Repas({id,categoriee,orthographe}){
 
     const handleChange = (event) => {
         setCategorie(event.target.value);
+    };
+
+    const handleChangeType = (event) => {
+        setType(event.target.value);
     };
 
 
@@ -91,6 +102,7 @@ export default function Repas({id,categoriee,orthographe}){
             description: description,
             ingredients: ingredients,
             nom:nom,
+            type:type,
             prix: prix
         };
         repasCollection.add(repasData).then(function() {
@@ -162,6 +174,43 @@ export default function Repas({id,categoriee,orthographe}){
         }
     }
 
+    const afficherSelectionCategorie = () => {
+
+        if(categoriee=="Déjeuné"){
+            return (
+
+                <>
+                <Grid item xs={12}>
+                    <FormControl className={classes.formControl} required={true}>
+                        <InputLabel id="categorie">Catégorie</InputLabel>
+                        <Select
+                            labelId="categorie_"
+                            id="categorie"
+                            name="categorie"
+                            value={type}
+                            onChange={handleChangeType}
+                        >
+                            <MenuItem value="Viande">Viande</MenuItem>
+                            <MenuItem value="Poisson">Poisson</MenuItem>
+                            <MenuItem value="Pizza">Pizza</MenuItem>
+                            <MenuItem value="Salade">Salade</MenuItem>
+                            <MenuItem value="Hamburger">Hamburger</MenuItem>
+                            <MenuItem value="Pâtes">Pâtes</MenuItem>
+                            <MenuItem value="Autre">Autre</MenuItem>
+
+                        </Select>
+                    </FormControl>
+                </Grid>
+                    <AjouterOptions/>
+                    </>
+
+
+            )
+        }
+        return <></>;
+
+    };
+
 
 
 
@@ -194,6 +243,7 @@ export default function Repas({id,categoriee,orthographe}){
                                 onChange={(e) => setNom(e.target.value)}
                             />
                         </Grid>
+                        {afficherSelectionCategorie()}
                         <Grid item xs={12}>
                             <TextField
                                 required
