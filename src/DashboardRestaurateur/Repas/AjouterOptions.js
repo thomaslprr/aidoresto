@@ -1,101 +1,84 @@
 import React, {useEffect, useState} from 'react';
 import Button from "@material-ui/core/Button";
-import FormControl from "@material-ui/core/FormControl";
-import InputLabel from "@material-ui/core/InputLabel";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
-import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
+import * as firebase from "firebase";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import IconButton from "@material-ui/core/IconButton";
+import DeleteIcon from "@material-ui/icons/Delete";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
 
-const AjouterOptions = () =>{
-
-    const [tabOptions, setTabOptions] = useState([]);
-
-
-
-
-    const handleChangeOption = () => {
-
-        let option = {nomOption:"",prixOption:""}
-        setTabOptions([...tabOptions,option]);
+const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
 
 
+    const [listeOptions, setListeOptions] = useState([]);
+
+    const refCollection = firebase.firestore().collection("restaurant").doc(idResto).collection("repas").doc(idRepas).collection("options");
+
+    useEffect(()=> {
+
+            refCollection.onSnapshot(function(querySnapshot) {
+
+                setListeOptions([]);
+
+                querySnapshot.forEach(function(doc) {
+
+                    let data = doc.data();
+
+                    let option = {
+                        id: doc.id,
+                        nom: data.nom ?? '',
+                        prix: data.prix ?? '',
+                        desc: data.desc ?? '',
+                    };
+
+                    setListeOptions(listeOptions => listeOptions.concat(option));
+
+                });
+            });
+    },[]);
+
+
+    const supprimerOption = (option) => {
+        refCollection.doc(option.id).delete();
     };
 
-    const handleChangeNomOption = (event,indice) => {
-        console.log("voici l'event "+event);
-        let tabActuel = [];
-        tabActuel = tabOptions;
-        tabActuel[indice] = {nomOption:event,prixOption:""};
+    const ListeOptions = () =>{
 
-        setTabOptions(tabActuel);
+        return (
+            <>
+
+                {listeOptions.map((element) =>
+                    <ListItem>
+                        <ListItemText
+                            primary={element.nom+"  -  "+element.prix}
+                            secondary={element.desc}
+                        />
+                        <ListItemSecondaryAction>
+                            <IconButton edge="end" aria-label="delete" onClick={()=> supprimerOption(element)}>
+                                <DeleteIcon />
+                            </IconButton>
+                        </ListItemSecondaryAction>
+                    </ListItem>
+                )}
+
+            </>
+        )
     };
-
-    const handleChangePrixOption = (event,indice) => {
-
-        let tabActuel = tabOptions;
-
-        tabActuel[indice].prixOption = event.target.value;
-
-        setTabOptions(tabActuel);
-    };
-
-    const afficherLesChamps = () => {
-
-        var rows = [];
-        for (let i = 0; i < tabOptions.length; i++) {
-            // note: we add a key prop here to allow react to uniquely identify each
-            // element in this array. see: https://reactjs.org/docs/lists-and-keys.html
-            rows.push(<div key={i}>
-                <Grid item xs={12}>
-                <TextField
-                    required
-                    variant="outlined"
-                    autoFocus
-                    placeholder="Petite"
-                    margin="dense"
-                    name="nom_option"
-                    id="nom_option"
-                    label={"Nom de l'option"}
-                    type="nom"
-                    fullWidth
-                    value={tabOptions[i].nomOption}
-                    onChange={(e) => handleChangeNomOption(e.target.value,i)}
-                />
-            </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        required
-                        variant="outlined"
-                        autoFocus
-                        placeholder="Petite"
-                        margin="dense"
-                        name="prix_option"
-                        id="prix_option"
-                        label={"Prix de l'option"}
-                        type="nom"
-                        fullWidth
-                        value={tabOptions[i].prixOption}
-                        onChange={(e) => handleChangePrixOption(e,i)}
-                    />
-                </Grid>
-            </div>);
-        }
-        return <>{rows}</>;
-
-
-
-
-
-    };
-
-
 
     return (
-        <div>
-            <Button color="primary" onClick={handleChangeOption}>Ajouter une option</Button>
-            {afficherLesChamps()}
-        </div>
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
+            <DialogTitle id="form-dialog-title">Variantes</DialogTitle>
+
+            <DialogContent>
+
+                <ListeOptions/>
+                <Button color="primary" onClick={()=>{ }}>Ajouter</Button>
+
+            </DialogContent>
+        </Dialog>
     )
 
 
