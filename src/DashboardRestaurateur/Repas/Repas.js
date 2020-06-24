@@ -201,8 +201,8 @@ export default function Repas({id,categoriee,orthographe}){
                         </Select>
                     </FormControl>
                 </Grid>
-                    <AjouterOptions/>
-                    </>
+
+                </>
 
 
             )
