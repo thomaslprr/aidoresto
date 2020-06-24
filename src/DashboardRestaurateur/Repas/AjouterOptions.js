@@ -11,6 +11,7 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
+import List from "@material-ui/core/List";
 
 const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
 
@@ -19,6 +20,7 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
     const [nomOption, setNomOption] = useState('');
     const [prixOption, setPrixOption] = useState('');
     const [descOption, setDescOption] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const refCollection = firebase.firestore().collection("restaurant").doc(idResto).collection("repas").doc(idRepas).collection("options");
 
@@ -50,11 +52,28 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
         refCollection.doc(option.id).delete();
     };
 
+    const ajoutOption = () =>{
+      if( nomOption !== '' && prixOption !== '' && !loading){
+          setLoading(true);
+          refCollection.add({
+              nom: nomOption,
+              prix: prixOption,
+              desc: descOption
+          }).then( () =>{
+                  setLoading(false);
+                  setNomOption('');
+                  setDescOption('');
+                  setPrixOption('');
+            }
+          );
+      }
+    };
+
     const ListeOptions = () =>{
 
         return (
-            <>
 
+            <List>
                 {listeOptions.map((element) =>
                     <ListItem>
                         <ListItemText
@@ -68,8 +87,8 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
                         </ListItemSecondaryAction>
                     </ListItem>
                 )}
+            </List>
 
-            </>
         )
     };
 
@@ -84,6 +103,8 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
                 <Grid container spacing={1}>
                     <Grid item xs={9} >
                         <TextField
+                            value={nomOption}
+                            onChange={(e) => setNomOption(e.target.value)}
                             variant="outlined"
                             margin="normal"
                             required
@@ -96,6 +117,8 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
                     </Grid>
                     <Grid item xs={3} >
                         <TextField
+                            value={prixOption}
+                            onChange={(e) => setPrixOption(e.target.value)}
                             variant="outlined"
                             margin="normal"
                             required
@@ -108,6 +131,8 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
                     </Grid>
                     <Grid item xs={12} >
                         <TextField
+                            value={descOption}
+                            onChange={(e) => setDescOption(e.target.value)}
                             variant="outlined"
                             margin="normal"
                             fullWidth
@@ -117,7 +142,7 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
                         />
                     </Grid>
                 </Grid>
-                <Button color="primary" onClick={()=>{ }}>Ajouter</Button>
+                <Button color="primary" onClick={ajoutOption}>Ajouter</Button>
 
             </DialogContent>
         </Dialog>
