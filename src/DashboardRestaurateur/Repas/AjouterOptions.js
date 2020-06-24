@@ -9,11 +9,16 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
+import Grid from "@material-ui/core/Grid";
+import TextField from "@material-ui/core/TextField";
 
 const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
 
 
     const [listeOptions, setListeOptions] = useState([]);
+    const [nomOption, setNomOption] = useState('');
+    const [prixOption, setPrixOption] = useState('');
+    const [descOption, setDescOption] = useState('');
 
     const refCollection = firebase.firestore().collection("restaurant").doc(idResto).collection("repas").doc(idRepas).collection("options");
 
@@ -53,7 +58,7 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
                 {listeOptions.map((element) =>
                     <ListItem>
                         <ListItemText
-                            primary={element.nom+"  -  "+element.prix}
+                            primary={element.nom+"  -  "+element.prix+" €"}
                             secondary={element.desc}
                         />
                         <ListItemSecondaryAction>
@@ -75,6 +80,43 @@ const AjouterOptions = ({idResto, idRepas, open, handleClose}) =>{
             <DialogContent>
 
                 <ListeOptions/>
+
+                <Grid container spacing={1}>
+                    <Grid item xs={9} >
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="nom"
+                            label="Nom"
+                            name="nom"
+                            autoComplete="name"
+                        />
+                    </Grid>
+                    <Grid item xs={3} >
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="prix"
+                            label="Prix"
+                            name="prix"
+                            autoComplete="number"
+                        />
+                    </Grid>
+                    <Grid item xs={12} >
+                        <TextField
+                            variant="outlined"
+                            margin="normal"
+                            fullWidth
+                            id="desc"
+                            label="Description"
+                            name="desc"
+                        />
+                    </Grid>
+                </Grid>
                 <Button color="primary" onClick={()=>{ }}>Ajouter</Button>
 
             </DialogContent>
