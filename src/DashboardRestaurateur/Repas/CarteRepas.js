@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import * as firebase from "firebase";
 import {useHistory} from "react-router";
 import ModifierRepas from "./PopupModifRepas";
+import AjouterOptions from "./AjouterOptions";
 
 
 const useStyles = makeStyles({
@@ -36,6 +37,16 @@ export default function SimpleCardRepas({nom,prix,ingredients,categorie,descript
     const [desc,setDesc] = useState(description);
     const [idd,setIdd] = useState(id);
 
+    const [modalOptionsOpen, setModalOptionsOpen] = useState(false);
+
+    const handleOpenOptions = () =>{
+        setModalOptionsOpen(true);
+    };
+
+    const handleCloseOptions = () =>{
+        setModalOptionsOpen(false);
+    };
+
     const history = useHistory();
 
     const handleSupression= () => {
@@ -62,25 +73,28 @@ export default function SimpleCardRepas({nom,prix,ingredients,categorie,descript
 
     return (
 
-        <Card className={classes.root}>
-            {modaleAAfficher()}
-            <CardContent>
-                <Typography variant="h5" component="h2">
-                    {nom}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    {description} <br/><br/>{ingredients}
-                </Typography>
-                <Typography variant="body2" component="p">
-                    {prix}€
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small" onClick={()=>setShowModal(1)}>Modifier</Button>
-                <Button size="small" onClick={handleSupression}>Supprimer</Button>
+        <>
+            <AjouterOptions idResto={idresto} idRepas={id} open={modalOptionsOpen} handleClose={handleCloseOptions}/>
+            <Card className={classes.root}>
+                {modaleAAfficher()}
+                <CardContent>
+                    <Typography variant="h5" component="h2">
+                        {nom}
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                        {description} <br/><br/>{ingredients}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        {prix}€
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button size="small" onClick={()=>setShowModal(1)}>Modifier</Button>
+                    <Button size="small" color="primary" onClick={handleOpenOptions}>Options</Button>
+                    <Button size="small" color="secondary" onClick={handleSupression}>Supprimer</Button>
+                </CardActions>
+            </Card>
 
-            </CardActions>
-        </Card>
-
+        </>
     );
-}
+};
