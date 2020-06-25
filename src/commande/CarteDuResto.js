@@ -184,13 +184,21 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 setDataEntree([]);
 
                 querySnapshot.forEach(function(doc) {
+                    doc.ref.collection("options").onSnapshot(function(qSnapshot) {
+                        let options = [];
+                        qSnapshot.forEach(function (option) {
+                            options.push(option.data());
+                        });
+
                     let entree = {
                         id: doc.id,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
-                        desc: doc.data().description
+                        desc: doc.data().description,
+                        options: options
                     };
                     setDataEntree(dataEntree => dataEntree.concat(entree));
+                    });
                 });
             });
 
@@ -200,13 +208,21 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 setDataPlat([]);
 
                 querySnapshot.forEach(function(doc) {
+                    doc.ref.collection("options").onSnapshot(function(qSnapshot) {
+                        let options = [];
+                        qSnapshot.forEach(function (option) {
+                            options.push(option.data());
+                        });
+
                     let plat = {
                         id: doc.id,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
-                        desc: doc.data().description
+                        desc: doc.data().description,
+                        options: options
                     };
                     setDataPlat(dataPlat => dataPlat.concat(plat));
+                    });
                 });
             });
 
@@ -216,13 +232,20 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 setDataDessert([]);
 
                 querySnapshot.forEach(function(doc) {
+                    doc.ref.collection("options").onSnapshot(function(qSnapshot) {
+                        let options = [];
+                        qSnapshot.forEach(function (option) {
+                            options.push(option.data());
+                        });
                     let dessert = {
                         id: doc.id,
                         nom: doc.data().nom,
                         prix: doc.data().prix,
-                        desc: doc.data().description
+                        desc: doc.data().description,
+                        options: options
                     };
                     setDataDessert(dataDessert => dataDessert.concat(dessert));
+                    });
                 });
             });
 
