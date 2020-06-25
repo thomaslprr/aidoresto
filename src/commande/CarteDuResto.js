@@ -156,15 +156,25 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 setDataBoisson([]);
 
                 querySnapshot.forEach(function(doc) {
-                    let boisson = {
-                        id: doc.id,
-                        date: doc.data().date,
-                        nom: doc.data().nom,
-                        prix: doc.data().prix,
-                        volume: doc.data().volume,
-                        categorie: doc.data().categorie
-                    };
-                    setDataBoisson(dataBoisson => dataBoisson.concat(boisson));
+                    doc.ref.collection("options").onSnapshot(function(qSnapshot) {
+                        let options = [];
+                        qSnapshot.forEach(function (option) {
+                            options.push(option.data());
+                        });
+
+                        let boisson = {
+                            id: doc.id,
+                            date: doc.data().date,
+                            nom: doc.data().nom,
+                            prix: doc.data().prix,
+                            volume: doc.data().volume,
+                            categorie: doc.data().categorie,
+                            options: options
+                        };
+                        setDataBoisson(dataBoisson => dataBoisson.concat(boisson));
+
+                    });
+
                 });
             });
 
