@@ -10,6 +10,7 @@ import {useHistory} from "react-router";
 import {func} from "prop-types";
 import ModifierBoisson from "./PopupModifBoisson";
 import AlertDialogInscription from "../../creationCompte/Popup";
+import AjouterOptions from "./AjouterOptions";
 
 const useStyles = makeStyles({
     root: {
@@ -38,6 +39,17 @@ export default function SimpleCardBoisson({nom,prix,volume,categorie,date,id,idr
 
     const history = useHistory();
 
+    const [modalOptionsOpen, setModalOptionsOpen] = useState(false);
+
+    const handleOpenOptions = () =>{
+        setModalOptionsOpen(true);
+    };
+
+    const handleCloseOptions = () =>{
+        setModalOptionsOpen(false);
+    };
+
+
     const handleSupression= () => {
         firebase.firestore().collection("restaurant").doc(idresto).collection("boisson").doc(id).delete().then(
             function(){
@@ -65,30 +77,36 @@ export default function SimpleCardBoisson({nom,prix,volume,categorie,date,id,idr
 
     return (
 
-        <Card className={classes.root}>
-            {modaleAAfficher()}
-            <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    {categorie}
-                </Typography>
-                <Typography variant="h5" component="h2">
-                    {nom}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    {date}
-                </Typography>
-                <Typography variant="body2" component="p">
-                    {prix}€
-                    <br />
-                    {volume}cL
-                </Typography>
-            </CardContent>
-            <CardActions>
-                <Button size="small" onClick={()=>setShowModal(1)}>Modifier</Button>
-                <Button size="small" onClick={handleSupression}>Supprimer</Button>
+        <>
+            <AjouterOptions idResto={idresto} idBoisson={id} open={modalOptionsOpen} handleClose={handleCloseOptions}/>
+            <Card className={classes.root}>
+                {modaleAAfficher()}
+                <CardContent>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {categorie}
+                    </Typography>
+                    <Typography variant="h5" component="h2">
+                        {nom}
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                        {date}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                        {prix}€
+                        <br />
+                        {volume}cL
+                    </Typography>
+                </CardContent>
+                <CardActions>
 
-            </CardActions>
-        </Card>
+                    <Button size="small" onClick={()=>setShowModal(1)}>Modifier</Button>
+                    <Button size="small" color="primary" onClick={handleOpenOptions}>Options</Button>
+                    <Button size="small" color="secondary" onClick={handleSupression}>Supprimer</Button>
+
+                </CardActions>
+            </Card>
+
+        </>
 
     );
-}
+};
