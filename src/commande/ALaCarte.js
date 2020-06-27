@@ -8,6 +8,7 @@ import TemplateBoisson from "./TemplateBoisson";
 import TemplateNourriture from "./TemplateNourriture";
 import Commande from "../stores/Commande";
 import SelectCategorieBoisson from "./SelectCategorieBoisson";
+import SelectCategorieRepas from "./SelectCategorieRepas";
 
 
 
@@ -81,6 +82,9 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
 
     const [filtreBoisson, setFiltreBoisson] = useState("");
 
+    const [filtreRepas, setFiltreRepas] = useState("");
+
+
     //valueTab
     const [value, setValue] = useState(0);
     const handleChange = (event, newValue) => {
@@ -112,6 +116,8 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
         );
     };
 
+
+
     const ListEntree = () => {
         return (
             <>
@@ -122,12 +128,25 @@ const ALaCarte = ({entrees, plats, desserts, boissons, idResto, setCountPanier})
         );
     };
 
+
     const ListPlat= () => {
+        console.log("Liste des repas");
+        console.log(plats);
+        let res = plats
+            .filter(plat => (plat.type === filtreRepas || filtreRepas === ""));
+
         return (
             <>
-                {plats.map( item => (
+                <SelectCategorieRepas
+                    filtre={filtreRepas}
+                    changerFiltre={setFiltreRepas}
+
+                /><br/><br/><br/><br/>
+                <Grid container spacing={3}>
+                {res.map( item => (
                     <TemplateNourriture repas={item} setCountPanier={setCountPanier}/>
                 ))}
+                </Grid>
             </>
         );
     };

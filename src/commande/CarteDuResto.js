@@ -202,6 +202,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 });
             });
 
+        //todo: order by "nom" ne fonctionne pas et renvoie 0 donnée
         firebase.firestore().collection("restaurant").doc(idResto).collection("repas").where("categorie", "==", "Déjeuné")
             .onSnapshot(function(querySnapshot) {
 
@@ -219,6 +220,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                         nom: doc.data().nom,
                         prix: doc.data().prix,
                         desc: doc.data().description,
+                        type: doc.data().type,
                         options: options
                     };
                     setDataPlat(dataPlat => dataPlat.concat(plat));
