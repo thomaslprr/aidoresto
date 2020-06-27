@@ -8,6 +8,7 @@ import {AuthProvider} from "./login/Auth";
 import LoginRestaurateur from "./login/LoginRestaurateur";
 import Dashboard from "./DashboardRestaurateur/Dashboard";
 import PageDuResto from "./commande/PageDuResto";
+import PageCommande from "./DashboardRestaurateur/commandes/pageDeLaCommande/PageCommande";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
 
                   <Route exact path="/dashboard/:id" render={props => <Dashboard {...props} type={0}/>} />
                   <Route exact path="/dashboard/:id/commandes" render={props => <Dashboard {...props} type={1} />} />
+                  <Route exact path="/dashboard/:id/commandes/:idCommande" render={props => <PageCommande {...props} type={1} />} />
                   <Route exact path="/dashboard/:id/boissons" render={props => <Dashboard {...props} type={2} />} />
                   <Route exact path="/dashboard/:id/entrees" render={props => <Dashboard {...props} type={3} />} />
                   <Route exact path="/dashboard/:id/repas" render={props => <Dashboard {...props} type={4} />} />
