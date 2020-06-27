@@ -8,15 +8,16 @@ function Dashboard({ match: {params :{id}} , type}){
 
     useEffect(()=>{
 
-        if(!(id===sessionStorage.getItem('idResto'))){
-            if(sessionStorage.getItem('isConnected')){
-                history.push("/dashboard/"+sessionStorage.getItem('idResto'));
-                console.log("Il est connecté");
+        if(sessionStorage.getItem('isConnected')){
 
-            }else{
-                history.push("/login");
+            if(!(id===sessionStorage.getItem('idResto'))){
+
+                history.push("/dashboard/"+sessionStorage.getItem('idResto'));
+
             }
 
+        }else{
+            history.push("/login");
         }
 
     },[]);
