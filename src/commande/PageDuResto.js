@@ -3,6 +3,7 @@ import firebase from "firebase";
 import RestoIntrouvable from "./RestoIntrouvable";
 import CarteDuResto from "./CarteDuResto";
 import {Copyright} from "../PiedDePage/PiedPage";
+import PulseLoader from "react-spinners/PulseLoader";
 
 
 const PageDuResto = ({ match: {params :{id}} }) => {
@@ -47,17 +48,32 @@ const PageDuResto = ({ match: {params :{id}} }) => {
         if (loading) {
             return (
                 <>
-                    Chargement ...
+                    <div
+                        style={{
+                            position: 'absolute', left: '50%', top: '50%',
+                            transform: 'translate(-50%, -50%)'
+                        }}
+                    >
+
+                        <PulseLoader loading={true} color={"#1f62b9"} size={20}/>
+
+                    </div>
                 </>
             );
         }else {
             if (estUnResto){
                 return (
-                    <CarteDuResto idResto={id} infoResto={infoResto}/>
+                    <>
+                        <CarteDuResto idResto={id} infoResto={infoResto}/>
+                        <Copyright/>
+                    </>
                 );
             }else {
                 return (
-                    <RestoIntrouvable />
+                    <>
+                        <RestoIntrouvable />
+                        <Copyright/>
+                    </>
                 );
             }
         }
@@ -65,11 +81,7 @@ const PageDuResto = ({ match: {params :{id}} }) => {
 
     return (
         <>
-
             <GetContent />
-
-            <Copyright/>
-
         </>
     )
 };
