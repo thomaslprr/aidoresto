@@ -31,7 +31,7 @@ function PageCommande({ match: {params :{id, idCommande}} , type}){
 
     return(
         <div>
-            <SideBar id={id} type={type} module={<Information id={id}/>}/>
+            <SideBar idResto={id} idCommande={idCommande} type={9} module={<Information id={id}/>}/>
         </div>
     )
 

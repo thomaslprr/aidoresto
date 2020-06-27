@@ -32,6 +32,7 @@ import Commande from "./commandes/Commande";
 import {Copyright} from "../PiedDePage/PiedPage";
 import PageMenu from "./menu/PageMenu";
 import PopUpDeconnexion from "./PopupDeconnexion";
+import ContenuPageCommande from "./commandes/pageDeLaCommande/ContenuPageCommande";
 
 const drawerWidth = 240;
 
@@ -183,6 +184,10 @@ function SideBar(props) {
                 break;
             case 8:
                 return <PopUpDeconnexion id={props.id} />;
+                break;
+
+            case 9:
+                return <ContenuPageCommande idResto={props.idResto} idCommande={props.idCommande}/>
                 break;
         }
     }
