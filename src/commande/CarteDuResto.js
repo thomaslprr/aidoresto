@@ -195,6 +195,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                         nom: doc.data().nom,
                         prix: doc.data().prix,
                         desc: doc.data().description,
+                        categorie: doc.data().categorie,
                         options: options
                     };
                     setDataEntree(dataEntree => dataEntree.concat(entree));
@@ -221,6 +222,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                         prix: doc.data().prix,
                         desc: doc.data().description,
                         type: doc.data().type,
+                        categorie: doc.data().categorie,
                         options: options
                     };
                     setDataPlat(dataPlat => dataPlat.concat(plat));
@@ -244,6 +246,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                         nom: doc.data().nom,
                         prix: doc.data().prix,
                         desc: doc.data().description,
+                        categorie: doc.data().categorie,
                         options: options
                     };
                     setDataDessert(dataDessert => dataDessert.concat(dessert));

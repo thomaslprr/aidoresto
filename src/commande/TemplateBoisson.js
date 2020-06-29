@@ -102,7 +102,8 @@ const TemplateBoisson = ({boisson, setCountPanier}) => {
                                     id: boisson.id + element.nom + element.desc + element.prix,
                                     nom: boisson.nom +" - "+element.nom,
                                     prix: element.prix,
-                                    desc: element.desc ?? boisson.desc
+                                    desc: element.desc ?? boisson.desc,
+                                    categorie: boisson.categorie
                                 };
 
                                 return(
