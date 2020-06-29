@@ -4,6 +4,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import {Box} from "@material-ui/core";
+import ContenuDeLaCommande from "./ContenuDeLaCommande";
 
 function ContenuPageCommande({ idResto, idCommande}){
 
@@ -94,6 +95,7 @@ function ContenuPageCommande({ idResto, idCommande}){
                     <Typography variant={"h5"} style={{marginTop:"25px"}}>
                         Contenu de la commande
                     </Typography>
+                    <ContenuDeLaCommande commande={commande}/>
 
 
                     <Typography variant={"h5"}  style={{display: 'inline-block', marginRight:"10px"}}>
