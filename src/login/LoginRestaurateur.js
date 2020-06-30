@@ -1,6 +1,5 @@
 import React, {useCallback, useState} from "react";
 import { withRouter } from "react-router";
-import app from "../index.js";
 import Background from '../image/resto1.jpg';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -17,6 +16,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AlertDialogInscription from "../creationCompte/Popup";
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import {Copyright} from "../PiedDePage/PiedPage";
+import {auth} from 'firebase/app';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,8 +59,7 @@ const LoginRestaurateur = ({ history }) => {
             event.preventDefault();
             const { email, password } = event.target.elements;
             try {
-                await app
-                    .auth()
+                await auth()
                     .signInWithEmailAndPassword(email.value, password.value).then((result) => {
                         const user = result.user;
                         sessionStorage.setItem('isConnected',true);

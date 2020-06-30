@@ -10,8 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {withRouter} from "react-router";
-import app from "../index";
-import {firestore} from "firebase/app";
+import {firestore, auth} from "firebase/app";
 import AlertDialogInscription from "./Popup";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 import {Copyright} from "../PiedDePage/PiedPage";
@@ -117,8 +116,7 @@ const SignUp = ({ history }) => {
         event.preventDefault();
         const { email, password } = event.target.elements;
         try {
-            await app
-                .auth()
+            await auth()
                 .createUserWithEmailAndPassword(email.value, password.value).then((result) => {
                         const user = result.user;
                         creationCompteFirebase(user.uid);

@@ -4,10 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-
-
-const firebase = require('firebase');
-require('firebase/firestore');
+import * as firebase from 'firebase';
 
 const theme = createMuiTheme({
     palette: {
@@ -20,7 +17,7 @@ const theme = createMuiTheme({
     }
 });
 
-const app = firebase.initializeApp({
+let firebaseConfig = {
     apiKey: "AIzaSyAm9gNIaEiOl0wce4HYHE-WkYo62Kecs0I",
     authDomain: "aidoresto-1bef4.firebaseapp.com",
     databaseURL: "https://aidoresto-1bef4.firebaseio.com",
@@ -29,8 +26,9 @@ const app = firebase.initializeApp({
     messagingSenderId: "553349771815",
     appId: "1:553349771815:web:200d381310fcb950f7d402",
     measurementId: "G-D4420PNFVL"
-});
-export default app;
+}
+firebase.initializeApp(firebaseConfig);
+
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
