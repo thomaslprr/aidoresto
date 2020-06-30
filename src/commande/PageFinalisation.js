@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import {makeStyles} from "@material-ui/core/styles";
 import NumberFormat from "react-number-format";
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 
 
 
@@ -86,13 +86,13 @@ const PageFinalisation = (props) => {
             nombreCouverts: couverts,
             listeItems: JSON.parse(JSON.stringify(Commande.listeItems())),
             prixTotal: Commande.prixTotal(),
-            date: firebase.firestore.FieldValue.serverTimestamp(),
+            date: firestore.FieldValue.serverTimestamp(),
             etat: "attente",
             numTable: numTable
         };
 
 
-        firebase.firestore().collection("restaurant").doc(props.idResto).collection("commandes").add(commandeData).then(function() {
+        firestore().collection("restaurant").doc(props.idResto).collection("commandes").add(commandeData).then(function() {
             console.log("Document successfully written!");
             props.finDeCommande("valid");
         }).catch(function(error) {

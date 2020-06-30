@@ -15,7 +15,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 import RestaurantMenuIcon from '@material-ui/icons/RestaurantMenu';
 import Background from "../image/resto4.jpg";
 import {Copyright} from "../PiedDePage/PiedPage";
@@ -89,10 +89,10 @@ const LoginClient = ({ history }) => {
 
             console.log(code_resto.value);
 
-            var res = false;
-            var result;
+            let res = false;
+            let result;
 
-            await firebase.firestore().collection("restaurant").where("code_resto", "==", code_resto.value)
+            await firestore().collection("restaurant").where("code_resto", "==", code_resto.value)
                 .get()
                 .then(function(querySnapshot) {
                     querySnapshot.forEach(function(doc) {

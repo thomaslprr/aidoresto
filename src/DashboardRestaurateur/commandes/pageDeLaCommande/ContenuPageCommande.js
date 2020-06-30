@@ -1,9 +1,7 @@
 import React, {useEffect} from 'react';
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 import PulseLoader from "react-spinners/PulseLoader";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import {Box} from "@material-ui/core";
 import ContenuDeLaCommande from "./ContenuDeLaCommande";
 
 function ContenuPageCommande({ idResto, idCommande}){
@@ -14,7 +12,7 @@ function ContenuPageCommande({ idResto, idCommande}){
 
     useEffect(()=>{
 
-        firebase.firestore().collection("restaurant").doc(idResto).collection("commandes").doc(idCommande)
+        firestore().collection("restaurant").doc(idResto).collection("commandes").doc(idCommande)
             .onSnapshot(function(doc) {
 
                 setCommande(doc.data());

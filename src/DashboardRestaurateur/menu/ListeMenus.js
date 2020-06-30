@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 import Grid from "@material-ui/core/Grid";
 import CarteMenu from "./CarteMenu";
 import {makeStyles} from "@material-ui/core/styles";
@@ -22,7 +22,7 @@ const ListeMenu = ({idResto, modifierMenu}) => {
     useEffect(()=> {
 
 
-        const refCollection = firebase.firestore().collection("restaurant").doc(idResto).collection("menus");
+        const refCollection = firestore().collection("restaurant").doc(idResto).collection("menus");
 
 
         refCollection.onSnapshot(function(querySnapshot) {

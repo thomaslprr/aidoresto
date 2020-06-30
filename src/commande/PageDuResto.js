@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 import RestoIntrouvable from "./RestoIntrouvable";
 import CarteDuResto from "./CarteDuResto";
 import {Copyright} from "../PiedDePage/PiedPage";
@@ -17,7 +17,7 @@ const PageDuResto = ({ match: {params :{id}} }) => {
         adresse: {},
     });
 
-    const restaurantRef = firebase.firestore().collection("restaurant").doc(id);
+    const restaurantRef = firestore().collection("restaurant").doc(id);
 
 
     useEffect(()=>{

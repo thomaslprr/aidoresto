@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 import HeaderPageCommande from "./HeaderPageCommande";
 import {makeStyles} from "@material-ui/core/styles";
 import {Box, Typography} from "@material-ui/core";
@@ -150,7 +150,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
 
     const getElementsCarte = () => {
 
-        firebase.firestore().collection("restaurant").doc(idResto).collection("boisson").orderBy("nom")
+        firestore().collection("restaurant").doc(idResto).collection("boisson").orderBy("nom")
             .onSnapshot(function(querySnapshot) {
 
                 setDataBoisson([]);
@@ -178,7 +178,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 });
             });
 
-        firebase.firestore().collection("restaurant").doc(idResto).collection("repas").where("categorie", "==", "Entrée")
+        firestore().collection("restaurant").doc(idResto).collection("repas").where("categorie", "==", "Entrée")
             .onSnapshot(function(querySnapshot) {
 
                 setDataEntree([]);
@@ -204,7 +204,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
             });
 
         //todo: order by "nom" ne fonctionne pas et renvoie 0 donnée
-        firebase.firestore().collection("restaurant").doc(idResto).collection("repas").where("categorie", "==", "Déjeuné")
+        firestore().collection("restaurant").doc(idResto).collection("repas").where("categorie", "==", "Déjeuné")
             .onSnapshot(function(querySnapshot) {
 
                 setDataPlat([]);
@@ -230,7 +230,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
                 });
             });
 
-        firebase.firestore().collection("restaurant").doc(idResto).collection("repas").where("categorie", "==", "Dessert")
+        firestore().collection("restaurant").doc(idResto).collection("repas").where("categorie", "==", "Dessert")
             .onSnapshot(function(querySnapshot) {
 
                 setDataDessert([]);
@@ -255,7 +255,7 @@ const CarteDuResto = ({idResto, infoResto}) => {
             });
 
 
-        let refCollectionMenus = firebase.firestore().collection("restaurant").doc(idResto).collection("menus");
+        let refCollectionMenus = firestore().collection("restaurant").doc(idResto).collection("menus");
         refCollectionMenus.onSnapshot(function(querySnapshot) {
 
             setDataMenus([]);

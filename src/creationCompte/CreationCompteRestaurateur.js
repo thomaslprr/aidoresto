@@ -11,7 +11,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {withRouter} from "react-router";
 import app from "../index";
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 import AlertDialogInscription from "./Popup";
 import RestaurantMenuIcon from "@material-ui/icons/RestaurantMenu";
 import {Copyright} from "../PiedDePage/PiedPage";
@@ -71,7 +71,7 @@ const SignUp = ({ history }) => {
 
     const verifIdLibre = async (id) =>{
         var dispo = true;
-        await firebase.firestore().collection("restaurant").where("code_resto", "==", id)
+        await firestore().collection("restaurant").where("code_resto", "==", id)
             .get()
             .then(function(querySnapshot) {
                 querySnapshot.forEach(function(doc) {
@@ -97,7 +97,7 @@ const SignUp = ({ history }) => {
 
         //Creation Profil vide avec ID
 
-        firebase.firestore().collection("restaurant").doc(idUser).set({
+        firestore().collection("restaurant").doc(idUser).set({
             adresse: {
                 code_postal: "",
                 pays: "",

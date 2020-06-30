@@ -16,7 +16,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Button from "@material-ui/core/Button";
 import DeleteIcon from '@material-ui/icons/Delete';
 import DoneIcon from '@material-ui/icons/Done';
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 import RedButton from "../../utils/ColoredButtons/RedButton";
 import GreenButton from "../../utils/ColoredButtons/GreenButton";
 
@@ -42,7 +42,7 @@ function Row({laCom, id}) {
 
     const setEtatCommande = (etatDeLaCommande) => {
 
-        firebase.firestore().collection("restaurant").doc(id).collection("commandes").doc(laCom.id).update(
+        firestore().collection("restaurant").doc(id).collection("commandes").doc(laCom.id).update(
             {
                 etat: etatDeLaCommande
             }

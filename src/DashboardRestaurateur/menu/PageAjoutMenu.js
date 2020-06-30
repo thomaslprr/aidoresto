@@ -14,7 +14,7 @@ import ListeComposentMenu from "./ListeComposentsMenu";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import GreenButton from "../../utils/ColoredButtons/GreenButton";
 import SaveIcon from '@material-ui/icons/Save';
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 
@@ -115,7 +115,7 @@ export default function PageAjoutMenu({handleClose, idResto, menu}) {
 
         }else {
             //envoie des données sur firestore:
-            const refCollection = firebase.firestore().collection("restaurant").doc(idResto).collection("menus");
+            const refCollection = firestore().collection("restaurant").doc(idResto).collection("menus");
 
             let dataMenu = {
                 boissons: state.boissons ? listeBoissons : [],

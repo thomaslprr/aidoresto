@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from "@material-ui/core/Grid";
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import PopUpConsulterMenu from "./Consulter/PopUpConsulterMenu";
-import firebase from "firebase";
+import {firestore} from "firebase/app";
 
 
 const useStyles = makeStyles({
@@ -40,7 +40,7 @@ export default function CarteMenu({menu, idResto, modifierMenu}) {
 
     //TODO Ajouter pop up confirmation avant de supp
     const suppressionMenu = () => {
-        firebase.firestore().collection("restaurant").doc(idResto).collection("menus").doc(menu.id).delete().then(
+        firestore().collection("restaurant").doc(idResto).collection("menus").doc(menu.id).delete().then(
             () => {console.log('Success deleting menu');}
         ).catch(function(error){
             console.log(error);
