@@ -4,7 +4,7 @@ import Information from "../../info/Information";
 import {useHistory} from "react-router";
 
 
-function PageCommande({ match: {params :{id, idCommande}} , type}){
+function PageCommande({ match: {params :{id, idCommande}}}){
 
     const history = useHistory();
 

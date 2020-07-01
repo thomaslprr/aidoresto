@@ -73,12 +73,11 @@ function ContenuPageCommande({ idResto, idCommande}){
             </div>
         )
     }else{
-        console.log(commande);
-
-        let dateCommande = commande.date ? commande.date.toDate() : null;
-        console.log(dateCommande);
 
         if (commande){
+
+            let dateCommande = commande.date ? commande.date.toDate() : null;
+
             return(
                 <>
 

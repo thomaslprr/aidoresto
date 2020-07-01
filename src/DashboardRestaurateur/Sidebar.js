@@ -33,6 +33,7 @@ import {Copyright} from "../PiedDePage/PiedPage";
 import PageMenu from "./menu/PageMenu";
 import PopUpDeconnexion from "./PopupDeconnexion";
 import ContenuPageCommande from "./commandes/pageDeLaCommande/ContenuPageCommande";
+import ListeDesCommandes from "./commandes/listeDesCommandes/ListeDesCommandes";
 
 const drawerWidth = 240;
 
@@ -188,6 +189,10 @@ function SideBar(props) {
 
             case 9:
                 return <ContenuPageCommande idResto={props.idResto} idCommande={props.idCommande}/>
+                break;
+
+            case 10:
+                return <ListeDesCommandes idResto={props.id} />
                 break;
         }
     }
