@@ -26,14 +26,14 @@ function ContenuPageCommande({ idResto, idCommande}){
     const LbStatutCommande = () =>{
         if (commande.etat === "attente"){
             return(
-                <Typography variant={"h5"}  style={{display: 'inline-block'}} color={"secondary"}>
+                <Typography variant={"h5"}  style={{display: 'inline-block', color:"#ff9800"}}>
                     En attente de validation
                 </Typography>
             )
         }
         if (commande.etat === "en cours"){
             return(
-                <Typography variant={"h5"}  style={{display: 'inline-block'}} color={"primary"}>
+                <Typography variant={"h5"}  style={{display: 'inline-block', color:"#2196f3"}}>
                     En cours
                 </Typography>
             )
@@ -47,7 +47,7 @@ function ContenuPageCommande({ idResto, idCommande}){
         }
         if (commande.etat === "refusé"){
             return(
-                <Typography variant={"h5"}  style={{display: 'inline-block'}} color={"error"}>
+                <Typography variant={"h5"}  style={{display: 'inline-block', color:"#f44336"}} >
                     Refusé
                 </Typography>
             )

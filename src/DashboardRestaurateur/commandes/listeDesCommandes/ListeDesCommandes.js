@@ -22,6 +22,7 @@ import ViewColumn from '@material-ui/icons/ViewColumn';
 
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import {useHistory} from "react-router";
+import Typography from "@material-ui/core/Typography";
 
 const tableIcons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -48,13 +49,48 @@ function ListeDesCommandes({idResto}){
     const [commandes, setCommandes] = useState([]);
     const [loading, setLoading] = useState(true);
 
+
+    const getEtat = (etat) => {
+        switch (etat) {
+            case "attente":
+                return {color: "#ff9800", txt: "En attente"};
+                break;
+            case 'fini':
+                return {color: "#43a047", txt: "Terminé"};
+                break;
+            case 'refusé':
+                return {color: "#f44336", txt: "Refusé"};
+                break;
+            case 'en cours':
+                return {color: "#2196f3", txt: "En cours"};
+                break;
+
+                return {color: "#f44336", txt: "Inconnu"};
+
+        }
+    }
+
+
     const columns = [
         { title: 'Nom', field: 'name' },
         { title: 'Couverts', field: 'couverts' },
         { title: 'Date de la commande', field: 'date'},
         { title: 'Prix', field: 'prix', type: 'numeric'},
-        { title: 'Etat', field: 'etat'},
+        { title: 'Etat',
+            field: 'etat',
+            export: false,
+            lookup: {
+
+                'attente': <Typography style={{color: getEtat('attente').color}}>{getEtat('attente').txt}</Typography>,
+                'fini': <Typography style={{color: getEtat('fini').color}}>{getEtat('fini').txt}</Typography>,
+                'refusé': <Typography style={{color: getEtat('refusé').color}}>{getEtat('refusé').txt}</Typography>,
+                'en cours': <Typography style={{color: getEtat('en cours').color}}>{getEtat('en cours').txt}</Typography>,
+
+
+            },
+        },
     ];
+
 
     const history = useHistory();
 
@@ -116,7 +152,9 @@ function ListeDesCommandes({idResto}){
                         }
                     ]}
                     options={{
-                        actionsColumnIndex: -1
+                        actionsColumnIndex: -1,
+                        exportButton: true,
+                        filtering: true
                     }}
                 />
             </>
