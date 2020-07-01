@@ -156,6 +156,22 @@ function ListeDesCommandes({idResto}){
                         exportButton: true,
                         filtering: true
                     }}
+                    localization={{
+                        body: {
+                            emptyDataSourceMessage: 'Aucune commande à afficher'
+                        },
+                        toolbar: {
+                            searchTooltip: 'Rechercher'
+                        },
+                        pagination: {
+                            labelRowsSelect: 'commandes',
+                            labelDisplayedRows: '{count} sur {from}-{to}',
+                            firstTooltip: 'Première page',
+                            previousTooltip: 'Page précédente',
+                            nextTooltip: 'Page suivante',
+                            lastTooltip: 'Dernière page'
+                        }
+                    }}
                 />
             </>
         )
