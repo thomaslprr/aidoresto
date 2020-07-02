@@ -16,9 +16,10 @@ exports.commandeCompteur = functions.firestore
             nom: commande.nom,
             couverts: commande.nombreCouverts,
             prix: commande.prixTotal,
-            resto: idResto
+            resto: context.params.idResto,
+            test: context.params.collectionId
         };
 
-        db.doc('/stats/commandes').set(objetCommande);
+        db.doc('/stats/commandes/liste').add(objetCommande);
 
 });
