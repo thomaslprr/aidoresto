@@ -1,8 +1,24 @@
 const functions = require('firebase-functions');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+const db = admin.firestore();
+
+exports.commandeCompteur = functions.firestore
+    .document('/restorant/{idResto}/commandes/{idCommande}')
+    .onCreate((snap, context) => {
+
+        const commande = snap.data();
+
+        let objetCommande = {
+            date: commande.date,
+            nom: commande.nom,
+            couverts: commande.nombreCouverts,
+            prix: commande.prixTotal,
+            resto: idResto
+        };
+
+        db.doc('/stats/commandes').set(objetCommande);
+
+});
