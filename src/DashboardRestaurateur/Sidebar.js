@@ -34,6 +34,7 @@ import PageMenu from "./menu/PageMenu";
 import PopUpDeconnexion from "./PopupDeconnexion";
 import ContenuPageCommande from "./commandes/pageDeLaCommande/ContenuPageCommande";
 import ListeDesCommandes from "./commandes/listeDesCommandes/ListeDesCommandes";
+import ArchiveIcon from '@material-ui/icons/Archive';
 
 const drawerWidth = 240;
 
@@ -213,7 +214,12 @@ function SideBar(props) {
         if(mobileOpen){
             handleDrawerToggle();
         }
-        history.push('/dashboard/'+id+'/'+clickVal);
+        if(clickVal === "allCommandes"){
+            history.push('/dashboard/'+id+'/commandes/all');
+        }else{
+            history.push('/dashboard/'+id+'/'+clickVal);
+        }
+
     }
 
     const selection = (number)=> {
@@ -230,6 +236,10 @@ function SideBar(props) {
                 <ListItem button onClick={()=> changerOnglet(props.id,"commandes") } selected={selection(1)}>
                     <ListItemIcon><SendIcon color={"secondary"}/></ListItemIcon>
                     <ListItemText primary="Mes commandes" />
+                </ListItem>
+                <ListItem button onClick={()=> changerOnglet(props.id,"allCommandes") } selected={selection(9)}>
+                    <ListItemIcon><ArchiveIcon/></ListItemIcon>
+                    <ListItemText primary="Historique des commandes" />
                 </ListItem>
             </List>
             <Divider />
