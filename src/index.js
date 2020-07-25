@@ -5,6 +5,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import * as firebase from 'firebase';
+import 'firebase/analytics';
 
 const theme = createMuiTheme({
     palette: {
@@ -26,9 +27,9 @@ let firebaseConfig = {
     messagingSenderId: "553349771815",
     appId: "1:553349771815:web:200d381310fcb950f7d402",
     measurementId: "G-D4420PNFVL"
-}
+};
 firebase.initializeApp(firebaseConfig);
-
+firebase.analytics();
 
 ReactDOM.render(
     <MuiThemeProvider theme={theme}>
